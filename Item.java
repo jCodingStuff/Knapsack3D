@@ -110,6 +110,26 @@ public class Item {
   }
 
   /**
+  * Get the volume of the item
+  * @return the volume of the item
+  */
+  public int getVolume() {
+    return this.getWidth() * this.getHeight() * this.getDepth();
+  }
+
+  /**
+  * Get a string representation of the item
+  * @return a string containing detailed information about the attributes
+  */
+  public String toString() {
+    String result = this.getClass().getName() + "[name=" + this.name
+    result += ", value=" + this.value + ", volume=" + this.getVolume();
+    result += ", width=" + this.getWidth() + ", height=" + this.getHeight();
+    result += ", depth=" + this.getDepth() + "]";
+    return result;
+  }
+
+  /**
   * Clone the item
   * @return a new item, which is a clone of the current one
   */
