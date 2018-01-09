@@ -149,6 +149,7 @@ public class Item {
   */
   public String toString() {
     String result = this.getClass().getName() + "[name=" + this.name;
+    result += ", ratio=" + this.getRatio();
     result += ", value=" + this.value + ", volume=" + this.getVolume();
     result += ", width=" + this.getWidth() + ", height=" + this.getHeight();
     result += ", depth=" + this.getDepth() + "]";
