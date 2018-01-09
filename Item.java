@@ -149,9 +149,9 @@ public class Item {
   * @return an array of items, all with different shapes
   */
   public Item[] getAllShapes() {
-    int dimensions = 3;
+    Item[] result = new Item[];
     if(shape.length!=shape[0].length) {
-      rotate(1, 2);
+      shape = rotate(1, 2).clone();
     }
     if(shape.length!=shape[0][0].length) {
       rotate(1, 3);
@@ -170,34 +170,19 @@ public class Item {
   * @return an item with a shape rotated 45 degrees in the indicated axis
   */
   public Item rotate(int dim1, int dim2) {
-    int[][][] newShape = new int[shape.length][shape[0].length][shape[0][0].length];
+    int[][][] newShape;
     if(dim1==1&&dim2==2) {
-      for (int i = 0; i < shape.length; i++){
-        for (int j = 0; j < shape[i].length; j++){
-          for (int k = 0; k < shape[i][j].length; k++){
-            newShape[i][j][k] = this.shape[j][i][k];
-          }
-        }
-      }
+      newShape =  = new int[shape[0].length][shape.length][shape[0][0].length];
     }
+
     else if (dim1==1&&dim2==3) {
-      for (int i = 0; i < shape.length; i++){
-        for (int j = 0; j < shape[i].length; j++){
-          for (int k = 0; k < shape[i][j].length; k++){
-            newShape[i][j][k] = this.shape[k][j][i];
-          }
-        }
-      }
+      newShape = new int[shape[0][0].length][shape[0].length][shape.length];
     }
+
     else if (dim1==2&&dim2==3) {
-      for (int i = 0; i < shape.length; i++){
-        for (int j = 0; j < shape[i].length; j++){
-          for (int k = 0; k < shape[i][j].length; k++){
-            newShape[i][j][k] = this.shape[i][k][j];
-          }
-        }
-      }
+      newShape = new int[shape.length][shape[0][0].length][shape[0].length];
     }
   }
 
+  return newShape;
 }
