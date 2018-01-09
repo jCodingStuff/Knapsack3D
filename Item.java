@@ -10,9 +10,12 @@
 
 public class Item {
 
+  private static int counter = 0;
+
   private String name;
   private int value;
   private int[][][] shape;
+  private int serialNumber;
 
   /**
   * Construct a new Item
@@ -21,6 +24,8 @@ public class Item {
   * @param shape the 3D int matrix representing the item
   */
   public Item(String name, int value, int[][][] shape) {
+    counter++;
+    this.serialNumber = counter;
     this.name = name;
     this.value = value;
     this.shape = shape;
@@ -35,9 +40,19 @@ public class Item {
   * @param depth the depth of the item
   */
   public Item(String name, int value, int width, int height, int depth) {
+    counter++;
+    this.serialNumber = counter;
     this.name = name;
     this.value = value;
     this.shape = new int[width][height][depth];
+  }
+
+  /**
+  * Get access to the serial number of the item
+  * @return the serial number
+  */
+  public int serialNumber() {
+    return this.serialNumber;
   }
 
   /**
