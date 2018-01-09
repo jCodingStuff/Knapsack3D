@@ -4,7 +4,7 @@ A method that clones from Cargo
 @author Pierre Bongrad
 @version 0.1, 08 December 2018
 */
-public static Item[][][] CloneCargo(Item[][][] ori) {
+public static Item[][][] cloneCargo(Item[][][] ori) {
 
   Item [][][] myInt = new Item [ori.length][ori[0].length][ori[0][0].length];
   for(int i = 0; i< ori.length; i++){
