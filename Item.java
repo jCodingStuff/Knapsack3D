@@ -3,6 +3,9 @@
 *
 * @author Julián Marrades
 * @version 0.01, 08-01-2018
+
+* @author Lucas Uberti-Bona
+* @version 0.02, 09-01-2018
 */
 
 public class Item {
@@ -139,6 +142,46 @@ public class Item {
     int depth = this.getDepth();
     int[][][] new_matrix = new int[width][height][depth];
     return new Item(this.name, this.value, new_matrix);
+  }
+
+  /**
+  * Returns all shapes of an Item
+  * @return an array of items, all with different shapes
+  */
+  public Item[] getAllShapes() {
+    int dimensions = 3;
+    if(shape.length!=shape[0].length) {
+      rotate(1, 2);
+    }
+    if(shape.length!=shape[0][0].length) {
+      rotate(1, 3);
+    }
+    if(shape[0][0].length!=shape[0].length) {
+      rotate(2, 3);
+    }
+
+
+  }
+
+  /**
+  * Rotates shape in the indicated axis
+  * @param dim1 first dimension of the axis of rotation
+  * @param dim2 second dimension of the axis of rotation
+  * @return an item with a shape rotated 45 degrees in the indicated axis
+  */
+  public Item rotate(int dim1, int dim2) {
+    int[][][] newShape = new int[shape.length][shape[0].length][shape[0][0].length];
+    if(dim1==1&&dim2==2) {
+      for(int i = 0; i< shape.length; i++){
+        for (int j = 0; j < shape[i].length; j++){
+          for (int k = 0; k < shape[i][j].length; k++){
+                  newShape[i][j][k] = this.shape[j][i][k];
+          }
+        }
+      }
+    }
+    
+    else {}
   }
 
 }
