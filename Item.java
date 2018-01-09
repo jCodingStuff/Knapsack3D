@@ -3,6 +3,9 @@
 *
 * @author Julián Marrades
 * @version 0.01, 08-01-2018
+*
+* @author Silvia Fallone
+* @version 0.02, 09-01-2018
 */
 
 public class Item {
@@ -118,11 +121,19 @@ public class Item {
   }
 
   /**
+  * Get the ratio value/volume of the item
+  * @return the ratio
+  */
+  public double getRatio() {
+    return (double)this.getValue()/(double)this.getVolume();
+  }
+
+  /**
   * Get a string representation of the item
   * @return a string containing detailed information about the attributes
   */
   public String toString() {
-    String result = this.getClass().getName() + "[name=" + this.name
+    String result = this.getClass().getName() + "[name=" + this.name;
     result += ", value=" + this.value + ", volume=" + this.getVolume();
     result += ", width=" + this.getWidth() + ", height=" + this.getHeight();
     result += ", depth=" + this.getDepth() + "]";
@@ -139,6 +150,33 @@ public class Item {
     int depth = this.getDepth();
     int[][][] new_matrix = new int[width][height][depth];
     return new Item(this.name, this.value, new_matrix);
+  }
+
+  /**
+  * Sort an array of items by decreasing ratio
+  * @param input the array to sort
+  */
+  public static void sort(Item[] input) {
+
+    Item x = null;
+    Item y = null;
+    int z = 0;
+
+    for (int i = 0; i < input.length; i++) { //loops through given array
+      x = input[i]; //stores current Item
+      for (int j = i+1; j < input.length; j++) {
+        /* loops through the rest of the array from i+1 onwards
+        because the parts that comes before is already sorted
+        */
+        if (x.getRatio() < input[j].getRatio()) { //sorts based on ratio
+          y = input[i];
+          x = input[j];
+          z = j;
+        }
+      }
+      input[i] = x;
+      input[z] = y;
+    }
   }
 
 }
