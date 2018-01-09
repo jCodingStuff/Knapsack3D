@@ -20,7 +20,9 @@ public class Arrays {
     for(int i = 0; i< ori.length; i++){
         for (int j = 0; j < ori[i].length; j++){
             for (int k = 0; k < ori[i][j].length; k++){
+              if (ori[i][j][k] != null) {
                 myInt[i][j][k] = ori[i][j][k].clone();
+              }
             }
         }
     }
