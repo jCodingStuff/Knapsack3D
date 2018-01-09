@@ -125,7 +125,7 @@ public class Item {
   * @return the ratio
   */
   public double getRatio() {
-    return this.getVolume()/this.getValue();
+    return (double)this.getValue()/(double)this.getVolume();
   }
 
   /**
@@ -150,6 +150,29 @@ public class Item {
     int depth = this.getDepth();
     int[][][] new_matrix = new int[width][height][depth];
     return new Item(this.name, this.value, new_matrix);
+  }
+
+  public static void sort(Item[] input) {
+
+    Item x = null;
+    Item y = null;
+    int z = 0;
+
+    for (int i = 0; i < input.length; i++) { //loops through given array
+      x = input[i]; //stores current Item
+      for (int j = i+1; j < input.length; j++) {
+        /* loops through the rest of the array from i+1 onwards
+        because the parts that comes before is already sorted
+        */
+        if (x.getRatio() < input[j].getRatio()) { //sorts based on ratio
+          y = input[i];
+          x = input[j];
+          z = j;
+        }
+      }
+      input[i] = x;
+      input[z] = y;
+    }
   }
 
 }
