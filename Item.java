@@ -3,6 +3,9 @@
 *
 * @author Julián Marrades
 * @version 0.01, 08-01-2018
+*
+* @author Silvia Fallone
+* @version 0.02, 09-01-2018
 */
 
 public class Item {
@@ -115,6 +118,14 @@ public class Item {
   */
   public int getVolume() {
     return this.getWidth() * this.getHeight() * this.getDepth();
+  }
+
+  /**
+  * Get the ratio volume/value of the item
+  * @return the ratio
+  */
+  public double getRatio() {
+    return this.getVolume()/this.getValue();
   }
 
   /**
