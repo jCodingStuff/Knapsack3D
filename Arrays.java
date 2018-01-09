@@ -1,8 +1,9 @@
-/*
-A method that clones from Cargo
-@author Sarah Waseem
-@author Pierre Bongrad
-@version 0.1, 08 December 2018
+/**
+* A method that clones from Cargo
+* @author Sarah Waseem
+* @author Pierre Bongrad
+* @author Lucas Uberti-Bona
+* @version 0.1, 08 December 2018
 */
 public static Item[][][] clone3DMatrix(Item[][][] ori) {
   Item [][][] myInt = new Item [ori.length][ori[0].length][ori[0][0].length];
