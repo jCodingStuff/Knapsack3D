@@ -172,16 +172,32 @@ public class Item {
   public Item rotate(int dim1, int dim2) {
     int[][][] newShape = new int[shape.length][shape[0].length][shape[0][0].length];
     if(dim1==1&&dim2==2) {
-      for(int i = 0; i< shape.length; i++){
+      for (int i = 0; i < shape.length; i++){
         for (int j = 0; j < shape[i].length; j++){
           for (int k = 0; k < shape[i][j].length; k++){
-                  newShape[i][j][k] = this.shape[j][i][k];
+            newShape[i][j][k] = this.shape[j][i][k];
           }
         }
       }
     }
-    
-    else {}
+    else if (dim1==1&&dim2==3) {
+      for (int i = 0; i < shape.length; i++){
+        for (int j = 0; j < shape[i].length; j++){
+          for (int k = 0; k < shape[i][j].length; k++){
+            newShape[i][j][k] = this.shape[k][j][i];
+          }
+        }
+      }
+    }
+    else if (dim1==2&&dim2==3) {
+      for (int i = 0; i < shape.length; i++){
+        for (int j = 0; j < shape[i].length; j++){
+          for (int k = 0; k < shape[i][j].length; k++){
+            newShape[i][j][k] = this.shape[i][k][j];
+          }
+        }
+      }
+    }
   }
 
 }
