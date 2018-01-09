@@ -100,9 +100,9 @@ public class Cargo {
   * @return a string containing detailed information about the attributes
   */
   public String toString() {
-    String result = this.getClass().getName() + "[name=" + this.name
+    String result = this.getClass().getName() + "[name=" + this.name;
     result += ", volume=" + this.getVolume() + ", width=" + this.getWidth();
-    result += ", height=" + this.getHeight() + ", depth=" + this.getDepth()
+    result += ", height=" + this.getHeight() + ", depth=" + this.getDepth();
     result += "]";
     return result;
   }

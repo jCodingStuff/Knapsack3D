@@ -96,7 +96,7 @@ public class Solver
   */
   public Solver clone() {
     Item[] new_items = Arrays.cloneArray(this.items);
-    return new Solver(this.name, new_items, this.cargo.clone())
+    return new Solver(this.name, new_items, this.cargo.clone());
   }
 
 }
