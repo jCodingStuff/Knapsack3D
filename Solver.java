@@ -74,6 +74,30 @@ public class Solver
   {
     this.cargo = cargo;
   }
+
+  /**
+  * See if an item fits in a certain position of the cargo
+  * @param item the item to check
+  * @param i the position on the x axis
+  * @param j the position on the y axis
+  * @param k the position on the z axis
+  * @return true if the item fits, false otherwise
+  */
+  private boolean canBePut(Item item, int i, int j, int k) {
+    int iWidth = i + item.getWidth();
+    int iHeight = j + item.getHeight();
+    int iDepth = k + item.getDepth();
+    int cWidth = this.cargo.getWidth();
+    int cHeight = this.cargo.getHeight();
+    int cDepth = this.cargo.getDepth();
+    if (iWidth <= cWidth && iHeight <= cHeight && iDepth <= cDepth) {
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
+
   /**
   * Get a string representation
   * @return a string containing the detailed information
