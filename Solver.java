@@ -85,7 +85,7 @@ public class Solver
     result += "\n - Cargo -> " + this.cargo.toString();
     result += "\n - Items:";
     for (Item item : this.items) {
-      result += "\n  - " + item.toString();
+      result += "\n\t- " + item.toString();
     }
     return result;
   }
