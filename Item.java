@@ -121,7 +121,7 @@ public class Item {
   }
 
   /**
-  * Get the ratio volume/value of the item
+  * Get the ratio value/volume of the item
   * @return the ratio
   */
   public double getRatio() {
@@ -152,6 +152,10 @@ public class Item {
     return new Item(this.name, this.value, new_matrix);
   }
 
+  /**
+  * Sort an array of items by decreasing ratio
+  * @param input the array to sort
+  */
   public static void sort(Item[] input) {
 
     Item x = null;
