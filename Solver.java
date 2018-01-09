@@ -74,6 +74,22 @@ public class Solver
   {
     this.cargo = cargo;
   }
+
+  private boolean canBePut(Item item, int i, int j, int k) {
+    int iWidth = i + item.getWidth();
+    int iHeight = j + item.getHeight();
+    int iDepth = k + item.getDepth();
+    int cWidth = this.cargo.getWidth();
+    int cHeight = this.cargo.getHeight();
+    int cDepth = this.cargo.cDepth();
+    if (iWidth <= cWidth && iHeight <= cHeight && iDepth <= cDepth) {
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
+
   /**
   * Get a string representation
   * @return a string containing the detailed information
