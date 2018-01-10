@@ -133,6 +133,17 @@ public class Cargo {
   }
 
   /**
+  * Get the content in a certain position of the container
+  * @param i the position along the x-axis
+  * @param j the position along the y-axis
+  * @param k the position along the z-axis
+  * @return the item at the position requested
+  */
+  public Item check(int i, int j, int k) {
+    return this.shape[i][j][k];
+  }
+
+  /**
   * Get a string representation of the cargo
   * @return a string containing detailed information about the attributes
   */
