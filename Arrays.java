@@ -1,8 +1,11 @@
-/*
-A method that clones from Cargo
-@author Sarah Waseem
-@author Pierre Bongrad
-@version 0.1, 08 December 2018
+/**
+* A method that clones from Cargo
+* @author Sarah Waseem
+* @author Pierre Bongrad
+* @version 0.01, 08-01-2018
+*
+* @author Julián Marrades
+* @version 0.02, 10-01-2018
 */
 
 public class Arrays {
@@ -10,7 +13,9 @@ public class Arrays {
   public static Item[] cloneArray(Item[] ori) {
     Item[] fut = new Item[ori.length];
     for (int i = 0; i < fut.length; i++) {
-      fut[i] = ori[i].clone();
+      if (ori[i] != null) {
+        fut[i] = ori[i].clone();
+      }
     }
     return fut;
   }
