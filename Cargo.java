@@ -96,6 +96,26 @@ public class Cargo {
   }
 
   /**
+  * See if an item fits in a certain position of the cargo
+  * @param item the item to check
+  * @param i the position on the x axis
+  * @param j the position on the y axis
+  * @param k the position on the z axis
+  * @return true if the item fits, false otherwise
+  */
+  public boolean canBePut(Item item, int i, int j, int k) {
+    int iWidth = i + item.getWidth();
+    int iHeight = j + item.getHeight();
+    int iDepth = k + item.getDepth();
+    if (iWidth <= this.width && iHeight <= this.height && iDepth <= this.depth) {
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
+
+  /**
   * Get a string representation of the cargo
   * @return a string containing detailed information about the attributes
   */
