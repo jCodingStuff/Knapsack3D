@@ -5,6 +5,9 @@
 *
 * @author Julián Marrades
 * @version 0.2, 09-01-2018
+*
+* @author Julián Marrades
+* @version 0.3, 10-01-2018
 */
 public class Solver
 {
@@ -111,10 +114,29 @@ public class Solver
       for (int i = 0; i < this.cargo.getWidth(); i++) {
         for (int k = 0; k < this.cargo.getDepth(); k++) {
           if (this.cargo.check(i, j, k) == null) {
-            //this.try(all, i, j, k);
+            this.try(all, i, j, k);
           }
         }
       }
+    }
+  }
+
+  /**
+  * Try to fit an item in a position
+  * @param items the set of items which can be put in the cargo
+  * @param i the position along the x-axis
+  * @param j the position along the y-axis
+  * @param k the position along the z-axis
+  */
+  private void try(Item[] items, int i, int j, int k) {
+    boolean filled = false;
+    int index = 0;
+    while (!filled && index < items.length) {
+      if (this.cargo.canBePut(items[index], i, j, k)) {
+        this.cargo.put(items[index], i, j, k);
+        filled = true;
+      }
+      index++;
     }
   }
 
