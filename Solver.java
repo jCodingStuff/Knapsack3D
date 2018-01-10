@@ -1,10 +1,10 @@
 /**
 * A class to solve using items and cargo
 * @author Sarah Waseem
-* @version 0.01, 09-01-2018
+* @version 0.1, 09-01-2018
 *
 * @author Julián Marrades
-* @version 0.02, 09-01-2018
+* @version 0.2, 09-01-2018
 */
 public class Solver
 {

@@ -1,7 +1,7 @@
 /**
 * A class to represent a Cargo for the Knapsack problem
 * @author Julián Marrades
-* @version 0.01, 09-01-2018
+* @version 0.1, 09-01-2018
 */
 
 public class Cargo {
