@@ -100,4 +100,11 @@ public class Solver
     return new Solver(this.name, new_items, this.cargo.clone());
   }
 
+  /**
+  * Fill the cargo with the greedy algorithm
+  */
+  public void fillGreedyCargo() {
+
+  }
+
 }
