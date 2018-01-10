@@ -167,7 +167,7 @@ public class Item {
   * @return the ratio
   */
   public double getRatio() {
-    return (double)this.getValue()/(double)this.getVolume();
+    return (double)this.value/(double)this.getVolume();
   }
 
   /**
