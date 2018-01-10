@@ -2,10 +2,13 @@
 * A method that clones from Cargo
 * @author Sarah Waseem
 * @author Pierre Bongrad
-* @author Lucas Uberti-Bona
-* @version 0.1, 08 December 2018
+* @version 0.1, 08-01-2018
+*
 * @author Julián Marrades
 * @version 0.2, 10-01-2018
+*
+* @author Lucas Uberti-Bona
+* @version 0.3, 10-01-2018
 */
 
 public class Arrays {

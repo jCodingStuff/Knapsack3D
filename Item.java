@@ -1,12 +1,8 @@
 /**
 * A class to represent an Item for the Knapsack problem
-*
-* @author Julián Marrades
-
-/**
-* A class to represent an Item for the Knapsack problem
 * @author Julián Marrades
 * @version 0.01, 08-01-2018
+*
 * @author Lucas Uberti-Bona
 * @author Silvia Fallone
 * @version 0.02, 09-01-2018
