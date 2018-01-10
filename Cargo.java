@@ -107,7 +107,7 @@ public class Cargo {
     int iWidth = i + item.getWidth();
     int iHeight = j + item.getHeight();
     int iDepth = k + item.getDepth();
-    if (iWidth <= this.width && iHeight <= this.height && iDepth <= this.depth) {
+    if (iWidth <= this.getWidth() && iHeight <= this.getHeight() && iDepth <= this.getDepth()) {
       return true;
     }
     else {
