@@ -123,7 +123,13 @@ public class Cargo {
   * @param k the position along the z-axis
   */
   public put(Item item, int i, int j, int k) {
-
+    for (int w = i; w < item.getWidth(); w++) {
+      for (int h = j; j < item.getHeight(); h++) {
+        for (int d = k; d < item.getDepth(); d++) {
+          this.shape[w][h][d] = item;
+        }
+      }
+    }
   }
 
   /**
