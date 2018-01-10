@@ -6,6 +6,9 @@
 *
 * @author Silvia Fallone
 * @version 0.02, 09-01-2018
+*
+* @author Julián Marrades
+* @version 0.03, 10-01-2018
 */
 
 public class Item {
@@ -14,16 +17,16 @@ public class Item {
 
   private String name;
   private int value;
-  private int[][][] shape;
+  private int[] shape;
   private int serialNumber;
 
   /**
   * Construct a new Item
   * @param name the name of the item
   * @param value the value of the item
-  * @param shape the 3D int matrix representing the item
+  * @param shape the int array representing the dimensions of the item
   */
-  public Item(String name, int value, int[][][] shape) {
+  public Item(String name, int value, int[] shape) {
     counter++;
     this.serialNumber = counter;
     this.name = name;
@@ -44,7 +47,7 @@ public class Item {
     this.serialNumber = counter;
     this.name = name;
     this.value = value;
-    this.shape = new int[width][height][depth];
+    this.shape = new int[]{width, height, depth};
   }
 
   /**
@@ -73,17 +76,17 @@ public class Item {
 
   /**
   * Get access to the shape of the item
-  * @return the 3D int matrix representing the item
+  * @return the int array representing the item
   */
-  public int[][][] getShape() {
+  public int[] getShape() {
     return this.shape;
   }
 
   /**
   * Set a new shape for the item
-  * @param shape the new 3D int matrix for the item
+  * @param shape the new int array for the item
   */
-  public void setShape(int[][][] shape) {
+  public void setShape(int[] shape) {
     this.shape = shape;
   }
 
@@ -108,7 +111,15 @@ public class Item {
   * @return the width of the item
   */
   public int getWidth() {
-    return this.shape.length;
+    return this.shape[0];
+  }
+
+  /**
+  * Set a new width for the item
+  * @param width the new width
+  */
+  public void setWidth(int width) {
+    this.shape[0] = width;
   }
 
   /**
@@ -116,7 +127,15 @@ public class Item {
   * @return the height of the item
   */
   public int getHeight() {
-    return this.shape[0].length;
+    return this.shape[1];
+  }
+
+  /**
+  * Set a new height for the item
+  * @param height the new height
+  */
+  public void setHeight(int height) {
+    this.shape[1] = height;
   }
 
   /**
@@ -124,7 +143,15 @@ public class Item {
   * @return the depth of the item
   */
   public int getDepth() {
-    return this.shape[0][0].length;
+    return this.shape[2];
+  }
+
+  /**
+  * Set a new depth for the item
+  * @param depth the new depth
+  */
+  public void setDepth(int depth) {
+    this.shape[2] = depth;
   }
 
   /**
@@ -132,7 +159,7 @@ public class Item {
   * @return the volume of the item
   */
   public int getVolume() {
-    return this.getWidth() * this.getHeight() * this.getDepth();
+    return this.shape[0] * this.shape[1] * this.shape[2];
   }
 
   /**
@@ -140,7 +167,7 @@ public class Item {
   * @return the ratio
   */
   public double getRatio() {
-    return (double)this.getValue()/(double)this.getVolume();
+    return (double)this.value/(double)this.getVolume();
   }
 
   /**
@@ -151,8 +178,8 @@ public class Item {
     String result = this.getClass().getName() + "[name=" + this.name;
     result += ", ratio=" + this.getRatio();
     result += ", value=" + this.value + ", volume=" + this.getVolume();
-    result += ", width=" + this.getWidth() + ", height=" + this.getHeight();
-    result += ", depth=" + this.getDepth() + "]";
+    result += ", width=" + this.shape[0] + ", height=" + this.shape[1];
+    result += ", depth=" + this.shape[2] + "]";
     return result;
   }
 
@@ -161,11 +188,11 @@ public class Item {
   * @return a new item, which is a clone of the current one
   */
   public Item clone() {
-    int width = this.getWidth();
-    int height = this.getHeight();
-    int depth = this.getDepth();
-    int[][][] new_matrix = new int[width][height][depth];
-    return new Item(this.name, this.value, new_matrix);
+    int width = this.shape[0];
+    int height = this.shape[1];
+    int depth = this.shape[2];
+    int[] new_array = new int[]{width, height, depth};
+    return new Item(this.name, this.value, new_array);
   }
 
   /**
