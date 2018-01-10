@@ -116,6 +116,17 @@ public class Cargo {
   }
 
   /**
+  * Put an item in a given position of the cargo
+  * @param item the item to fit
+  * @param i the position along the x-axis
+  * @param j the position along the y-axis
+  * @param k the position along the z-axis
+  */
+  public put(Item item, int i, int j, int k) {
+
+  }
+
+  /**
   * Get a string representation of the cargo
   * @return a string containing detailed information about the attributes
   */
