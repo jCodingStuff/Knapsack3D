@@ -2,8 +2,12 @@
 * A class to represent an Item for the Knapsack problem
 *
 * @author Julián Marrades
+
+/**
+* A class to represent an Item for the Knapsack problem
+* @author Julián Marrades
 * @version 0.01, 08-01-2018
-*
+* @author Lucas Uberti-Bona
 * @author Silvia Fallone
 * @version 0.02, 09-01-2018
 *
@@ -222,4 +226,45 @@ public class Item {
     }
   }
 
+  /**
+  * Returns all shapes of an Item
+  * @return an array of items, all with different shapes
+  */
+  public Item[] getAllShapes() {
+    Item[] result = new Item[];
+    if(shape.length!=shape[0].length) {
+      shape = rotate(1, 2).clone();
+    }
+    if(shape.length!=shape[0][0].length) {
+      rotate(1, 3);
+    }
+    if(shape[0][0].length!=shape[0].length) {
+      rotate(2, 3);
+    }
+
+
+  }
+
+  /**
+  * Rotates shape in the indicated axis
+  * @param dim1 first dimension of the axis of rotation
+  * @param dim2 second dimension of the axis of rotation
+  * @return an item with a shape rotated 45 degrees in the indicated axis
+  */
+  public Item rotate(int dim1, int dim2) {
+    int[][][] newShape;
+    if(dim1==1&&dim2==2) {
+      newShape =  = new int[shape[0].length][shape.length][shape[0][0].length];
+    }
+
+    else if (dim1==1&&dim2==3) {
+      newShape = new int[shape[0][0].length][shape[0].length][shape.length];
+    }
+
+    else if (dim1==2&&dim2==3) {
+      newShape = new int[shape.length][shape[0][0].length][shape[0].length];
+    }
+  }
+
+  return newShape;
 }
