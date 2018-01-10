@@ -107,7 +107,7 @@ public class Cargo {
     int iWidth = i + item.getWidth();
     int iHeight = j + item.getHeight();
     int iDepth = k + item.getDepth();
-    if (iWidth <= this.width && iHeight <= this.height && iDepth <= this.depth) {
+    if (iWidth <= this.getWidth() && iHeight <= this.getHeight() && iDepth <= this.getDepth()) {
       return true;
     }
     else {
@@ -130,6 +130,17 @@ public class Cargo {
         }
       }
     }
+  }
+
+  /**
+  * Get the content in a certain position of the container
+  * @param i the position along the x-axis
+  * @param j the position along the y-axis
+  * @param k the position along the z-axis
+  * @return the item at the position requested
+  */
+  public Item check(int i, int j, int k) {
+    return this.shape[i][j][k];
   }
 
   /**
