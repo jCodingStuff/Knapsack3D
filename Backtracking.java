@@ -149,7 +149,7 @@ public class Backtracking {
         System.out.print(item.getName());
       }
       else {
-        System.out.print("null");
+        System.out.print("N");
       }
       System.out.print(" ");
     }
