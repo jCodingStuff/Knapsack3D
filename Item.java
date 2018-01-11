@@ -16,6 +16,9 @@
 
 * @author Lucas Uberti-Bona
 * @version 0.04, 11-01-2018
+
+* @author Lucas Uberti-Bona
+* @version 0.05, 11-01-2018
 */
 import java.util.ArrayList;
 public class Item {
@@ -246,10 +249,32 @@ public class Item {
     return result;
   }
 
+  /**
+  * Returns all shapes of an Item
+  * @param ori is an array containing the Items for which we want all shapes
+  * @return an array of items, all with different rotations of the input Items
+  */
+  public static Item[] getAllShapes(Item[] ori) {
+    ArrayList<Item[]> rawResult = new ArrayList<Item[]>();
+    for (Item i : ori) {
+      rawResult.add(getAllShapes(i));
+    }
+
+    ArrayList<Item> result = new ArrayList<Item>();
+    for (Item[] i : rawResult){
+      for(Item j : i) {
+        result.add(j);
+      }
+    }
+
+    Item[] arrResult = (Item[]) result.toArray();
+    return arrResult;
+  }
+
 
   /**
   * Returns all shapes of an Item
-  * @param ori is the Item for which we want all shapes from
+  * @param ori is the Item for which we want all shapes
   * @return an array of items, all with different rotations of the input Item
   */
   public static Item[] getAllShapes(Item ori) {
