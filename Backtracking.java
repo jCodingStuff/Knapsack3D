@@ -9,7 +9,7 @@
 public class Backtracking {
 
   public static void solveFor(Item[] item, boolean[] used, Item[][][] shape) {
-
+    
   }
 
   /**
@@ -67,6 +67,28 @@ public class Backtracking {
       w++;
     }
     return permission;
+  }
+
+  /**
+  * Insert an item in a given position of the cargo, creating a new version of it
+  * @param item the item to fit
+  * @param shape the cargo that recieves the item
+  * @param i the position along the x-axis
+  * @param j the position along the y-axis
+  * @param k the position along the z-axis
+  * @return new version of shape with the item inside
+  */
+  public Item[][][] insert(Item item, Item[][][] shape, int i, int j, int k) {
+    Item[][][] newShape = Arrays.clone3DMatrix(shape);
+    Item newItem = item.clone();
+    for (int w = i; w < i + item.getWidth(); w++) {
+      for (int h = j; j < j + item.getHeight(); h++) {
+        for (int d = k; d < k + item.getDepth(); d++) {
+          shape[w][h][d] = newItem;
+        }
+      }
+    }
+    return newShape;
   }
 
   /**
