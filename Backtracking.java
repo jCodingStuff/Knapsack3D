@@ -114,14 +114,9 @@ public class Backtracking {
   public static Item[][][] insert(Item item, Item[][][] shape, int i, int j, int k) {
     Item[][][] newShape = Arrays.clone3DMatrix(shape);
     Item newItem = item.clone();
-    // System.out.println(newItem);
     for (int w = 0; w < item.getWidth(); w++) {
       for (int h = 0; j < item.getHeight(); h++) {
         for (int d = 0; d < item.getDepth(); d++) {
-          // int newW = w + i;
-          // int newH = h + j;
-          // int newD = d + k;
-          // System.out.println(newW + ", " + newH + ", " + newD);
           shape[w + i][h + j][d + k] = newItem;
         }
       }
