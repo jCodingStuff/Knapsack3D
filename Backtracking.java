@@ -38,6 +38,38 @@ public class Backtracking {
   }
 
   /**
+  * See if an item fits in a certain position of the cargo
+  * @param item the item to check
+  * @param shape the shape of the cargo
+  * @param i the position on the x axis
+  * @param j the position on the y axis
+  * @param k the position on the z axis
+  * @return true if the item fits, false otherwise
+  */
+  public static boolean canBePut(Item item, Item[][][] shape, int i, int j, int k) {
+    boolean permission = true;
+    int w = i;
+    while (permission && w < i + item.getWidth()) {
+      int h = j;
+      while (permission && h < j + item.getHeight()) {
+        int d = k;
+        while (permission && d < k + item.getDepth()) {
+          if (w >= shape.length || h >= shape[w].length || d >= shape[w][h].length) {
+            permission = false;
+          }
+          else if (this.shape[w][h][d] != null) {
+            permission = false;
+          }
+          d++;
+        }
+        h++;
+      }
+      w++;
+    }
+    return permission;
+  }
+
+  /**
   * Print a matrix to the screen
   * @param matrix the matrix to print
   */
