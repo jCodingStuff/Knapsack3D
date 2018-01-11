@@ -82,7 +82,7 @@ public class Backtracking {
           if (w >= shape.length || h >= shape[w].length || d >= shape[w][h].length) {
             permission = false;
           }
-          else if (this.shape[w][h][d] != null) {
+          else if (shape[w][h][d] != null) {
             permission = false;
           }
           d++;
@@ -103,7 +103,7 @@ public class Backtracking {
   * @param k the position along the z-axis
   * @return new version of shape with the item inside
   */
-  public Item[][][] insert(Item item, Item[][][] shape, int i, int j, int k) {
+  public static Item[][][] insert(Item item, Item[][][] shape, int i, int j, int k) {
     Item[][][] newShape = Arrays.clone3DMatrix(shape);
     Item newItem = item.clone();
     for (int w = i; w < i + item.getWidth(); w++) {
