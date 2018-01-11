@@ -104,15 +104,7 @@ public class Cargo {
   * @return true if the item fits, false otherwise
   */
   public boolean canBePut(Item item, int i, int j, int k) {
-    int iWidth = i + item.getWidth();
-    int iHeight = j + item.getHeight();
-    int iDepth = k + item.getDepth();
-    if (iWidth <= this.getWidth() && iHeight <= this.getHeight() && iDepth <= this.getDepth()) {
-      return true;
-    }
-    else {
-      return false;
-    }
+    
   }
 
   /**
