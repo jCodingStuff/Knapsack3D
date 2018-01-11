@@ -74,18 +74,12 @@ public class Backtracking {
   */
   public static boolean canBePut(Item item, Item[][][] shape, int i, int j, int k) {
     boolean permission = true;
-    System.out.println(item);
-    System.out.println("Cargo:\n - Width -> " + shape.length + "\n - Height -> " + shape[0].length + "\n - Depth -> " + shape[0][0].length);
     int w = 0;
     while (permission && w < item.getWidth()) {
       int h = 0;
       while (permission && h < item.getHeight()) {
         int d = 0;
         while (permission && d < item.getDepth()) {
-          int newW = w + i;
-          int newH = h + j;
-          int newD = d + k;
-          System.out.println(newW + ", " + newH + ", " + newD);
           if (w + i >= shape.length || h + j >= shape[w + i].length || d + k >= shape[w + i][h + j].length) {
             permission = false;
           }
@@ -98,7 +92,6 @@ public class Backtracking {
       }
       w++;
     }
-    System.out.println(permission);
     return permission;
   }
 
