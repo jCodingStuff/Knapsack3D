@@ -306,7 +306,7 @@ public class Item {
       }
     }
 
-    Object[] arrResult = result.toArray();
+    Object[] arrResult = cleanResult.toArray();
     Item[] finResult = Arrays.asList(arrResult).toArray(new Item[arrResult.length]);
     return finResult;
   }
