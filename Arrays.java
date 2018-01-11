@@ -37,4 +37,29 @@ public class Arrays {
     return myInt;
   }
 
+  /**
+  * Print a matrix to the screen
+  * @param matrix the matrix to print
+  */
+  public static void printMatrix(Item[][] matrix) {
+    for (Item[] array : matrix) {
+      printArray(array);
+    }
+  }
+
+  /**
+  * Print an array to the screen
+  * @param array the array to print
+  */
+  public static void printArray(Item[] array) {
+    System.out.print("[ ");
+    for (int i = 0; i < array.length; i++) {
+      System.out.print(array[i].getName());
+      if (i != array.length - 1) {
+        System.out.print(" ");
+      }
+    }
+    System.out.println(" ]");
+  }
+
 }
