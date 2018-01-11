@@ -110,7 +110,7 @@ public class Backtracking {
     for (int w = 0; w < item.getWidth(); w++) {
       for (int h = 0; h < item.getHeight(); h++) {
         for (int d = 0; d < item.getDepth(); d++) {
-          shape[w + i][h + j][d + k] = newItem;
+          newShape[w + i][h + j][d + k] = newItem;
         }
       }
     }
