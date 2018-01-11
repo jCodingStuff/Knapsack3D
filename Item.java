@@ -228,7 +228,21 @@ public class Item {
 
   /**
   * Checks if object is equal to input object
-  * @param
+  * @param obj object being compared
+  * @return a boolean, true if equal, false if not
+  */
+  public boolean equals(Object obj) {
+    Item comp = (Item) obj;
+    int[] compShape = comp.getShape();
+    boolean result = true;
+    for(int i = 0; i < shape.length; i++){
+      if(shape[i] != compShpe[i]){
+        result = false;
+      }
+    }
+    return result;
+  }
+
 
   /**
   * Returns all shapes of an Item
@@ -259,6 +273,7 @@ public class Item {
     yz2.setShape(xy, 1, 2);
     result[5] = yz2;
 
+    
     return result;
   }
 
