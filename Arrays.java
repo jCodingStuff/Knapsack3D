@@ -53,13 +53,10 @@ public class Arrays {
   */
   public static void printArray(Item[] array) {
     System.out.print("[ ");
-    for (int i = 0; i < array.length; i++) {
-      System.out.print(array[i].getName());
-      if (i != array.length - 1) {
-        System.out.print(" ");
-      }
+    for (Item item : array) {
+      System.out.print(item.getName() + " ");
     }
-    System.out.println(" ]");
+    System.out.println("]");
   }
 
 }
