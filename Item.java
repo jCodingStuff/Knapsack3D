@@ -13,8 +13,11 @@
 *
 * @author Julián Marrades
 * @version 0.03, 10-01-2018
-*/
 
+* @author Lucas Uberti-Bona
+* @version 0.04, 11-01-2018
+*/
+import java.util.ArrayList;
 public class Item {
 
   private static int counter = 0;
@@ -273,8 +276,15 @@ public class Item {
     yz2.setShape(rotate(xy, 1, 2));
     result[5] = yz2;
 
+    ArrayList<Item> cleanResult = new ArrayList<Item>();
+    for(int i = 0; i < result.length; i++) {
+      if(!cleanResult.contains(result[i])){
+        cleanResult.add(result[i]);
+      }
+    }
 
-    return result;
+    Item[] arrResult = (Item[]) cleanResult.toArray();
+    return arrResult;
   }
 
   /**
