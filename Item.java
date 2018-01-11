@@ -265,8 +265,8 @@ public class Item {
     }
 
     Object[] arrResult = result.toArray();
-    Arrays.asList(arrResult).toArray(new Item[arrResult.length]);
-    return arrResult;
+    Item[] finResult = Arrays.asList(arrResult).toArray(new Item[arrResult.length]);
+    return finResult;
   }
 
 
@@ -307,8 +307,8 @@ public class Item {
     }
 
     Object[] arrResult = result.toArray();
-    Arrays.asList(arrResult).toArray(new Item[arrResult.length]);
-    return arrResult;
+    Item[] finResult = Arrays.asList(arrResult).toArray(new Item[arrResult.length]);
+    return finResult;
   }
 
   /**
