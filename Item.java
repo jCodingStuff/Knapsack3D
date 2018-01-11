@@ -9,8 +9,14 @@
 *
 * @author Julián Marrades
 * @version 0.03, 10-01-2018
-*/
 
+* @author Lucas Uberti-Bona
+* @version 0.04, 11-01-2018
+
+* @author Lucas Uberti-Bona
+* @version 0.05, 11-01-2018
+*/
+import java.util.ArrayList;
 public class Item {
 
   private static int counter = 0;
@@ -223,44 +229,109 @@ public class Item {
   }
 
   /**
-  * Returns all shapes of an Item
-  * @return an array of items, all with different shapes
+  * Checks if object is equal to input object
+  * @param obj object being compared
+  * @return a boolean, true if Item's shapes are equal, false else
   */
-  public Item[] getAllShapes() {
-    Item[] result = new Item[];
-    if(shape.length!=shape[0].length) {
-      shape = rotate(1, 2).clone();
+  public boolean equals(Object obj) {
+    Item comp = (Item) obj;
+    int[] compShape = comp.getShape();
+    boolean result = true;
+    for(int i = 0; i < shape.length; i++){
+      if(shape[i] != compShape[i]){
+        result = false;
+      }
     }
-    if(shape.length!=shape[0][0].length) {
-      rotate(1, 3);
-    }
-    if(shape[0][0].length!=shape[0].length) {
-      rotate(2, 3);
+    return result;
+  }
+
+  /**
+  * Returns all shapes of an Item
+  * @param ori is an array containing the Items for which we want all shapes
+  * @return an array of items, all with different rotations of the input Items
+  */
+  public static Item[] getAllShapes(Item[] ori) {
+    ArrayList<Item[]> rawResult = new ArrayList<Item[]>();
+    for (Item i : ori) {
+      rawResult.add(getAllShapes(i));
     }
 
+    ArrayList<Item> result = new ArrayList<Item>();
+    for (Item[] i : rawResult){
+      for(Item j : i) {
+        result.add(j);
+      }
+    }
 
+    Item[] arrResult = (Item[]) result.toArray();
+    return arrResult;
+  }
+
+
+  /**
+  * Returns all shapes of an Item
+  * @param ori is the Item for which we want all shapes
+  * @return an array of items, all with different rotations of the input Item
+  */
+  public static Item[] getAllShapes(Item ori) {
+    Item[] result = new Item[6];
+    result[0] = ori;
+
+    Item xy = ori.clone();
+    xy.setShape(rotate(ori, 0, 1));
+    result[1] = xy;
+
+    Item xz = ori.clone();
+    xz.setShape(rotate(ori, 0, 2));
+    result[2] = xz;
+
+    Item xz2 = ori.clone();
+    xz2.setShape(rotate(xy, 0, 2));
+    result[3] = xz2;
+
+    Item yz = ori.clone();
+    yz.setShape(rotate(ori, 1, 2));
+    result[4] = yz;
+
+    Item yz2 = ori.clone();
+    yz2.setShape(rotate(xy, 1, 2));
+    result[5] = yz2;
+
+    ArrayList<Item> cleanResult = new ArrayList<Item>();
+    for(int i = 0; i < result.length; i++) {
+      if(!cleanResult.contains(result[i])){
+        cleanResult.add(result[i]);
+      }
+    }
+
+    Item[] arrResult = (Item[]) cleanResult.toArray();
+    return arrResult;
   }
 
   /**
   * Rotates shape in the indicated axis
+  * @param obj the Item we want to rotate
   * @param dim1 first dimension of the axis of rotation
   * @param dim2 second dimension of the axis of rotation
   * @return an item with a shape rotated 45 degrees in the indicated axis
   */
-  public Item rotate(int dim1, int dim2) {
-    int[][][] newShape;
-    if(dim1==1&&dim2==2) {
-      newShape =  = new int[shape[0].length][shape.length][shape[0][0].length];
+  public static int[] rotate(Item obj, int dim1, int dim2) {
+    int[] newShape;
+    int[] shape = obj.getShape();
+    if(dim1==0&&dim2==1) {
+      newShape = new int[] {shape[1], shape[0], shape[2]};
     }
 
-    else if (dim1==1&&dim2==3) {
-      newShape = new int[shape[0][0].length][shape[0].length][shape.length];
+    else if (dim1==0&&dim2==2) {
+      newShape = new int[] {shape[2], shape[1], shape[0]};
     }
 
-    else if (dim1==2&&dim2==3) {
-      newShape = new int[shape.length][shape[0][0].length][shape[0].length];
+    else if (dim1==1&&dim2==2) {
+      newShape = new int[] {shape[0], shape[2], shape[1]};
     }
+    else {
+      newShape = new int[] {0, 0, 0};
+    }
+    return newShape;
   }
-
-  return newShape;
 }
