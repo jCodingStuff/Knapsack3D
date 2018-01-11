@@ -133,7 +133,7 @@ public class Cargo {
   * @param j the position along the y-axis
   * @param k the position along the z-axis
   */
-  public put(Item item, int i, int j, int k) {
+  public void put(Item item, int i, int j, int k) {
     for (int w = i; w < i + item.getWidth(); w++) {
       for (int h = j; j < j + item.getHeight(); h++) {
         for (int d = k; d < k + item.getDepth(); d++) {
