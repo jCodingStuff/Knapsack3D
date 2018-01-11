@@ -229,14 +229,14 @@ public class Item {
   /**
   * Checks if object is equal to input object
   * @param obj object being compared
-  * @return a boolean, true if equal, false if not
+  * @return a boolean, true if Item's shapes are equal, false else
   */
   public boolean equals(Object obj) {
     Item comp = (Item) obj;
     int[] compShape = comp.getShape();
     boolean result = true;
     for(int i = 0; i < shape.length; i++){
-      if(shape[i] != compShpe[i]){
+      if(shape[i] != compShape[i]){
         result = false;
       }
     }
@@ -262,18 +262,18 @@ public class Item {
     result[2] = xz;
 
     Item xz2 = ori.clone();
-    xz2.setShape(xy, 0, 2);
+    xz2.setShape(rotate(xy, 0, 2));
     result[3] = xz2;
 
     Item yz = ori.clone();
-    yz.setShape(ori, 1, 2);
+    yz.setShape(rotate(ori, 1, 2));
     result[4] = yz;
 
     Item yz2 = ori.clone();
-    yz2.setShape(xy, 1, 2);
+    yz2.setShape(rotate(xy, 1, 2));
     result[5] = yz2;
 
-    
+
     return result;
   }
 
@@ -288,17 +288,19 @@ public class Item {
     int[] newShape;
     int[] shape = obj.getShape();
     if(dim1==0&&dim2==1) {
-      newShape = {shape[1], shape[0], shape[2]};
+      newShape = new int[] {shape[1], shape[0], shape[2]};
     }
 
     else if (dim1==0&&dim2==2) {
-      newShape = {shape[2], shape[1], shape[0]};
+      newShape = new int[] {shape[2], shape[1], shape[0]};
     }
 
     else if (dim1==1&&dim2==2) {
-      newShape = {shape[0], shape[2], shape[1]};
+      newShape = new int[] {shape[0], shape[2], shape[1]};
     }
+    else {
+      newShape = new int[] {0, 0, 0};
+    }
+    return newShape;
   }
-
-  return newShape;
 }
