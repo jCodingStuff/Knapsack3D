@@ -8,8 +8,23 @@
 
 public class Backtracking {
 
-  public static void solveFor(Item[] item, boolean[] used, Item[][][] shape) {
-    
+  /**
+  * Try to fill the cargo with certain types of items
+  * @param items the set of items that can be used
+  * @param shape the cargo
+  */
+  public static void solveFor(Item[] items, Item[][][] shape) {
+    if (isFull(shape)) {
+      print3DArray(shape);
+      System.exit(0);
+    }
+    for (int i = 0; i < shape.length; i++) {
+      for (int j = 0; j < shape[i].length; j++) {
+        for (int k = 0; k < shape[i][j].length; k++) {
+          
+        }
+      }
+    }
   }
 
   /**
@@ -89,6 +104,17 @@ public class Backtracking {
       }
     }
     return newShape;
+  }
+
+  /**
+  * Print the slices of a 3D array to the screen
+  * @param shape the 3D array to print
+  */
+  public static void print3DArray(Item[][][] shape) {
+    for (Item[][] matrix : shape) {
+      printMatrix(matrix);
+      System.out.println();
+    }
   }
 
   /**
