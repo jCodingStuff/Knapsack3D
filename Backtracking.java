@@ -35,7 +35,7 @@ public class Backtracking {
         }
       }
     }
-    System.out.println("The Cargo cannot be fully packed!");
+    // System.out.println("The Cargo cannot be fully packed!");
   }
 
   /**
