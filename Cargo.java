@@ -104,15 +104,26 @@ public class Cargo {
   * @return true if the item fits, false otherwise
   */
   public boolean canBePut(Item item, int i, int j, int k) {
-    int iWidth = i + item.getWidth();
-    int iHeight = j + item.getHeight();
-    int iDepth = k + item.getDepth();
-    if (iWidth <= this.getWidth() && iHeight <= this.getHeight() && iDepth <= this.getDepth()) {
-      return true;
+    boolean permission = true;
+    int w = i;
+    while (permission && w < i + item.getWidth()) {
+      int h = j;
+      while (permission && h < j + item.getHeight()) {
+        int d = k;
+        while (permission && d < k + item.getDepth()) {
+          if (w >= this.getWidth() || h >= this.getHeight() || d >= this.getDepth()) {
+            permission = false;
+          }
+          else if (this.shape[w][h][d] != null) {
+            permission = false;
+          }
+          d++;
+        }
+        h++;
+      }
+      w++;
     }
-    else {
-      return false;
-    }
+    return permission;
   }
 
   /**
@@ -122,10 +133,10 @@ public class Cargo {
   * @param j the position along the y-axis
   * @param k the position along the z-axis
   */
-  public put(Item item, int i, int j, int k) {
-    for (int w = i; w < item.getWidth(); w++) {
-      for (int h = j; j < item.getHeight(); h++) {
-        for (int d = k; d < item.getDepth(); d++) {
+  public void put(Item item, int i, int j, int k) {
+    for (int w = i; w < i + item.getWidth(); w++) {
+      for (int h = j; j < j + item.getHeight(); h++) {
+        for (int d = k; d < k + item.getDepth(); d++) {
           this.shape[w][h][d] = item;
         }
       }
