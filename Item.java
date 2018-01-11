@@ -227,42 +227,61 @@ public class Item {
   }
 
   /**
+  * Checks if object is equal to input object
+  * @param
+
+  /**
   * Returns all shapes of an Item
-  * @return an array of items, all with different shapes
+  * @param ori is the Item for which we want all shapes from
+  * @return an array of items, all with different rotations of the input Item
   */
-  public Item[] getAllShapes() {
-    Item[] result = new Item[];
-    if(shape.length!=shape[0].length) {
-      shape = rotate(1, 2).clone();
-    }
-    if(shape.length!=shape[0][0].length) {
-      rotate(1, 3);
-    }
-    if(shape[0][0].length!=shape[0].length) {
-      rotate(2, 3);
-    }
+  public static Item[] getAllShapes(Item ori) {
+    Item[] result = new Item[6];
+    result[0] = ori;
 
+    Item xy = ori.clone();
+    xy.setShape(rotate(ori, 0, 1));
+    result[1] = xy;
 
+    Item xz = ori.clone();
+    xz.setShape(rotate(ori, 0, 2));
+    result[2] = xz;
+
+    Item xz2 = ori.clone();
+    xz2.setShape(xy, 0, 2);
+    result[3] = xz2;
+
+    Item yz = ori.clone();
+    yz.setShape(ori, 1, 2);
+    result[4] = yz;
+
+    Item yz2 = ori.clone();
+    yz2.setShape(xy, 1, 2);
+    result[5] = yz2;
+
+    return result;
   }
 
   /**
   * Rotates shape in the indicated axis
+  * @param obj the Item we want to rotate
   * @param dim1 first dimension of the axis of rotation
   * @param dim2 second dimension of the axis of rotation
   * @return an item with a shape rotated 45 degrees in the indicated axis
   */
-  public Item rotate(int dim1, int dim2) {
-    int[][][] newShape;
-    if(dim1==1&&dim2==2) {
-      newShape =  = new int[shape[0].length][shape.length][shape[0][0].length];
+  public static int[] rotate(Item obj, int dim1, int dim2) {
+    int[] newShape;
+    int[] shape = obj.getShape();
+    if(dim1==0&&dim2==1) {
+      newShape = {shape[1], shape[0], shape[2]};
     }
 
-    else if (dim1==1&&dim2==3) {
-      newShape = new int[shape[0][0].length][shape[0].length][shape.length];
+    else if (dim1==0&&dim2==2) {
+      newShape = {shape[2], shape[1], shape[0]};
     }
 
-    else if (dim1==2&&dim2==3) {
-      newShape = new int[shape.length][shape[0][0].length][shape[0].length];
+    else if (dim1==1&&dim2==2) {
+      newShape = {shape[0], shape[2], shape[1]};
     }
   }
 
