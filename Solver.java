@@ -114,7 +114,7 @@ public class Solver
       for (int i = 0; i < this.cargo.getWidth(); i++) {
         for (int k = 0; k < this.cargo.getDepth(); k++) {
           if (this.cargo.check(i, j, k) == null) {
-            this.try(all, i, j, k);
+            this.tryFill(all, i, j, k);
           }
         }
       }
@@ -128,7 +128,7 @@ public class Solver
   * @param j the position along the y-axis
   * @param k the position along the z-axis
   */
-  private void try(Item[] items, int i, int j, int k) {
+  private void tryFill(Item[] items, int i, int j, int k) {
     boolean filled = false;
     int index = 0;
     while (!filled && index < items.length) {
