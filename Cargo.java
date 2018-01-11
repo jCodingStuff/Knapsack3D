@@ -106,7 +106,7 @@ public class Cargo {
   public boolean canBePut(Item item, int i, int j, int k) {
     boolean permission = true;
     int w = i;
-    while (permission && x < w + item.getWidth()) {
+    while (permission && w < i + item.getWidth()) {
       int h = j;
       while (permission && h < j + item.getHeight()) {
         int d = k;
