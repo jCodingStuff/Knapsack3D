@@ -17,6 +17,7 @@
 * @version 0.5, 11-01-2018
 */
 import java.util.ArrayList;
+import java.util.Arrays;
 public class Item {
 
   private static int counter = 0;
@@ -263,7 +264,8 @@ public class Item {
       }
     }
 
-    Item[] arrResult = (Item[]) result.toArray();
+    Object[] arrResult = result.toArray();
+    Arrays.asList(arrResult).toArray(new Item[arrResult.length]);
     return arrResult;
   }
 
@@ -304,7 +306,8 @@ public class Item {
       }
     }
 
-    Item[] arrResult = (Item[]) cleanResult.toArray();
+    Object[] arrResult = result.toArray();
+    Arrays.asList(arrResult).toArray(new Item[arrResult.length]);
     return arrResult;
   }
 
