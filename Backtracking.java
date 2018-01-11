@@ -8,6 +8,8 @@
 
 public class Backtracking {
 
-
+  public static void solveFor(Item[] item, boolean[] used, Item[][][] shape, Cargo cargo) {
+    
+  }
 
 }
