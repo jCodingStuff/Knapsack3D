@@ -24,8 +24,9 @@ public class Backtracking {
           if (shape[i][j][k] == null) {
             for (int t = 0; t < items.length; t++) {
               for (Item item : Item.getAllShapes(items[t])) {
-                if (canBePut(item, )) {
-
+                if (canBePut(item, shape, i, j, k)) {
+                  Item[][][] newShape = insert(item, shape, i, j, k);
+                  solveFor(items, newShape);
                 }
               }
             }
