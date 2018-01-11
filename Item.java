@@ -1,20 +1,20 @@
 /**
 * A class to represent an Item for the Knapsack problem
 * @author Julián Marrades
-* @version 0.01, 08-01-2018
+* @version 0.1, 08-01-2018
 *
 * @author Lucas Uberti-Bona
 * @author Silvia Fallone
-* @version 0.02, 09-01-2018
+* @version 0.2, 09-01-2018
 *
 * @author Julián Marrades
-* @version 0.03, 10-01-2018
+* @version 0.3, 10-01-2018
 
 * @author Lucas Uberti-Bona
-* @version 0.04, 11-01-2018
+* @version 0.4, 11-01-2018
 
 * @author Lucas Uberti-Bona
-* @version 0.05, 11-01-2018
+* @version 0.5, 11-01-2018
 */
 import java.util.ArrayList;
 public class Item {
