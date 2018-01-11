@@ -122,7 +122,7 @@ public class Solver
   }
 
   /**
-  * Try to fit an item in a position
+  * Try to fit an item from a set in a position
   * @param items the set of items which can be put in the cargo
   * @param i the position along the x-axis
   * @param j the position along the y-axis
