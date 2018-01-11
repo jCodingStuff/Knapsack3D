@@ -13,8 +13,8 @@ public class Backtracking {
   * @param items the set of items that can be used
   * @param shape the cargo
   */
-  public static void solveFor(Item[] items, Item[][][] shape) {
-    if (isFull(shape)) {
+  public static void solveFor(Item[] items, Item[][][] shape, int count) {
+    if (isFull(shape) || count >= 7) {
       print3DArray(shape);
       System.exit(0);
     }
@@ -26,7 +26,7 @@ public class Backtracking {
               for (Item item : Item.getAllShapes(items[t])) {
                 if (canBePut(item, shape, i, j, k)) {
                   Item[][][] newShape = insert(item, shape, i, j, k);
-                  solveFor(items, newShape);
+                  solveFor(items, newShape, count + 1);
                 }
               }
             }
@@ -145,7 +145,13 @@ public class Backtracking {
   public static void printArray(Item[] array) {
     System.out.print("[ ");
     for (Item item : array) {
-      System.out.print(item.getName() + " ");
+      if (item != null) {
+        System.out.print(item.getName());
+      }
+      else {
+        System.out.print("null");
+      }
+      System.out.print(" ");
     }
     System.out.println("]");
   }
