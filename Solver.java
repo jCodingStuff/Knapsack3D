@@ -110,9 +110,9 @@ public class Solver
   * Fill the cargo with the greedy algorithm
   */
   public void fillGreedyCargo() {
-    Item.jSort(this.items);
+    Item[] sorted = Item.jSort(this.items);
     // for (Item item : this.items) System.out.println(item);
-    Item[] all = Item.getAllShapes(this.items);
+    Item[] all = Item.getAllShapes(sorted);
     // Loop through the whole cargo and fill any empty space
     for (int j = 0; j < this.cargo.getHeight(); j++) {
       for (int i = 0; i < this.cargo.getWidth(); i++) {

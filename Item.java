@@ -231,16 +231,20 @@ public class Item {
   /**
   * Sort an array of Items by their ratio
   * @param input the array to sort
+  * @return a sorted copy of the array
   */
-  public static void jSort(Item[] input) {
+  public static Item[] jSort(Item[] input) {
+    Item[] sorted = new Item[input.length];
     ArrayList<Item> items = new ArrayList<Item>();
     for (Item item : input) {
       items.add(item.clone());
     }
-    for (int i = 0; i < input.length; i++) {
-      input[i] = items.get(getMaxIndex(items));
-      items.remove(getMaxIndex(items));
+    for (int i = 0; i < sorted.length; i++) {
+      int index = getMaxIndex(items);
+      sorted[i] = items.get(index);
+      items.remove(index);
     }
+    return sorted;
   }
 
   /**
