@@ -119,6 +119,7 @@ public class Solver
         }
       }
     }
+    Backtracking.print3DArray(this.cargo.getShape());
   }
 
   /**
