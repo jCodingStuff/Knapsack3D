@@ -105,16 +105,16 @@ public class Cargo {
   */
   public boolean canBePut(Item item, int i, int j, int k) {
     boolean permission = true;
-    int w = i;
-    while (permission && w < i + item.getWidth()) {
-      int h = j;
-      while (permission && h < j + item.getHeight()) {
-        int d = k;
-        while (permission && d < k + item.getDepth()) {
-          if (w >= this.getWidth() || h >= this.getHeight() || d >= this.getDepth()) {
+    int w = 0;
+    while (permission && w < item.getWidth()) {
+      int h = 0;
+      while (permission && h < item.getHeight()) {
+        int d = 0;
+        while (permission && d < item.getDepth()) {
+          if (w+i >= this.getWidth() || h+j >= this.getHeight() || d+k >= this.getDepth()) {
             permission = false;
           }
-          else if (this.shape[w][h][d] != null) {
+          else if (this.shape[w+i][h+j][d+k] != null) {
             permission = false;
           }
           d++;
@@ -135,10 +135,10 @@ public class Cargo {
   */
   public void put(Item item, int i, int j, int k) {
     Item newItem = item.clone();
-    for (int w = i; w < i + item.getWidth(); w++) {
-      for (int h = j; h < j + item.getHeight(); h++) {
-        for (int d = k; d < k + item.getDepth(); d++) {
-          this.shape[w][h][d] = newItem;
+    for (int w = 0; w < item.getWidth(); w++) {
+      for (int h = 0; h < item.getHeight(); h++) {
+        for (int d = 0; d < item.getDepth(); d++) {
+          this.shape[w + i][h + j][d + k] = newItem;
         }
       }
     }

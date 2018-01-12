@@ -108,6 +108,7 @@ public class Solver
   */
   public void fillGreedyCargo() {
     Item.sort(this.items);
+    // for (Item item : this.items) System.out.println(item);
     Item[] all = Item.getAllShapes(this.items);
     // Loop through the whole cargo and fill any empty space
     for (int j = 0; j < this.cargo.getHeight(); j++) {
@@ -119,6 +120,7 @@ public class Solver
         }
       }
     }
+    Backtracking.print3DArray(this.cargo.getShape());
   }
 
   /**
