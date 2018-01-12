@@ -300,9 +300,9 @@ public class Item {
     result[5] = yz2;
 
     ArrayList<Item> cleanResult = new ArrayList<Item>();
-    for(int i = 0; i < result.length; i++) {
-      if(!cleanResult.contains(result[i])){
-        cleanResult.add(result[i]);
+    for(Item i : result) {
+      if(!cleanResult.contains(i)3 ){
+        cleanResult.add(i);
       }
     }
 
