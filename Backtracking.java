@@ -35,7 +35,7 @@ public class Backtracking {
         }
       }
     }
-    System.out.println("The Cargo cannot be fully packed!");
+    // System.out.println("The Cargo cannot be fully packed!");
   }
 
   /**
@@ -74,18 +74,12 @@ public class Backtracking {
   */
   public static boolean canBePut(Item item, Item[][][] shape, int i, int j, int k) {
     boolean permission = true;
-    System.out.println(item);
-    System.out.println("Cargo:\n - Width -> " + shape.length + "\n - Height -> " + shape[0].length + "\n - Depth -> " + shape[0][0].length);
     int w = 0;
     while (permission && w < item.getWidth()) {
       int h = 0;
       while (permission && h < item.getHeight()) {
         int d = 0;
         while (permission && d < item.getDepth()) {
-          int newW = w + i;
-          int newH = h + j;
-          int newD = d + k;
-          System.out.println(newW + ", " + newH + ", " + newD);
           if (w + i >= shape.length || h + j >= shape[w + i].length || d + k >= shape[w + i][h + j].length) {
             permission = false;
           }
@@ -98,7 +92,6 @@ public class Backtracking {
       }
       w++;
     }
-    System.out.println(permission);
     return permission;
   }
 
@@ -114,15 +107,10 @@ public class Backtracking {
   public static Item[][][] insert(Item item, Item[][][] shape, int i, int j, int k) {
     Item[][][] newShape = Arrays.clone3DMatrix(shape);
     Item newItem = item.clone();
-    // System.out.println(newItem);
     for (int w = 0; w < item.getWidth(); w++) {
-      for (int h = 0; j < item.getHeight(); h++) {
+      for (int h = 0; h < item.getHeight(); h++) {
         for (int d = 0; d < item.getDepth(); d++) {
-          // int newW = w + i;
-          // int newH = h + j;
-          // int newD = d + k;
-          // System.out.println(newW + ", " + newH + ", " + newD);
-          shape[w + i][h + j][d + k] = newItem;
+          newShape[w + i][h + j][d + k] = newItem;
         }
       }
     }
@@ -157,7 +145,13 @@ public class Backtracking {
   public static void printArray(Item[] array) {
     System.out.print("[ ");
     for (Item item : array) {
-      System.out.print(item.getName() + " ");
+      if (item != null) {
+        System.out.print(item.getName());
+      }
+      else {
+        System.out.print("N");
+      }
+      System.out.print(" ");
     }
     System.out.println("]");
   }
