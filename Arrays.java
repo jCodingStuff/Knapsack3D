@@ -9,6 +9,9 @@
 *
 * @author Lucas Uberti-Bona
 * @version 0.3, 10-01-2018
+*
+* @author Julián Marrades
+* @version 0.4, 12-01-2018
 */
 
 public class Arrays {
@@ -35,6 +38,26 @@ public class Arrays {
         }
     }
     return myInt;
+  }
+
+  /**
+  * Find the index of an item inside an array
+  * @param item the item to search
+  * @param items the array
+  * @return the index if it finds it, -1 otherwise
+  */
+  public static int findIndex(Item item, Item[] items) {
+    int index = -1;
+    boolean found = false;
+    int i = 0;
+    while (!found && i < items.length) {
+      if (item.equals(items[i])) {
+        found = true;
+        index = i;
+      }
+      i++;
+    }
+    return index;
   }
 
 }
