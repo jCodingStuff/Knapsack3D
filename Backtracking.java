@@ -4,6 +4,9 @@
 *
 * @author Julián Marrades
 * @version 0.1, 11-01-2018
+*
+* @author Julián Marrades
+* @version 0.2, 12-01-2018
 */
 
 public class Backtracking {

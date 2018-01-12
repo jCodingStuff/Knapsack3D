@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 /**
 * A class to represent a Cargo for the Knapsack problem
 * @author Julián Marrades
@@ -173,6 +175,35 @@ public class Cargo {
   */
   public Cargo clone() {
     return new Cargo(this.name, Arrays.clone3DMatrix(this.shape));
+  }
+
+  /**
+  * Print the amount of each type of item in the cargo
+  * @param items the set of items
+  */
+  public void printSolution(Item[] items) {
+    int[] amounts = new int[items.length];
+    int volumeUsed = 0;
+    int valueStored = 0;
+    ArrayList<Integer> serials = new ArrayList<Integer>();
+    for (int i = 0; i < this.shape.length; i++) {
+      for (int j = 0; j < this.shape[i].length; j++) {
+        for (int k = 0; k < this.shape[i][j].length; k++) {
+          if (this.shape[i][j][k] != null && !serials.contains(this.shape[i][j][k].serialNumber())) {
+            serials.add(this.shape[i][j][k].serialNumber());
+            amounts[Arrays.findIndex(this.shape[i][j][k], items)]++;
+            valueStored += this.shape[i][j][k].getValue();
+            volumeUsed += this.shape[i][j][k].getVolume();
+          }
+        }
+      }
+    }
+    System.out.println("Volume stored -> " + volumeUsed + " out of " + this.getVolume());
+    System.out.println("Value stored -> " + valueStored);
+    System.out.println("Item amounts:");
+    for (int t = 0; t < items.length; t++) {
+      System.out.println(" - " + items[t].getName() + " -> " + amounts[t]);
+    }
   }
 
 }

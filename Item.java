@@ -301,7 +301,7 @@ public class Item {
 
     ArrayList<Item> cleanResult = new ArrayList<Item>();
     for(Item i : result) {
-      if(!cleanResult.contains(i)3 ){
+      if(!cleanResult.contains(i)){
         cleanResult.add(i);
       }
     }

@@ -8,6 +8,9 @@
 *
 * @author Julián Marrades
 * @version 0.3, 10-01-2018
+*
+* @author Julián Marrades
+* @version 0.4, 12-01-2018
 */
 public class Solver
 {
@@ -107,7 +110,7 @@ public class Solver
   * Fill the cargo with the greedy algorithm
   */
   public void fillGreedyCargo() {
-    Item.sort(this.items);
+    // Item.sort(this.items);
     // for (Item item : this.items) System.out.println(item);
     Item[] all = Item.getAllShapes(this.items);
     // Loop through the whole cargo and fill any empty space
@@ -120,7 +123,7 @@ public class Solver
         }
       }
     }
-    Backtracking.print3DArray(this.cargo.getShape());
+    this.cargo.printSolution(this.items);
   }
 
   /**
