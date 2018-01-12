@@ -135,10 +135,10 @@ public class Cargo {
   */
   public void put(Item item, int i, int j, int k) {
     Item newItem = item.clone();
-    for (int w = i; w < i + item.getWidth(); w++) {
-      for (int h = j; h < j + item.getHeight(); h++) {
-        for (int d = k; d < k + item.getDepth(); d++) {
-          this.shape[w][h][d] = newItem;
+    for (int w = 0; w < item.getWidth(); w++) {
+      for (int h = 0; h < item.getHeight(); h++) {
+        for (int d = 0; d < item.getDepth(); d++) {
+          this.shape[w + i][h + j][d + k] = newItem;
         }
       }
     }
