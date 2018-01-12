@@ -207,7 +207,6 @@ public class Item {
   * @param input the array to sort
   */
   public static void sort(Item[] input) {
-
     Item x = null;
     Item y = null;
     int z = 0;
@@ -227,6 +226,38 @@ public class Item {
       input[i] = x;
       input[z] = y;
     }
+  }
+
+  /**
+  * Sort an array of Items by their ratio
+  * @param input the array to sort
+  */
+  public static void jSort(Item[] input) {
+    ArrayList<Item> items = new ArrayList<Item>();
+    for (Item item : input) {
+      items.add(item.clone());
+    }
+    for (int i = 0; i < input.length; i++) {
+      input[i] = items.get(getMaxIndex(items));
+      items.remove(getMaxIndex(items));
+    }
+  }
+
+  /**
+  * Get the index from an ArrayList that contains the item with the highest ratio
+  * @param items the ArrayList to search
+  * @return the index with the max ratio
+  */
+  public static int getMaxIndex(ArrayList<Item> items) {
+    int index = 0;
+    double max = Double.MIN_VALUE;
+    for (int i = 0; i < items.size(); i++) {
+      if (items.get(i).getRatio() > max) {
+        index = i;
+        max = items.get(i).getRatio();
+      }
+    }
+    return index;
   }
 
   /**
