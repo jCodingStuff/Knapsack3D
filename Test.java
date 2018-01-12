@@ -15,10 +15,10 @@ public class Test {
     // Item[][][] cargo = new Item[3][3][3];
     // Backtracking.print3DArray(cargo);
 
-    Backtracking.solveFor(items, cargo);
+    //Backtracking.solveFor(items, cargo);
 
-    // Solver mine = new Solver("Greedy", items, new Cargo("Cargo", 33, 5, 8));
-    // mine.fillGreedyCargo();
+    Solver mine = new Solver("Greedy", items, new Cargo("Cargo", 33, 5, 8));
+    mine.fillGreedyCargo();
 
   }
 
