@@ -138,7 +138,7 @@ public class Solver
     while(i < ori.length) {
       int j = (int) (Math.random()*ori.length);
       if(result[j] == null){
-        result[j] = ori[i];
+        result[j] = ori[i].clone();
         i++;
       }
     }
