@@ -28,13 +28,16 @@ public class Backtracking {
           if (shape[i][j][k] == null) {
             for (int t = 0; t < items.length; t++) {
               for (Item item : Item.getAllShapes(items[t])) {
+                System.out.println(canBePut(item, shape, i, j, k));
                 if (canBePut(item, shape, i, j, k)) {
                   Item[][][] newShape = insert(item, shape, i, j, k);
                   System.out.println("Inserting " + item.getName());
+                  // print3DArray(newShape);
                   solveFor(items, newShape);
                 }
               }
             }
+            System.out.println("Going back!");
             return;
           }
         }
@@ -87,7 +90,7 @@ public class Backtracking {
           if (w + i >= shape.length || h + j >= shape[w + i].length || d + k >= shape[w + i][h + j].length) {
             permission = false;
           }
-          else if (shape[w][h][d] != null) {
+          else if (shape[w+i][h+j][d+k] != null) {
             permission = false;
           }
           d++;
