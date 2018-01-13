@@ -31,6 +31,7 @@ public class Backtracking {
                 if (canBePut(item, shape, i, j, k)) {
                   Item[][][] newShape = insert(item, shape, i, j, k);
                   System.out.println("Inserting " + item.getName());
+                  // print3DArray(newShape);
                   solveFor(items, newShape);
                 }
               }
