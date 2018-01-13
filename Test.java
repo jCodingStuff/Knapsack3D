@@ -11,7 +11,7 @@ public class Test {
     // for (Item item : sorted) System.out.println(item.getName());
     // Item[] items = new Item[]{A, B};
 
-    //Item[][][] cargo = new Item[33][5][8];
+    // Item[][][] cargo = new Item[33][5][8];
     Item[][][] cargo = new Item[21][16][9];
     // Backtracking.print3DArray(cargo);
 
