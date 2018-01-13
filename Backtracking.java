@@ -20,7 +20,7 @@ public class Backtracking {
   public static void solveFor(Item[] items, Item[][][] shape) {
     iterations++;
     if(iterations%500_000 == 0) {
-      System.out.println(iterations+ " iterations");
+      System.out.println(iterations + " iterations");
     }
     if (isFull(shape)) {
       // System.out.println("The cargo is full");
