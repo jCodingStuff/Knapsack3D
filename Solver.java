@@ -113,6 +113,7 @@ public class Solver
     // Item[] sorted = Item.jSort(this.items);
     Item[] sorted = Item.getAllShapes(this.items);
     // for (Item item : this.items) System.out.println(item);
+    // Backtracking.printArray(shuffle(sorted));
     Item[] all = shuffle(sorted);
     // Loop through the whole cargo and fill any empty space
     for (int j = 0; j < this.cargo.getHeight(); j++) {
@@ -124,7 +125,7 @@ public class Solver
         }
       }
     }
-    this.cargo.printSolution(this.items);
+    this.cargo.printSolution(all);
   }
 
   /**
