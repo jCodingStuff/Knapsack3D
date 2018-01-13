@@ -11,14 +11,14 @@ public class Test {
     // for (Item item : sorted) System.out.println(item.getName());
     // Item[] items = new Item[]{A, B};
 
-    //Item[][][] cargo = new Item[33][5][8];
-    Item[][][] cargo = new Item[8][8][8];
+    Item[][][] cargo = new Item[33][5][8];
+    //Item[][][] cargo = new Item[9][9][9];
     // Backtracking.print3DArray(cargo);
 
-    // Backtracking.solveFor(items, cargo);
+    Backtracking.solveFor(items, cargo);
 
-    Solver mine = new Solver("Greedy", items, new Cargo("Cargo", 33, 5, 8));
-    mine.fillGreedyCargo();
+    //Solver mine = new Solver("Greedy", items, new Cargo("Cargo", 33, 5, 8));
+    //mine.fillGreedyCargo();
 
   }
 
