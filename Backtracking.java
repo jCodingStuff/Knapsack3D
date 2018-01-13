@@ -18,7 +18,7 @@ public class Backtracking {
   */
   public static void solveFor(Item[] items, Item[][][] shape) {
     if (isFull(shape)) {
-      System.out.println("The cargo is full");
+      // System.out.println("The cargo is full");
       print3DArray(shape);
       System.exit(0);
     }
@@ -28,16 +28,16 @@ public class Backtracking {
           if (shape[i][j][k] == null) {
             for (int t = 0; t < items.length; t++) {
               for (Item item : Item.getAllShapes(items[t])) {
-                System.out.println(canBePut(item, shape, i, j, k));
+                // System.out.println(canBePut(item, shape, i, j, k));
                 if (canBePut(item, shape, i, j, k)) {
                   Item[][][] newShape = insert(item, shape, i, j, k);
-                  System.out.println("Inserting " + item.getName());
+                  // System.out.println("Inserting " + item.getName());
                   // print3DArray(newShape);
                   solveFor(items, newShape);
                 }
               }
             }
-            System.out.println("Going back!");
+            // System.out.println("Going back!");
             return;
           }
         }
