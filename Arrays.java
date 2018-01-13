@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 /**
 * A method that clones from Cargo
 * @author Sarah Waseem
@@ -90,6 +92,24 @@ public class Arrays {
       i++;
     }
     return match;
+  }
+
+  /**
+  * Check if a list contains a 3D array that satisfies boolCompare
+  * @param shape the shape to compare
+  * @param shapes the list to search in
+  * @return true if the list contains one shape that matches, false otherwise
+  */
+  public static boolean listContains(Item[][][] shape, ArrayList<Item[][][]> shapes) {
+    boolean cont = false;
+    int i = 0;
+    while (!cont && i < shapes.length) {
+      if (boolCompare(shape, shapes[i])) {
+        cont = true;
+      }
+      i++;
+    }
+    return cont;
   }
 
 }
