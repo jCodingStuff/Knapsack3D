@@ -12,7 +12,7 @@ public class Test {
     // Item[] items = new Item[]{A, B};
 
     // Item[][][] cargo = new Item[33][5][8];
-    Item[][][] cargo = new Item[21][16][9];
+    Item[][][] cargo = new Item[6][9][12];
     // Backtracking.print3DArray(cargo);
 
     Backtracking.solveFor(items, cargo);
