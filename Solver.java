@@ -110,9 +110,10 @@ public class Solver
   * Fill the cargo with the greedy algorithm
   */
   public void fillGreedyCargo() {
-    // Item.sort(this.items);
+    // Item[] sorted = Item.jSort(this.items);
+    Item[] sorted = Item.getAllShapes(this.items);
     // for (Item item : this.items) System.out.println(item);
-    Item[] all = Item.getAllShapes(this.items);
+    Item[] all = shuffle(sorted);
     // Loop through the whole cargo and fill any empty space
     for (int j = 0; j < this.cargo.getHeight(); j++) {
       for (int i = 0; i < this.cargo.getWidth(); i++) {
@@ -125,6 +126,25 @@ public class Solver
     }
     this.cargo.printSolution(this.items);
   }
+
+  /**
+  * Shuffle an array of elements
+  * @param ori original arrey
+  * @return  shuffled array
+  */
+  public static Item[] shuffle(Item[] ori) {
+    Item[] result = new Item[ori.length];
+    int i = 0;
+    while(i < ori.length) {
+      int j = (int) (Math.random()*ori.length);
+      if(result[j] == null){
+        result[j] = ori[i].clone();
+        i++;
+      }
+    }
+    return result;
+  }
+
 
   /**
   * Try to fit an item from a set in a position
