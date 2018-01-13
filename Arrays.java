@@ -103,8 +103,8 @@ public class Arrays {
   public static boolean listContains(Item[][][] shape, ArrayList<Item[][][]> shapes) {
     boolean cont = false;
     int i = 0;
-    while (!cont && i < shapes.length) {
-      if (boolCompare(shape, shapes[i])) {
+    while (!cont && i < shapes.size()) {
+      if (boolCompare(shape, shapes.get(i))) {
         cont = true;
       }
       i++;
