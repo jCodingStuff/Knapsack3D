@@ -29,6 +29,8 @@ public class Backtracking {
     if (isFull(shape)) {
       // System.out.println("The cargo is full");
       print3DArray(shape);
+      Cargo tmp = new Cargo("WTF", shape);
+      tmp.printSolution(items);
       System.exit(0);
     }
     for (int i = 0; i < shape.length; i++) {

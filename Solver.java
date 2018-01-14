@@ -125,7 +125,7 @@ public class Solver
         }
       }
     }
-    this.cargo.printSolution(all);
+    this.cargo.printSolution(this.items);
   }
 
   /**

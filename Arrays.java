@@ -56,7 +56,7 @@ public class Arrays {
     boolean found = false;
     int i = 0;
     while (!found && i < items.length) {
-      if (item.equals(items[i])) {
+      if (item.getName().equals(items[i].getName())) {
         found = true;
         index = i;
       }

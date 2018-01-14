@@ -20,7 +20,7 @@ public class Test {
 
     Backtracking.solveFor(items, cargo);
 
-    // Solver mine = new Solver("Greedy", items, new Cargo("Cargo", 33, 5, 8));
+    // Solver mine = new Solver("Greedy", items, new Cargo("Cargo", height, width, depth));
     // mine.fillGreedyCargo();
 
   }
