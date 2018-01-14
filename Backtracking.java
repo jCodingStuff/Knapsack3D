@@ -45,7 +45,6 @@ public class Backtracking {
                   // System.out.println("Inserting " + item.getName());
                   // print3DArray(newShape);
                   solveFor(items, newShape);
-                  cargos.add(newShape);
                 }
               }
             }
