@@ -12,7 +12,10 @@ public class Test {
     // Item[] items = new Item[]{A, B};
 
     // Item[][][] cargo = new Item[33][5][8];
-    Item[][][] cargo = new Item[6][6][6];
+    int height = Integer.parseInt(args[0]);
+    int width = Integer.parseInt(args[1]);
+    int depth = Integer.parseInt(args[2]);
+    Item[][][] cargo = new Item[height][width][depth];
     // Backtracking.print3DArray(cargo);
 
     Backtracking.solveFor(items, cargo);
