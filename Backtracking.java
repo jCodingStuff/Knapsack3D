@@ -28,7 +28,7 @@ public class Backtracking {
     }
     if (isFull(shape)) {
       // System.out.println("The cargo is full");
-      print3DArray(shape);
+      // print3DArray(shape);
       Cargo tmp = new Cargo("WTF", shape);
       tmp.printSolution(items);
       System.exit(0);
@@ -124,7 +124,14 @@ public class Backtracking {
   * @return new version of shape with the item inside
   */
   public static Item[][][] insert(Item item, Item[][][] shape, int i, int j, int k) {
-    Item[][][] newShape = Arrays.clone3DMatrix(shape);
+    Item[][][] newShape = new Item[shape.length][shape[0].length][shape[0][0].length];
+    for (int x = 0; x < newShape.length; x++) {
+      for (int y = 0; y < newShape[x].length; y++) {
+        for (int z = 0; z < newShape[x][y].length; z++) {
+          newShape[x][y][z] = shape[x][y][z];
+        }
+      }
+    }
     Item newItem = item.clone();
     for (int w = 0; w < item.getWidth(); w++) {
       for (int h = 0; h < item.getHeight(); h++) {
