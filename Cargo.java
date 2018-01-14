@@ -10,6 +10,8 @@ public class Cargo {
 
   private String name;
   private Item[][][] shape;
+  private String result;
+  private int value;
 
   /**
   * Default Cargo constructor
@@ -31,6 +33,22 @@ public class Cargo {
   public Cargo(String name, Item[][][] shape) {
     this.name = name;
     this.shape = shape;
+  }
+
+  /**
+  * Get access to the filled in the cargo
+  * @return the properties of the filled cargo
+  */
+  public String getResult() {
+    return this.result;
+  }
+
+  /**
+  * Get access to the value stored in the cargo
+  * @return the value stored
+  */
+  public int getValue() {
+    return this.value;
   }
 
   /**
@@ -198,12 +216,15 @@ public class Cargo {
         }
       }
     }
-    System.out.println("Volume stored -> " + volumeUsed + " out of " + this.getVolume());
-    System.out.println("Value stored -> " + valueStored);
-    System.out.println("Item amounts:");
+    this.value = valueStored;
+    this.result = "";
+    this.result += "\nVolume stored -> " + volumeUsed + " out of " + this.getVolume();
+    this.result += "\nValue stored -> " + valueStored;
+    this.result += "\nItem amounts:";
     for (int t = 0; t < items.length; t++) {
-      System.out.println(" - " + items[t].getName() + " -> " + amounts[t]);
+      this.result += "\n - " + items[t].getName() + " -> " + amounts[t];
     }
+    // System.out.println(this.result);
   }
 
 }
