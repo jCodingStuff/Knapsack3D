@@ -224,7 +224,7 @@ public class Cargo {
     for (int t = 0; t < items.length; t++) {
       this.result += "\n - " + items[t].getName() + " -> " + amounts[t];
     }
-    // System.out.println(this.result);
+    System.out.println(this.result);
   }
 
 }
