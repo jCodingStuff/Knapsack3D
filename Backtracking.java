@@ -42,10 +42,7 @@ public class Backtracking {
                   Item[][][] newShape = insert(item, shape, i, j, k);
                   // System.out.println("Inserting " + item.getName());
                   // print3DArray(newShape);
-                  if (Arrays.listContains(newShape, cargos)) {
-                    return;
-                  }
-                  else {
+                  if (!Arrays.listContains(newShape, cargos)) {
                     solveFor(items, newShape);
                     cargos.add(newShape);
                   }
