@@ -125,7 +125,8 @@ public class Solver
         }
       }
     }
-    this.cargo.printSolution(all);
+    // Backtracking.print3DArray(this.cargo.getShape());
+    this.cargo.printSolution(this.items);
   }
 
   /**
