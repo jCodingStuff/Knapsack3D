@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 /**
 * A class with a backtracking algorithm that tries to fill the total volume of
 * a cargo
@@ -11,12 +13,14 @@
 
 public class Backtracking {
 
+  public static int iterations = 0;
+  public static ArrayList<Item[][][]> cargos = new ArrayList<Item[][][]>();
+
   /**
   * Try to fill the cargo with certain types of items
   * @param items the set of items that can be used
   * @param shape the cargo
   */
-  public static int iterations = 0;
   public static void solveFor(Item[] items, Item[][][] shape) {
     iterations++;
     if(iterations%500_000 == 0) {
@@ -24,12 +28,14 @@ public class Backtracking {
     }
     if (isFull(shape)) {
       // System.out.println("The cargo is full");
-      print3DArray(shape);
+      // print3DArray(shape);
+      Cargo tmp = new Cargo("WTF", shape);
+      tmp.printSolution(items);
       System.exit(0);
     }
-    for (int i = 0; i < shape.length; i++) {
-      for (int j = 0; j < shape[i].length; j++) {
-        for (int k = 0; k < shape[i][j].length; k++) {
+    for (int j = 0; j < shape[0].length; j++) {
+      for (int k = 0; k < shape[0][0].length; k++) {
+        for (int i = 0; i < shape.length; i++) {
           if (shape[i][j][k] == null) {
             for (int t = 0; t < items.length; t++) {
               for (Item item : Item.getAllShapes(items[t])) {
@@ -117,7 +123,14 @@ public class Backtracking {
   * @return new version of shape with the item inside
   */
   public static Item[][][] insert(Item item, Item[][][] shape, int i, int j, int k) {
-    Item[][][] newShape = Arrays.clone3DMatrix(shape);
+    Item[][][] newShape = new Item[shape.length][shape[0].length][shape[0][0].length];
+    for (int x = 0; x < newShape.length; x++) {
+      for (int y = 0; y < newShape[x].length; y++) {
+        for (int z = 0; z < newShape[x][y].length; z++) {
+          newShape[x][y][z] = shape[x][y][z];
+        }
+      }
+    }
     Item newItem = item.clone();
     for (int w = 0; w < item.getWidth(); w++) {
       for (int h = 0; h < item.getHeight(); h++) {
