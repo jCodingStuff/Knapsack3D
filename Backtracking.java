@@ -33,9 +33,9 @@ public class Backtracking {
       tmp.printSolution(items);
       System.exit(0);
     }
-    for (int i = 0; i < shape.length; i++) {
-      for (int j = 0; j < shape[i].length; j++) {
-        for (int k = 0; k < shape[i][j].length; k++) {
+    for (int j = 0; j < shape[0].length; j++) {
+      for (int i = 0; i < shape.length; i++) {
+        for (int k = 0; k < shape[0][0].length; k++) {
           if (shape[i][j][k] == null) {
             for (int t = 0; t < items.length; t++) {
               for (Item item : Item.getAllShapes(items[t])) {

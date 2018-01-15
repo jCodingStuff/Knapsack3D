@@ -5,15 +5,15 @@ public class Test {
 
   public static void main(String[] args) {
 
-    FileWriter writer = null;
+    // FileWriter writer = null;
 
-    try {
-      writer = new FileWriter("results.txt");
-    }
-    catch (Exception e) {
-      System.out.println("You are dumb!");
-      System.exit(0);
-    }
+    // try {
+    //   writer = new FileWriter("results.txt");
+    // }
+    // catch (Exception e) {
+    //   System.out.println("You are dumb!");
+    //   System.exit(0);
+    // }
 
     Item A = new Item("A", 3, 2, 2, 4);
     Item B = new Item("B", 4, 2, 3, 4);
@@ -31,27 +31,27 @@ public class Test {
     Item[][][] cargo = new Item[height][width][depth];
     // Backtracking.print3DArray(cargo);
 
-    // Backtracking.solveFor(sorted, cargo);
-    for (int i = 0; i < 20_000_000; i++) {
-      Solver mine = new Solver("Greedy", items, new Cargo("Cargo", height, width, depth));
-      mine.fillGreedyCargo();
-      if (mine.getCargo().getValue() > 238) {
-        try {
-          writer.write("\n" + mine.getCargo().getResult());
-        }
-        catch (IOException e) {
-          System.out.println("Motherfucker you sick dumb ass get my try!");
-        }
-      }
-    }
-
-    try {
-      writer.close();
-    }
-    catch (Exception e) {
-      System.out.println("Could not close the writer sdoignarewoignaeriogn");
-    }
-
+    Backtracking.solveFor(sorted, cargo);
+  //   for (int i = 0; i < 20_000_000; i++) {
+  //     Solver mine = new Solver("Greedy", items, new Cargo("Cargo", height, width, depth));
+  //     mine.fillGreedyCargo();
+  //     if (mine.getCargo().getValue() > 238) {
+  //       try {
+  //         writer.write("\n" + mine.getCargo().getResult());
+  //       }
+  //       catch (IOException e) {
+  //         System.out.println("Motherfucker you sick dumb ass get my try!");
+  //       }
+  //     }
+  //   }
+  //
+  //   try {
+  //     writer.close();
+  //   }
+  //   catch (Exception e) {
+  //     System.out.println("Could not close the writer sdoignarewoignaeriogn");
+  //   }
+  //
   }
 
 }
