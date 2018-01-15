@@ -31,13 +31,13 @@ import javax.media.j3d.TransformGroup;
 import com.sun.j3d.utils.behaviors.mouse.*;
 
 public class BasicConstruct extends JFrame {
-	
+
   protected SimpleUniverse simpleU;
   protected BranchGroup bg;
 
   /**
    * Constructor that constructs the window with the given name.
-   * 
+   *
    * @param name
    *            The name of the window, in String format
    */
@@ -51,7 +51,7 @@ public class BasicConstruct extends JFrame {
    * Perform the essential setups for the Java3D
    */
   protected void initial_setup() {
-  
+
     getContentPane().setLayout(new BorderLayout());
     GraphicsConfiguration config = SimpleUniverse.getPreferredConfiguration();
     Canvas3D canvas3D = new Canvas3D(config);
@@ -62,7 +62,7 @@ public class BasicConstruct extends JFrame {
 
   /**
    * Adds a light source to the universe
-   * 
+   *
    * @param direction
    *            The inverse direction of the light
    * @param color
@@ -84,7 +84,7 @@ public class BasicConstruct extends JFrame {
 
   /**
    * Adds a box to the universe
-   * 
+   *
    * @param x
    *            The x dimension of the box
    * @param y
@@ -107,11 +107,11 @@ public class BasicConstruct extends JFrame {
 
     // Create a TransformGroup and make it the parent of the box
     TransformGroup tg = new TransformGroup();
-    
+
     Transform3D transform = new Transform3D();
     transform.setTranslation(vector);
     tg.setTransform(transform);
-    
+
     tg.addChild(box);
 
     // Then add it to the bg
@@ -135,7 +135,7 @@ public class BasicConstruct extends JFrame {
     myMouseZoom.setSchedulingBounds(new BoundingSphere());
     bg.addChild(myMouseZoom);
   }
-  
+
   /**
    * Calculating the vector for each item translation
    * @param x the x-coordinate to start from
@@ -146,30 +146,30 @@ public class BasicConstruct extends JFrame {
    * @return the vector for the transformation requested
    */
   public static Vector3f vec(float x, float y, float z, Cargo cargo, Item item) {
-	 
+
 	  float cW = ((float)(cargo.getWidth())*5f);
 	  float cH = ((float)(cargo.getHeight())*5f);
 	  float cD = ((float)(cargo.getDepth())*5f);
 	  float iW = ((float)(item.getWidth())*5f);
 	  float iH = ((float)(item.getHeight())*5f);
 	  float iD = ((float)(item.getDepth())*5f);
-	  
+
 	  float vecX = x - cW + iW;
 	  float vecY = y + cH - iH;
 	  float vecZ = z - cD + iD;
-	  
+
 	  Vector3f vector = new Vector3f(vecX,vecY,vecZ);
-	  
+
 	  return vector;
-	  
-	  /*Vector3f vector = new Vector3f( 
-			  ( (float)(i) - ( (float)(cargo.getWidth()) / 2f) + ( (float)(tmp.getWidth()) / 2f) ), 
-			  ( (float)(j) + ( (float)(cargo.getHeight()) / 2f) - ( (float)(tmp.getHeight() / 2f) ) ), 
+
+	  /*Vector3f vector = new Vector3f(
+			  ( (float)(i) - ( (float)(cargo.getWidth()) / 2f) + ( (float)(tmp.getWidth()) / 2f) ),
+			  ( (float)(j) + ( (float)(cargo.getHeight()) / 2f) - ( (float)(tmp.getHeight() / 2f) ) ),
 			  ( (float)(k) - ( (float)(cargo.getDepth()) / 2f) + ( (float)(tmp.getDepth()) / 2f) ) );
 			  */
-	  
+
   }
-  
+
   /**
    * Finalise everything to get ready
    */
@@ -182,28 +182,28 @@ public class BasicConstruct extends JFrame {
   }
 
   public static void main(String[] argv) {
-	
+
     BasicConstruct bc = new BasicConstruct("Foo");
 
     bc.setSize(250, 250);
-    
+
     ArrayList<Integer> numbers = new ArrayList<Integer>();
-    
+
     Item A = new Item("A",3,2,2,4, new Color(255,0,0));
     Item B = new Item("B",4,2,3,4, new Color(0,0,255));
     Item C = new Item("C",5,3,3,3, new Color(0,255,0));
-    Item[] items = {A,B,C}; 
+    Item[] items = {A,B,C};
     Cargo cargo = new Cargo("cargo",20,5,8);
-    
+
     /*for (int i = 0; i<items.length; i++) {
     	Box items[i].getName() = new Box(items[i].getWidth(),items[i].getHeight(),items[i].getDepth(), appearance)
     }*/
-    
-    
+
+
     Backtracking.solveFor(items,cargo.getShape());
-    Item[][][] solution = cargo.getShape();
+    Item[][][] solution = Backtracking.tmp.getShape();
     System.out.println("cargo solved");
-    
+
     for (int i = 0; i<solution.length; i++) {
     	System.out.println("Hello");
     	for (int j = 0; j<solution[i].length; j++) {
@@ -217,7 +217,7 @@ public class BasicConstruct extends JFrame {
     		}
     	}
     }
-    
+
     bc.addDirectionalLight(new Vector3f(0f, 0f, -1),new Color3f(1f, 1f, 0f));
     bc.finalise();
 
