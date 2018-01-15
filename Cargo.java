@@ -218,7 +218,7 @@ public class Cargo {
     }
     this.value = valueStored;
     this.result = "";
-    this.result += "\nVolume stored -> " + volumeUsed + " out of " + this.getVolume();
+    this.result += "Volume stored -> " + volumeUsed + " out of " + this.getVolume();
     this.result += "\nValue stored -> " + valueStored;
     this.result += "\nItem amounts:";
     for (int t = 0; t < items.length; t++) {
