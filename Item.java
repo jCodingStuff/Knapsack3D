@@ -18,6 +18,7 @@
 */
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.awt.Color;
 public class Item {
 
   private static int counter = 0;
@@ -25,6 +26,7 @@ public class Item {
   private String name;
   private int value;
   private int[] shape;
+  private Color color;
   private int serialNumber;
 
   /**
@@ -56,6 +58,24 @@ public class Item {
     this.value = value;
     this.shape = new int[]{width, height, depth};
   }
+  
+  /**
+   * Construct a new Item
+   * @param name the name of the item
+   * @param value the value of the item
+   * @param width the width of the item
+   * @param height the height of the item
+   * @param depth the depth of the item
+   * @param color the color of the item
+   */
+   public Item(String name, int value, int width, int height, int depth, Color color) {
+     counter++;
+     this.serialNumber = counter;
+     this.name = name;
+     this.value = value;
+     this.shape = new int[]{width, height, depth};
+     this.color = color;
+   }
 
   /**
   * Get access to the serial number of the item
@@ -160,6 +180,14 @@ public class Item {
   public void setDepth(int depth) {
     this.shape[2] = depth;
   }
+  
+  /**
+   * Get the color of the item
+   * @return the color of the item
+   */
+   public Color getColor() {
+     return this.color;
+   }
 
   /**
   * Get the volume of the item
@@ -371,5 +399,21 @@ public class Item {
       newShape = new int[] {0, 0, 0};
     }
     return newShape;
+  }
+  
+  /**
+   * Checks if the serial number matches any number in a list
+   * @param list the list of numbers to compare
+   * @return true if there is a match
+   */
+  
+  public boolean matchSN(ArrayList<Integer> numbers) {
+	  boolean match = false;
+	  for (int i = 0; i < numbers.size(); i++) {
+		  if (this.serialNumber()==numbers.get(i)) {
+			  match = true;
+		  }
+	  }
+	  return match;
   }
 }
