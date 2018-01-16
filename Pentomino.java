@@ -61,6 +61,14 @@ public class Pentomino {
   }
 
   /**
+  * Get access to the item of the pentomino
+  * @return the item of the pentomino
+  */
+  public Item getItem() {
+    return this.item;
+  }
+
+  /**
   * Get the starting coordinates of a pentomino
   * @return a integer array containing [x, y, z] positions
   */
