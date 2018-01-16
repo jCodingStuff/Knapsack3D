@@ -16,7 +16,7 @@ public class Backtracking {
   * @param items the set of items that can be used
   * @param shape the cargo
   */
-  public static int iterations = 0;
+  public static long iterations = 0;
   public static void solveFor(Item[] items, Item[][][] shape) {
     iterations++;
     if(iterations%500_000 == 0) {
