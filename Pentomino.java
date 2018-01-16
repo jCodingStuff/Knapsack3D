@@ -51,6 +51,32 @@ public class Pentomino {
   }
 
   /**
+  * Get access to the shape of the Pentomino
+  */
+  public boolean[][][] getShape() {
+    return this.shape;
+  }
+
+  /**
+  * Set a new shape for the Pentomino
+  * @param shape the new shape
+  */
+  public void setShape(boolean[][][] shape) {
+    this.shape = shape;
+  }
+
+  /**
+  * Get access to a certain position of the shape
+  * @param i the position along the x-axis
+  * @param j the position along the y-axis
+  * @param k the position along the z-axis
+  * @return the value of that position
+  */
+  public boolean check(int i, int j, int k) {
+    return this.shape[i][j][k];
+  }
+
+  /**
   * Build an T-type pentomino
   */
   private void buildT() {
