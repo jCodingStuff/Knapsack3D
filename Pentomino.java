@@ -112,10 +112,9 @@ public class Pentomino {
   }
 
   public static boolean[][][] mirror(Pentomino pent, int dim1, int dim2) {
-    boolean[][][] newShape;
+    boolean[][][] newShape = newShape = new boolean[shape.length][shape[0].length][shape[0][0].length];
     boolean[][][] shape = pent.getShape();
     if (dim1 == 0 && dim2 == 1) {
-      newShape = new boolean[shape.length][shape[0].length][shape[0][0].length];
       int i1 = 0, j1 = 0, k1 = 0;
       int i2 = shape.length, j2 = 0, k2 = 0;
       while (i1 < shape.length) {
@@ -137,9 +136,6 @@ public class Pentomino {
     }
     else if (dim1 == 1 && dim2 == 2) {
 
-    }
-    else {
-      newShape = new boolean[1][1][1];
     }
     return newShape;
   }
