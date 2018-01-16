@@ -58,7 +58,7 @@ public class Item {
     this.value = value;
     this.shape = new int[]{width, height, depth};
   }
-  
+
   /**
    * Construct a new Item
    * @param name the name of the item
@@ -180,7 +180,7 @@ public class Item {
   public void setDepth(int depth) {
     this.shape[2] = depth;
   }
-  
+
   /**
    * Get the color of the item
    * @return the color of the item
@@ -226,8 +226,8 @@ public class Item {
     int width = this.shape[0];
     int height = this.shape[1];
     int depth = this.shape[2];
-    int[] new_array = new int[]{width, height, depth};
-    return new Item(this.name, this.value, new_array);
+    // int[] new_array = new int[]{width, height, depth};
+    return new Item(this.name, this.value, width, height, depth, this.color);
   }
 
   /**
@@ -400,13 +400,13 @@ public class Item {
     }
     return newShape;
   }
-  
+
   /**
    * Checks if the serial number matches any number in a list
    * @param list the list of numbers to compare
    * @return true if there is a match
    */
-  
+
   public boolean matchSN(ArrayList<Integer> numbers) {
 	  boolean match = false;
 	  for (int i = 0; i < numbers.size(); i++) {
