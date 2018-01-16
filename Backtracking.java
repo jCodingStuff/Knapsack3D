@@ -15,6 +15,7 @@ public class Backtracking {
 
   public static int iterations = 0;
   public static ArrayList<Item[][][]> cargos = new ArrayList<Item[][][]>();
+  public static Cargo tmp;
 
   /**
   * Try to fill the cargo with certain types of items
@@ -29,9 +30,10 @@ public class Backtracking {
     if (isFull(shape)) {
       // System.out.println("The cargo is full");
       // print3DArray(shape);
-      Cargo tmp = new Cargo("WTF", shape);
-      tmp.printSolution(items);
-      System.exit(0);
+      tmp = new Cargo("WTF", shape);
+      // tmp.printSolution(items);
+      // System.exit(0);
+      return;
     }
     for (int j = 0; j < shape[0].length; j++) {
       for (int k = 0; k < shape[0][0].length; k++) {
