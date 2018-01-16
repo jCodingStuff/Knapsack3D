@@ -112,4 +112,16 @@ public class Arrays {
     return cont;
   }
 
+  public static boolean[][][] cloneBool3DArray(boolean[][][] ori) {
+    boolean[][][] fut = new boolean[ori.length][ori[0].length][ori[0][0].length];
+    for (int i = 0; i < ori.length; i++) {
+      for (int j = 0; j < ori[i].length; j++) {
+        for (int k = 0; k < ori[i][j].length; k++) {
+          fut[i][j][k] = ori[i][j][k];
+        }
+      }
+    }
+    return fut;
+  }
+
 }
