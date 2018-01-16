@@ -51,6 +51,41 @@ public class Pentomino {
   }
 
   /**
+  * Build an T-type pentomino
+  */
+  private void buildT() {
+    this.item = new Item(this.name, 5, 1, 1, 1, new Color(0, 0, 255));
+    this.shape = new boolean[][][]{{{true, false, false}},
+                                   {{true, true, true}},
+                                   {{true, false, false}}};
+  }
+
+  /**
+  * Get the starting coordinates of a pentomino
+  * @return a integer array containing [x, y, z] positions
+  */
+  public int[] getStartCoordinates() {
+    int[] tmp = new int[3];
+    boolean stop = false;
+    int i = 0;
+    while (!stop && i < this.shape.length) {
+      int j = 0;
+      while (!stop && j < this.shape[i].length) {
+        int k = 0;
+        while (!stop && k < this.shape[i][j].length) {
+          if (this.shape[i][j][k] == true) {
+            tmp = new int[]{i, j, k};
+          }
+          k++;
+        }
+        j++;
+      }
+      i++;
+    }
+    return tmp;
+  }
+
+  /**
   * Get access to the shape of the Pentomino
   */
   public boolean[][][] getShape() {
@@ -74,16 +109,6 @@ public class Pentomino {
   */
   public boolean check(int i, int j, int k) {
     return this.shape[i][j][k];
-  }
-
-  /**
-  * Build an T-type pentomino
-  */
-  private void buildT() {
-    this.item = new Item(this.name, 5, 1, 1, 1, new Color(0, 0, 255));
-    this.shape = new boolean[][][]{{{true, false, false}},
-                                   {{true, true, true}},
-                                   {{true, false, false}}};
   }
 
   /**
