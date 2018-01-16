@@ -1,5 +1,4 @@
 import java.util.*;
-import javax.swing.JFrame;
 
 // BorderLayout stuff
 import java.awt.*;

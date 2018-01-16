@@ -32,6 +32,8 @@ public class Test {
     // Backtracking.print3DArray(cargo);
 
     Backtracking.solveFor(sorted, cargo);
+    Cargo tmp = new Cargo("TMP", Backtracking.tmp.getShape());
+    tmp.printSolution(items);
   //   for (int i = 0; i < 20_000_000; i++) {
   //     Solver mine = new Solver("Greedy", items, new Cargo("Cargo", height, width, depth));
   //     mine.fillGreedyCargo();
