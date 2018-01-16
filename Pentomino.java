@@ -111,14 +111,25 @@ public class Pentomino {
     return this.shape[i][j][k];
   }
 
+  /**
+  * Mirror a pentomino
+  * @param pent the pentomino to rotate
+  * @param dim1 the first axis
+  * @param dim2 the second axis
+  * @return the mirrored shape
+  */
   public static boolean[][][] mirror(Pentomino pent, int dim1, int dim2) {
     boolean[][][] newShape = newShape = new boolean[shape.length][shape[0].length][shape[0][0].length];
     boolean[][][] shape = pent.getShape();
+    int i1 = 0, j1 = 0, k1 = 0;
     if (dim1 == 0 && dim2 == 1) {
-      int i1 = 0, j1 = 0, k1 = 0;
       int i2 = shape.length, j2 = 0, k2 = 0;
       while (i1 < shape.length) {
+        j1 = 0;
+        j2 = 0;
         while (j1 < shape[i1].length) {
+          k1 = 0;
+          k2 = 0;
           while (k1 < shape[i1][j1].length) {
             newShape[i2][j2][k2] = shape[i1][j1][k1];
             k1++;
@@ -132,10 +143,44 @@ public class Pentomino {
       }
     }
     else if (dim1 == 0 && dim2 == 2) {
-
+      int i2 = 0, j2 = 0, k2 = shape[0][0].length;
+      while (i1 < shape.length) {
+        j1 = 0;
+        j2 = 0;
+        while (j1 < shape[i1].length) {
+          k1 = 0;
+          k2 = shape[0][0].length;
+          while (k1 < shape[i1][j1].length) {
+            newShape[i2][j2][k2] = shape[i1][j1][k1];
+            k1++;
+            k2--;
+          }
+          j1++;
+          j2++;
+        }
+        i1++;
+        i2++;
+      }
     }
     else if (dim1 == 1 && dim2 == 2) {
-
+      int i2 = 0, j2 = 0, k2 = shape[0][0].length;
+      while (i1 < shape.length) {
+        j1 = 0;
+        j2 = 0;
+        while (j1 < shape[i1].length) {
+          k1 = 0;
+          k2 = shape[0][0].length;
+          while (k1 < shape[i1][j1].length) {
+            newShape[i2][j2][k2] = shape[i1][j1][k1];
+            k1++;
+            k2--;
+          }
+          j1++;
+          j2++;
+        }
+        i1++;
+        i2++;
+      }
     }
     return newShape;
   }
