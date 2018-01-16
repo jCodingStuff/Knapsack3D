@@ -5,6 +5,10 @@ import java.awt.Color;
 *
 * @author Julián Marrades
 * @version 0.1, 16-01-2018
+*
+* @author Lucas Uberti-Bona
+* @version 0.2, 16-01-2018
+*
 */
 
 public class Pentomino {
@@ -100,6 +104,63 @@ public class Pentomino {
   */
   public String toString() {
     return "[name=" + this.name + ", value=" + this.item.getValue() +"]";
+  }
+
+  /**
+  * Get all shapes of an Pentomino
+  * @param ori Item that we want to get all shapes of
+  * @return an array containing an array of Pentominoes with all the different getAllShapes
+  */
+  public static Pentomino[] getAllShapes(Pentomino ori) {
+
+  }
+
+  /**
+  * Rotates shape in the indicated axis
+  * @param ori the Pentomino we want to rotate
+  * @param dim1 first dimension of the axis of rotation
+  * @param dim2 second dimension of the axis of rotation
+  * @return an item with a shape rotated 45 degrees in the indicated axis
+  */
+  public static boolean[][][] rotate(Pentomino ori, int dim1, int dim2) {
+    boolean[][][] newShape;
+    boolean[][][] shape = ori.getShape();
+    if (dim1==0&&dim2==1) {
+      newShape = new boolean[shape[0].length][shape.length][shape[0][0].length];
+      for (int i = 0; i < shape.length; i++) {
+        for (int j = 0; j < shape[0].length; j++) {
+          for (int k = 0; k < shape[0][0].length; k++) {
+            newShape[shape[0].length-j][i][k] = shape[i][j][k];
+          }
+        }
+      }
+    }
+
+    else if (dim1==0&&dim2==2) {
+      newShape = new boolean[shape[0][0].length][shape[0].length][shape.length];
+      for (int i = 0; i < shape.length; i++) {
+        for (int j = 0; j < shape[0].length; j++) {
+          for (int k = 0; k < shape[0][0].length; k++) {
+            newShape[k][j][shape[0].length-i] = shape[i][j][k];
+          }
+        }
+      }
+    }
+
+    else if (dim1==1&&dim2==2) {
+      newShape = new boolean[shape.length][shape[0][0].length][shape[0].length];
+      for (int i = 0; i < shape.length; i++) {
+        for (int j = 0; j < shape[0].length; j++) {
+          for (int k = 0; k < shape[0][0].length; k++) {
+            newShape[i][shape[0].length-k][j] = shape[i][j][k];
+          }
+        }
+      }
+    }
+    else {
+      newShape = new boolean[1][1][1];
+    }
+    return newShape;
   }
 
 }
