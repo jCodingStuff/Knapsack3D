@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 /**
 * A method that clones from Cargo
 * @author Sarah Waseem
@@ -12,6 +14,9 @@
 *
 * @author Julián Marrades
 * @version 0.4, 12-01-2018
+*
+* @author Julián Marrades
+* @version 0.5, 13-01-2018
 */
 
 public class Arrays {
@@ -51,13 +56,60 @@ public class Arrays {
     boolean found = false;
     int i = 0;
     while (!found && i < items.length) {
-      if (item.equals(items[i])) {
+      if (item.getName().equals(items[i].getName())) {
         found = true;
         index = i;
       }
       i++;
     }
     return index;
+  }
+
+  /**
+  * Compare if two 3D Item arrays have the same filled spots
+  * @param arr1 one array
+  * @param arr2 another array
+  * @return true if they match, false otherwise
+  */
+  public static boolean boolCompare(Item[][][] arr1, Item[][][] arr2) {
+    boolean match = true;
+    int i = 0;
+    while (match && i < arr1.length) {
+      int j = 0;
+      while (match && j < arr1[i].length) {
+        int k = 0;
+        while (match && k < arr1[i][j].length) {
+          if (arr1[i][j][k] != null && arr2[i][j][k] == null) {
+            match = false;
+          }
+          else if (arr1[i][j][k] == null && arr2[i][j][k] != null) {
+            match = false;
+          }
+          k++;
+        }
+        j++;
+      }
+      i++;
+    }
+    return match;
+  }
+
+  /**
+  * Check if a list contains a 3D array that satisfies boolCompare
+  * @param shape the shape to compare
+  * @param shapes the list to search in
+  * @return true if the list contains one shape that matches, false otherwise
+  */
+  public static boolean listContains(Item[][][] shape, ArrayList<Item[][][]> shapes) {
+    boolean cont = false;
+    int i = 0;
+    while (!cont && i < shapes.size()) {
+      if (boolCompare(shape, shapes.get(i))) {
+        cont = true;
+      }
+      i++;
+    }
+    return cont;
   }
 
 }
