@@ -45,7 +45,6 @@ public class Backtracking {
                 if (canBePut(item, shape, i, j, k)) {
                   Item[][][] newShape = insert(item, shape, i, j, k);
                   // System.out.println("Inserting " + item.getName());
-                  // print3DArray(newShape);
                   solveFor(items, newShape);
                 }
               }
@@ -56,6 +55,24 @@ public class Backtracking {
         }
       }
     }
+  }
+
+  /**
+  * Decide if continue the search
+  * @param shape the current state of the cargo
+  * @return if it should continue, false otherwise
+  */
+  public static boolean shouldContinue(Item[][][] shape) {
+    for (int i = 0; i < shape.length; i++) {
+      for (int j = 0; j < shape[i].length; i++) {
+        for (int k = 0; k < shape[i][j].length; k++) {
+          if (isolated(shape, i, j, k)) {
+            return false;
+          }
+        }
+      }
+    }
+    return true;
   }
 
   /**
