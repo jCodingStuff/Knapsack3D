@@ -24,7 +24,6 @@ public class Solver
   * @param items the array of items
   * @param cargo the cargo object
   */
-
   public Solver(String name, Item[] items, Cargo cargo)
   {
     this.name = name;
