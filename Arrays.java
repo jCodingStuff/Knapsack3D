@@ -21,6 +21,26 @@ import java.util.ArrayList;
 
 public class Arrays {
 
+  public static Pentomino[] clonePArray(Pentomino[] ori) {
+    Pentomino[] fut = new Pentomino[ori.length];
+    for (int i = 0; i < fut.length; i++) {
+      if (ori[i] != null) {
+        fut[i] = ori[i].clone();
+      }
+    }
+    return fut;
+  }
+
+  public static Item[] toItemArray(Pentomino[] ori) {
+    Item[] fut = new Item[ori.length];
+    for (int i = 0; i < ori.length; i++) {
+      if (ori[i] != null) {
+        fut[i] = ori[i].getItem().clone();
+      }
+    }
+    return fut;
+  }
+
   public static Item[] cloneArray(Item[] ori) {
     Item[] fut = new Item[ori.length];
     for (int i = 0; i < fut.length; i++) {
