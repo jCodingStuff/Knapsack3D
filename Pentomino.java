@@ -229,8 +229,8 @@ public class Pentomino {
   */
   public static Pentomino[] getAllShapes(Pentomino ori) {
     Pentomino[] result = new Pentomino[24];
-    for (Pentomino i : result) {
-      i = ori.clone();
+    for (int i = 0; i < result.length; i++) {
+      result[i] = ori.clone();
     }
 
     for (int i = 1; i < 4; i++) {
