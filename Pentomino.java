@@ -171,6 +171,23 @@ public class Pentomino {
     return new Pentomino(this.name);
   }
 
+  public boolean equals(Object obj) {
+    if (obj == null) return false;
+    Pentomino other = (Pentomino) obj;
+    boolean[][][] oShape = other.getShape();
+    if (this.shape.length != oShape.length || this.shape[0].length != oShape[0].length || this.shape[0][0].length != oShape[0][0].length) {
+      return false;
+    }
+    for (int i = 0; i < this.shape.length; i++) {
+      for (int j = 0; j < this.shape[i].length; j++) {
+        for (int k = 0; k < this.shape[i][j].length; k++) {
+          if (this.shape[i][j][k] != oShape[i][j][k]) return false;
+        }
+      }
+    }
+    return true;
+  }
+
   /**
   * Get a string representation of the Pentomino
   * @return a string containing details about the attributes
