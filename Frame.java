@@ -5,8 +5,8 @@ import java.awt.event.ActionListener;
 
 public class Frame extends JFrame
 {
-  private static final int FRAME_WIDTH = 400;
-  private static final int FRAME_HEIGHT = 200;
+  private static final int FRAME_WIDTH = 520;
+  private static final int FRAME_HEIGHT = 180;
   private JLabel label;
   private JTextField parcelA;
   private JTextField parcelB;
@@ -33,6 +33,7 @@ public class Frame extends JFrame
     setTitle("Cargo Filling");
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     setLayout(new BorderLayout());
+    getContentPane().setBackground(Color.WHITE);
     createPanel();
     setVisible(true);
   }
@@ -42,6 +43,7 @@ public class Frame extends JFrame
     label = new JLabel("Cargo Filling");
     Font font = new Font("Times New Roman", Font.BOLD,20);
     label.setFont(font);
+    label.setHorizontalAlignment(JLabel.CENTER);
     A = new JLabel("Parcel A");
     parcelA = new JTextField(5);
     B = new JLabel("Parcel B");
@@ -56,33 +58,39 @@ public class Frame extends JFrame
     pent3 = new JTextField(5);
     maximize1 = new JLabel("Maximize: ");
     JPanel box1 = createComboBox1();
+    box1.setBackground(Color.WHITE);
     maximize2 = new JLabel("Maximize: ");
     JPanel box2 = createComboBox2();
+    box2.setBackground(Color.WHITE);
     button = new JButton("Fill");
+    button.setBackground(Color.WHITE);
   //  ActionListener listener = new ButtonListener();
   //  button.addActionListener(listener);
 
-    JPanel panel = new JPanel();
-    panel.add(label);
-    panel.add(A);
-    panel.add(parcelA);
-    panel.add(B);
-    panel.add(parcelB);
-    panel.add(C);
-    panel.add(parcelC);
-    panel.add(maximize1);
-    panel.add(box1);
-    panel.add(L);
-    panel.add(pent1);
-    panel.add(P);
-    panel.add(pent2);
-    panel.add(T);
-    panel.add(pent3);
-    panel.add(maximize2);
-    panel.add(box2);
+  add(label, BorderLayout.NORTH);
 
-    panel.add(button);
-    add(panel, BorderLayout.CENTER);
+  JPanel panel = new JPanel();
+  panel.setBackground(Color.WHITE);
+  panel.add(A);
+  panel.add(parcelA);
+  panel.add(B);
+  panel.add(parcelB);
+  panel.add(C);
+  panel.add(parcelC);
+  panel.add(maximize1);
+  panel.add(box1);
+  panel.add(L);
+  panel.add(pent1);
+  panel.add(P);
+  panel.add(pent2);
+  panel.add(T);
+  panel.add(pent3);
+  panel.add(maximize2);
+  panel.add(box2);
+
+  add(panel, BorderLayout.CENTER);
+  add(button, BorderLayout.SOUTH);
+
   }
 
   public JPanel createComboBox1()
