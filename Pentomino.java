@@ -210,6 +210,14 @@ public class Pentomino {
   }
 
   /**
+  * Get a sorted array of Pentominoes
+  * @return an array of Pentominoes [T, P, L]
+  */
+  public static Pentomino[] getSorted() {
+    return new Pentomino[]{new Pentomino("T"), new Pentomino("P"), new Pentomino("L")};
+  }
+
+  /**
   * Returns all shapes of an Item
   * @param ori is an array containing the Items for which we want all shapes
   * @return an array of items, all with different rotations of the input Items
