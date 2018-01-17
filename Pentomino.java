@@ -14,7 +14,7 @@ import java.awt.Color;
 public class Pentomino {
 
   private Item item;
-  private int name;
+  private String name;
   private boolean[][][] shape;
 
   /**
@@ -131,8 +131,8 @@ public class Pentomino {
   * @return the mirrored shape
   */
   public static boolean[][][] mirror(Pentomino pent, int dim1, int dim2) {
-    boolean[][][] newShape = newShape = new boolean[shape.length][shape[0].length][shape[0][0].length];
     boolean[][][] shape = pent.getShape();
+    boolean[][][] newShape = new boolean[shape.length][shape[0].length][shape[0][0].length];
     if (dim1 == 0 && dim2 == 1) {
       for (int i = 0; i < shape.length; i++) {
         for (int j = 0; j < shape[i].length; j++) {
