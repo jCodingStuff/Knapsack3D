@@ -168,10 +168,10 @@ public class Cargo {
           if (x < 0 || y < 0 || z < 0) {
             permission = false;
           }
-          else if (x >= this.shape.length || y >= this.shape[0].length || z >= this.shape[0][0].length) {
+          if (x >= this.shape.length || y >= this.shape[0].length || z >= this.shape[0][0].length) {
             permission = false;
           }
-          else if (pShape[w][h][d] == true && this.shape[x][y][z] != null) {
+          if (permission && pShape[w][h][d] == true && this.shape[x][y][z] != null) {
             permission = false;
           }
           d++;
@@ -214,10 +214,11 @@ public class Cargo {
     boolean[][][] pShape = newPent.getShape();
     int[] start = pent.getStartCoordinates();
     for (int w = 0; w < pShape.length; w++) {
-      for (int h = 0; h < pShape[i].length; h++) {
-        for (int d = 0; d < pShape[i][j].length; d++) {
+      for (int h = 0; h < pShape[w].length; h++) {
+        for (int d = 0; d < pShape[w][h].length; d++) {
           int x = w + i - start[0], y = h + j - start[1], z = d + k - start[2];
           if (pShape[w][h][d] == true) {
+            // System.out.println("x=" + x + ", y=" + y + ", z=" + z);
             this.shape[x][y][z] = item;
           }
         }
@@ -259,8 +260,9 @@ public class Cargo {
   /**
   * Print the amount of each type of item in the cargo
   * @param items the set of items
+  * @param pentos is the solution for pentos
   */
-  public void printSolution(Item[] items) {
+  public void printSolution(Item[] items, boolean pentos) {
     int[] amounts = new int[items.length];
     int volumeUsed = 0;
     int valueStored = 0;
@@ -277,6 +279,7 @@ public class Cargo {
         }
       }
     }
+    if (pentos) volumeUsed *= 5;
     this.value = valueStored;
     this.result = "";
     this.result += "Volume stored -> " + volumeUsed + " out of " + this.getVolume();

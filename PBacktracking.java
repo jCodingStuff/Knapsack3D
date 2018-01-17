@@ -6,9 +6,10 @@ public class PBacktracking {
   public static void solveFor(Pentomino[] pentominoes, Item[][][] cargo) {
     if (solved) return;
     if (Backtracking.isFull(cargo)) {
+      solved = true;
       Backtracking.print3DArray(cargo);
       tmp = new Cargo("tmp", cargo);
-      tmp.printSolution(Arrays.toItemArray(pentominoes));
+      // tmp.printSolution(Arrays.toItemArray(pentominoes));
       return;
     }
     for (int i = 0; i < cargo.length; i++) {
@@ -18,6 +19,7 @@ public class PBacktracking {
             for (int t = 0; t < pentominoes.length; t++) {
               for (Pentomino pentomino : Pentomino.getAllShapes(pentominoes[t])) {
                 if (canBePut(pentomino, cargo, i, j, k)) {
+                  // System.out.println("Putting " + pentomino.getItem().getName());
                   Item[][][] newCargo = insert(pentomino, cargo, i, j, k);
                   if (Backtracking.shouldContinue(newCargo)) {
                     solveFor(pentominoes, newCargo);
@@ -25,6 +27,7 @@ public class PBacktracking {
                 }
               }
             }
+            // System.out.println("Going back!");
             return;
           }
         }
@@ -46,9 +49,10 @@ public class PBacktracking {
       }
     }
     for (int w = 0; w < shape.length; w++) {
-      for (int h = 0; h < shape[i].length; h++) {
-        for (int d = 0; d < shape[i][j].length; d++) {
+      for (int h = 0; h < shape[w].length; h++) {
+        for (int d = 0; d < shape[w][h].length; d++) {
           int x = w + i - start[0], y = h + j - start[1], z = d + k - start[2];
+          // System.out.println("PUT: x=" + x + ", y=" + y + ", z=" + z);
           if (shape[w][h][d] == true) {
             newCargo[x][y][z] = item;
           }
@@ -69,13 +73,14 @@ public class PBacktracking {
         int d = 0;
         while (permission && d < shape[w][h].length) {
           int x = w + i - start[0], y = h + j - start[1], z = d + k - start[2];
+          // System.out.println("CHECK: x=" + x + ", y=" + y + ", z=" + z);
           if (x < 0 || y < 0 || z < 0) {
             permission = false;
           }
-          else if (x >= cargo.length || y >= cargo[0].length || z >= cargo[0][0].length) {
+          if (x >= cargo.length || y >= cargo[0].length || z >= cargo[0][0].length) {
             permission = false;
           }
-          else if (shape[w][h][d] == true && cargo[x][y][z] != null) {
+          if (permission && shape[w][h][d] == true && cargo[x][y][z] != null) {
             permission = false;
           }
           d++;
@@ -84,6 +89,7 @@ public class PBacktracking {
       }
       w++;
     }
+    // System.out.println(permission);
     return permission;
   }
 

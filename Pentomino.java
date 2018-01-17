@@ -89,6 +89,7 @@ public class Pentomino {
         while (!stop && k < this.shape[i][j].length) {
           if (this.shape[i][j][k] == true) {
             tmp = new int[]{i, j, k};
+            stop = true;
           }
           k++;
         }
@@ -170,7 +171,17 @@ public class Pentomino {
   * @return the deep copy of the Pentomino
   */
   public Pentomino clone() {
-    return new Pentomino(this.name);
+    Pentomino tmp = new Pentomino(this.name);
+    boolean[][][] bool = new boolean[this.shape.length][this.shape[0].length][this.shape[0][0].length];
+    for (int i = 0; i < bool.length; i++) {
+      for (int j = 0; j < bool[i].length; j++) {
+        for (int k = 0; k < bool[i][j].length; k++) {
+          bool[i][j][k] = this.shape[i][j][k];
+        }
+      }
+    }
+    tmp.setShape(bool);
+    return tmp;
   }
 
   public boolean equals(Object obj) {

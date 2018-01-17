@@ -34,7 +34,7 @@ public class Test {
     Backtracking.solveFor(sorted, cargo);
     if (Backtracking.tmp != null) {
       Cargo tmp = new Cargo("TMP", Backtracking.tmp.getShape());
-      tmp.printSolution(items);
+      tmp.printSolution(items, false);
     }
     else {
       System.out.println("The cargo could not be filled :(");

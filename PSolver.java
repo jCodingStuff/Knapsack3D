@@ -109,7 +109,7 @@ public class PSolver {
       }
     }
     Backtracking.print3DArray(this.cargo.getShape());
-    this.cargo.printSolution(Arrays.toItemArray(this.pentos));
+    this.cargo.printSolution(Arrays.toItemArray(this.pentos), true);
   }
 
   /**
