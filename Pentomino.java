@@ -226,7 +226,7 @@ public class Pentomino {
   * @return an array containing an array of Pentominoes with all the different getAllShapes
   */
   public static Pentomino[] getAllShapes(Pentomino ori) {
-    Pentomino[] result = new Item[24];
+    Pentomino[] result = new Pentomino[24];
     for (Pentomino i : result) {
       i = ori.clone();
     }
