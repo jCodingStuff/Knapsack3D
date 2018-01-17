@@ -214,12 +214,74 @@ public class Pentomino {
   }
 
   /**
+  * Returns all shapes of an Item
+  * @param ori is an array containing the Items for which we want all shapes
+  * @return an array of items, all with different rotations of the input Items
+  */
+  public static Pentomino[] getAllShapes(Pentomino[] ori) {
+    ArrayList<Pentomino[]> rawResult = new ArrayList<Pentomino[]>();
+    for (Pentomino i : ori) {
+      rawResult.add(getAllShapes(i));
+    }
+
+    ArrayList<Pentomino> result = new ArrayList<Pentomino>();
+    for (Pentomino[] i : rawResult){
+      for(Pentomino j : i) {
+        result.add(j);
+      }
+    }
+
+    Object[] arrResult = result.toArray();
+    Pentomino[] finResult = Arrays.asList(arrResult).toArray(new Pentomino[arrResult.length]);
+    return finResult;
+  }
+
+
+  /**
   * Get all shapes of an Pentomino
   * @param ori Item that we want to get all shapes of
   * @return an array containing an array of Pentominoes with all the different getAllShapes
   */
   public static Pentomino[] getAllShapes(Pentomino ori) {
+    Pentomino[] result = new Item[24];
+    for (Pentomino i : result) {
+      i = ori.clone();
+    }
 
+    for (int i = 1; i < 4; i++) {
+      result[i].setShape(rotate(result[i-1], 0, 2));
+    }
+    result[4].setShape(mirror(ori, 1, 2));
+    for (int i = 5; i < 8; i++) {
+      result[i].setShape(rotate(result[i-1], 0, 2));
+    }
+    result[8].setShape(rotate(result[8], 1, 2))
+    for (int i = 9; i < 12; i++) {
+      result[i].setShape(rotate(result[i-1], 0, 2));
+    }
+    result[12].setShape(mirror(result[12], 0, 2));
+    for (int i = 13; i < 16; i++) {
+      result[i].setShape(rotate(result[i-1], 0, 2));
+    }
+    result[16].setShape(rotate(result[16], 0, 1));
+    for (int i = 17; i < 20; i++) {
+      result[i].setShape(rotate(result[i-1], 0, 2));
+    }
+    result[20].setShape(mirror(result[20], 0, 2));
+    for (int i = 21; i < 24; i++) {
+      result[i].setShape(rotate(result[i-1], 0, 2));
+    }
+
+    ArrayList<Pentomino> cleanResult = new ArrayList<Pentomino>();
+    for(Pentomino i : result) {
+      if(!cleanResult.contains(i)){
+        cleanResult.add(i);
+      }
+    }
+
+    Object[] arrResult = cleanResult.toArray();
+    Pentomino[] finResult = Arrays.asList(arrResult).toArray(new Pentomino[arrResult.length]);
+    return finResult;
   }
 
   /**
