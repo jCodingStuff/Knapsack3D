@@ -15,6 +15,7 @@ public class Backtracking {
 
   public static ArrayList<Item[][][]> cargos = new ArrayList<Item[][][]>();
   public static Cargo tmp;
+  public static boolean solved = false;
 
   /**
   * Try to fill the cargo with certain types of items
@@ -27,10 +28,12 @@ public class Backtracking {
     if(iterations%500_000 == 0) {
       System.out.println(iterations + " iterations");
     }
+    if (solved) return;
     if (isFull(shape)) {
       // System.out.println("The cargo is full");
       // print3DArray(shape);
       tmp = new Cargo("WTF", shape);
+      solved = true;
       // tmp.printSolution(items);
       // System.exit(0);
       return;
@@ -73,6 +76,32 @@ public class Backtracking {
       }
     }
     return true;
+  }
+
+  /**
+  * Check if a certain cell is isolated
+  * @param shape the cargo that contains the cell
+  * @param i the position along the x-axis
+  * @param j the position along the y-axis
+  * @param k the position along the z-axis
+  * @return true is the cell is isolated, false otherwise
+  */
+  public static boolean isolated(Item[][][] shape, int i, int j, int k) {
+    boolean iso = false;
+    if (checkPosition(shape, i, j-1, k)) {  // TOP
+      if (checkPosition(shape, i, j+1, k)) {  // BOTTOM
+        if (checkPosition(shape, i, j, k+1)) {  // FRONT
+          if (checkPosition(shape, i, j, k-1)) {  // REAR
+            if (checkPosition(shape, i-1, j, k)) {  // LEFT
+              if (checkPosition(shape, i+1, j, k)) {  // RIGHT
+                iso = true;
+              }
+            }
+          }
+        }
+      }
+    }
+    return iso;
   }
 
   /**

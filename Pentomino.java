@@ -185,7 +185,7 @@ public class Pentomino {
   * @return an array containing an array of Pentominoes with all the different getAllShapes
   */
   public static Pentomino[] getAllShapes(Pentomino ori) {
-
+    return null;
   }
 
   /**
