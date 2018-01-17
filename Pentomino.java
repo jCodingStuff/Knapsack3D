@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.util.ArrayList;
 
 /**
 * A class to represent a Pentomino for the Knapsack problem
