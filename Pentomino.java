@@ -134,13 +134,31 @@ public class Pentomino {
     boolean[][][] newShape = newShape = new boolean[shape.length][shape[0].length][shape[0][0].length];
     boolean[][][] shape = pent.getShape();
     if (dim1 == 0 && dim2 == 1) {
-
+      for (int i = 0; i < shape.length; i++) {
+        for (int j = 0; j < shape[i].length; j++) {
+          for (int k = 0; k < shape[i][j].length; k++) {
+            newShape[shape.length - 1 - i][j][k] = shape[i][j][k];
+          }
+        }
+      }
     }
     else if (dim1 == 0 && dim2 == 2) {
-
+      for (int i = 0; i < shape.length; i++) {
+        for (int j = 0; j < shape[i].length; j++) {
+          for (int k = 0; k < shape[i][j].length; k++) {
+            newShape[][][] = shape[][][];
+          }
+        }
+      }
     }
     else if (dim1 == 1 && dim2 == 2) {
-
+      for (int i = 0; i < shape.length; i++) {
+        for (int j = 0; j < shape[i].length; j++) {
+          for (int k = 0; k < shape[i][j].length; k++) {
+            newShape[][][] = shape[][][];
+          }
+        }
+      }
     }
     return newShape;
   }
