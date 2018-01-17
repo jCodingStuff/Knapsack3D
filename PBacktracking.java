@@ -3,6 +3,8 @@ public class PBacktracking {
   public static void solveFor(Pentomino[] pentominoes, Item[][][] cargo) {
     if (Backtracking.isFull(cargo)) {
       Backtracking.print3DArray(cargo);
+      Cargo tmp = new Cargo("tmp", cargo);
+      tmp.printSolution(Arrays.toItemArray(pentominoes));
       System.exit(0);
     }
     for (int i = 0; i < cargo.length; i++) {
