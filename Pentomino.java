@@ -238,7 +238,7 @@ public class Pentomino {
     for (int i = 5; i < 8; i++) {
       result[i].setShape(rotate(result[i-1], 0, 2));
     }
-    result[8].setShape(rotate(result[8], 1, 2))
+    result[8].setShape(rotate(result[8], 1, 2));
     for (int i = 9; i < 12; i++) {
       result[i].setShape(rotate(result[i-1], 0, 2));
     }
