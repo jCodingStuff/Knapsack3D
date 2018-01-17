@@ -284,7 +284,7 @@ public class Pentomino {
       for (int i = 0; i < shape.length; i++) {
         for (int j = 0; j < shape[0].length; j++) {
           for (int k = 0; k < shape[0][0].length; k++) {
-            newShape[shape[0].length-j][i][k] = shape[i][j][k];
+            newShape[newShape.length-1-j][i][k] = shape[i][j][k];
           }
         }
       }
@@ -295,7 +295,7 @@ public class Pentomino {
       for (int i = 0; i < shape.length; i++) {
         for (int j = 0; j < shape[0].length; j++) {
           for (int k = 0; k < shape[0][0].length; k++) {
-            newShape[k][j][shape.length-i] = shape[i][j][k];
+            newShape[k][j][newShape[0][0].length-1-i] = shape[i][j][k];
           }
         }
       }
@@ -306,7 +306,7 @@ public class Pentomino {
       for (int i = 0; i < shape.length; i++) {
         for (int j = 0; j < shape[0].length; j++) {
           for (int k = 0; k < shape[0][0].length; k++) {
-            newShape[i][shape[0].length-k][j] = shape[i][j][k];
+            newShape[i][newShape[0].length-1-k][j] = shape[i][j][k];
           }
         }
       }
