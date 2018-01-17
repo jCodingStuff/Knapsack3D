@@ -13,7 +13,6 @@ import java.util.ArrayList;
 
 public class Backtracking {
 
-  public static int iterations = 0;
   public static ArrayList<Item[][][]> cargos = new ArrayList<Item[][][]>();
   public static Cargo tmp;
 
