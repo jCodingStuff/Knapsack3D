@@ -14,7 +14,7 @@ import java.awt.Color;
 public class Pentomino {
 
   private Item item;
-  private int name;
+  private String name;
   private boolean[][][] shape;
 
   /**
@@ -131,67 +131,33 @@ public class Pentomino {
   * @return the mirrored shape
   */
   public static boolean[][][] mirror(Pentomino pent, int dim1, int dim2) {
-    boolean[][][] newShape = newShape = new boolean[shape.length][shape[0].length][shape[0][0].length];
     boolean[][][] shape = pent.getShape();
-    int i1 = 0, j1 = 0, k1 = 0;
+    boolean[][][] newShape = new boolean[shape.length][shape[0].length][shape[0][0].length];
     if (dim1 == 0 && dim2 == 1) {
-      int i2 = shape.length, j2 = 0, k2 = 0;
-      while (i1 < shape.length) {
-        j1 = 0;
-        j2 = 0;
-        while (j1 < shape[i1].length) {
-          k1 = 0;
-          k2 = 0;
-          while (k1 < shape[i1][j1].length) {
-            newShape[i2][j2][k2] = shape[i1][j1][k1];
-            k1++;
-            k2++;
+      for (int i = 0; i < shape.length; i++) {
+        for (int j = 0; j < shape[i].length; j++) {
+          for (int k = 0; k < shape[i][j].length; k++) {
+            newShape[i][j][shape[i][j].length - 1 - k] = shape[i][j][k];
           }
-          j1++;
-          j2++;
         }
-        i1++;
-        i2--;
       }
     }
     else if (dim1 == 0 && dim2 == 2) {
-      int i2 = 0, j2 = 0, k2 = shape[0][0].length;
-      while (i1 < shape.length) {
-        j1 = 0;
-        j2 = 0;
-        while (j1 < shape[i1].length) {
-          k1 = 0;
-          k2 = shape[0][0].length;
-          while (k1 < shape[i1][j1].length) {
-            newShape[i2][j2][k2] = shape[i1][j1][k1];
-            k1++;
-            k2--;
+      for (int i = 0; i < shape.length; i++) {
+        for (int j = 0; j < shape[i].length; j++) {
+          for (int k = 0; k < shape[i][j].length; k++) {
+            newShape[i][shape[i].length - 1 - j][k] = shape[i][j][k];
           }
-          j1++;
-          j2++;
         }
-        i1++;
-        i2++;
       }
     }
     else if (dim1 == 1 && dim2 == 2) {
-      int i2 = 0, j2 = 0, k2 = shape[0][0].length;
-      while (i1 < shape.length) {
-        j1 = 0;
-        j2 = 0;
-        while (j1 < shape[i1].length) {
-          k1 = 0;
-          k2 = shape[0][0].length;
-          while (k1 < shape[i1][j1].length) {
-            newShape[i2][j2][k2] = shape[i1][j1][k1];
-            k1++;
-            k2--;
+      for (int i = 0; i < shape.length; i++) {
+        for (int j = 0; j < shape[i].length; j++) {
+          for (int k = 0; k < shape[i][j].length; k++) {
+            newShape[shape.length - 1 - i][j][k] = shape[i][j][k];
           }
-          j1++;
-          j2++;
         }
-        i1++;
-        i2++;
       }
     }
     return newShape;
@@ -203,6 +169,23 @@ public class Pentomino {
   */
   public Pentomino clone() {
     return new Pentomino(this.name);
+  }
+
+  public boolean equals(Object obj) {
+    if (obj == null) return false;
+    Pentomino other = (Pentomino) obj;
+    boolean[][][] oShape = other.getShape();
+    if (this.shape.length != oShape.length || this.shape[0].length != oShape[0].length || this.shape[0][0].length != oShape[0][0].length) {
+      return false;
+    }
+    for (int i = 0; i < this.shape.length; i++) {
+      for (int j = 0; j < this.shape[i].length; j++) {
+        for (int k = 0; k < this.shape[i][j].length; k++) {
+          if (this.shape[i][j][k] != oShape[i][j][k]) return false;
+        }
+      }
+    }
+    return true;
   }
 
   /**

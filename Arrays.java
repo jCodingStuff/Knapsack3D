@@ -21,6 +21,26 @@ import java.util.ArrayList;
 
 public class Arrays {
 
+  public static Pentomino[] clonePArray(Pentomino[] ori) {
+    Pentomino[] fut = new Pentomino[ori.length];
+    for (int i = 0; i < fut.length; i++) {
+      if (ori[i] != null) {
+        fut[i] = ori[i].clone();
+      }
+    }
+    return fut;
+  }
+
+  public static Item[] toItemArray(Pentomino[] ori) {
+    Item[] fut = new Item[ori.length];
+    for (int i = 0; i < ori.length; i++) {
+      if (ori[i] != null) {
+        fut[i] = ori[i].getItem().clone();
+      }
+    }
+    return fut;
+  }
+
   public static Item[] cloneArray(Item[] ori) {
     Item[] fut = new Item[ori.length];
     for (int i = 0; i < fut.length; i++) {
@@ -110,6 +130,18 @@ public class Arrays {
       i++;
     }
     return cont;
+  }
+
+  public static boolean[][][] cloneBool3DArray(boolean[][][] ori) {
+    boolean[][][] fut = new boolean[ori.length][ori[0].length][ori[0][0].length];
+    for (int i = 0; i < ori.length; i++) {
+      for (int j = 0; j < ori[i].length; j++) {
+        for (int k = 0; k < ori[i][j].length; k++) {
+          fut[i][j][k] = ori[i][j][k];
+        }
+      }
+    }
+    return fut;
   }
 
 }

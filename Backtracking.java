@@ -13,9 +13,9 @@ import java.util.ArrayList;
 
 public class Backtracking {
 
-  public static int iterations = 0;
   public static ArrayList<Item[][][]> cargos = new ArrayList<Item[][][]>();
   public static Cargo tmp;
+  public static boolean solved = false;
 
   /**
   * Try to fill the cargo with certain types of items
@@ -28,10 +28,12 @@ public class Backtracking {
     if(iterations%500_000 == 0) {
       System.out.println(iterations + " iterations");
     }
+    if (solved) return;
     if (isFull(shape)) {
       // System.out.println("The cargo is full");
       // print3DArray(shape);
       tmp = new Cargo("WTF", shape);
+      solved = true;
       // tmp.printSolution(items);
       // System.exit(0);
       return;
@@ -46,8 +48,9 @@ public class Backtracking {
                 if (canBePut(item, shape, i, j, k)) {
                   Item[][][] newShape = insert(item, shape, i, j, k);
                   // System.out.println("Inserting " + item.getName());
-                  // print3DArray(newShape);
-                  solveFor(items, newShape);
+                  if (shouldContinue(newShape)) {
+                    solveFor(items, newShape);
+                  }
                 }
               }
             }
@@ -58,6 +61,76 @@ public class Backtracking {
       }
     }
   }
+
+  /**
+  * Decide if continue the search
+  * @param shape the current state of the cargo
+  * @return if it should continue, false otherwise
+  */
+  public static boolean shouldContinue(Item[][][] shape) {
+    for (int i = 0; i < shape.length; i++) {
+      for (int j = 0; j < shape[i].length; j++) {
+        for (int k = 0; k < shape[i][j].length; k++) {
+          if (shape[i][j][k] == null && isolated(shape, i, j, k)) {
+            return false;
+          }
+        }
+      }
+    }
+    return true;
+  }
+
+  /**
+  * Check if a certain cell is isolated
+  * @param shape the cargo that contains the cell
+  * @param i the position along the x-axis
+  * @param j the position along the y-axis
+  * @param k the position along the z-axis
+  * @return true is the cell is isolated, false otherwise
+  */
+  public static boolean isolated(Item[][][] shape, int i, int j, int k) {
+    boolean iso = false;
+    if (checkPosition(shape, i, j-1, k)) {  // TOP
+      if (checkPosition(shape, i, j+1, k)) {  // BOTTOM
+        if (checkPosition(shape, i, j, k+1)) {  // FRONT
+          if (checkPosition(shape, i, j, k-1)) {  // REAR
+            if (checkPosition(shape, i-1, j, k)) {  // LEFT
+              if (checkPosition(shape, i+1, j, k)) {  // RIGHT
+                iso = true;
+              }
+            }
+          }
+        }
+      }
+    }
+    return iso;
+  }
+
+  /**
+  * Check if a certain cell is full or out of bounds
+  * @param shape the cargo that contains the cell
+  * @param i the position along the x-axis
+  * @param j the position along the y-axis
+  * @param k the position along the z-axis
+  * @return true is the cell is out or full, false otherwise
+  */
+  public static boolean checkPosition(Item[][][] shape, int i, int j, int k) {
+    boolean off = false;
+    if (i < 0 || i >= shape.length) {
+      off = true;
+    }
+    else if (j < 0 || j >= shape[0].length) {
+      off = true;
+    }
+    else if (k < 0 || k >= shape[0][0].length) {
+      off = true;
+    }
+    else if (shape[i][j][k] != null) {
+      off = true;
+    }
+    return off;
+  }
+
 
   /**
   * Determine if a 3D Item array is full or not
