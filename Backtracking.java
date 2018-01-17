@@ -48,7 +48,9 @@ public class Backtracking {
                 if (canBePut(item, shape, i, j, k)) {
                   Item[][][] newShape = insert(item, shape, i, j, k);
                   // System.out.println("Inserting " + item.getName());
-                  solveFor(items, newShape);
+                  if (shouldContinue(newShape)) {
+                    solveFor(items, newShape);
+                  }
                 }
               }
             }
@@ -67,9 +69,9 @@ public class Backtracking {
   */
   public static boolean shouldContinue(Item[][][] shape) {
     for (int i = 0; i < shape.length; i++) {
-      for (int j = 0; j < shape[i].length; i++) {
+      for (int j = 0; j < shape[i].length; j++) {
         for (int k = 0; k < shape[i][j].length; k++) {
-          if (isolated(shape, i, j, k)) {
+          if (shape[i][j][k] == null && isolated(shape, i, j, k)) {
             return false;
           }
         }
@@ -103,6 +105,32 @@ public class Backtracking {
     }
     return iso;
   }
+
+  /**
+  * Check if a certain cell is full or out of bounds
+  * @param shape the cargo that contains the cell
+  * @param i the position along the x-axis
+  * @param j the position along the y-axis
+  * @param k the position along the z-axis
+  * @return true is the cell is out or full, false otherwise
+  */
+  public static boolean checkPosition(Item[][][] shape, int i, int j, int k) {
+    boolean off = false;
+    if (i < 0 || i >= shape.length) {
+      off = true;
+    }
+    else if (j < 0 || j >= shape[0].length) {
+      off = true;
+    }
+    else if (k < 0 || k >= shape[0][0].length) {
+      off = true;
+    }
+    else if (shape[i][j][k] != null) {
+      off = true;
+    }
+    return off;
+  }
+
 
   /**
   * Determine if a 3D Item array is full or not

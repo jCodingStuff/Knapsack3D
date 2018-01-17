@@ -32,8 +32,13 @@ public class Test {
     // Backtracking.print3DArray(cargo);
 
     Backtracking.solveFor(sorted, cargo);
-    Cargo tmp = new Cargo("TMP", Backtracking.tmp.getShape());
-    tmp.printSolution(items);
+    if (Backtracking.tmp != null) {
+      Cargo tmp = new Cargo("TMP", Backtracking.tmp.getShape());
+      tmp.printSolution(items);
+    }
+    else {
+      System.out.println("The cargo could not be filled :(");
+    }
   //   for (int i = 0; i < 20_000_000; i++) {
   //     Solver mine = new Solver("Greedy", items, new Cargo("Cargo", height, width, depth));
   //     mine.fillGreedyCargo();

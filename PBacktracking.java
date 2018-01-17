@@ -1,11 +1,15 @@
 public class PBacktracking {
 
+  public static Cargo tmp;
+  public static boolean solved = false;
+
   public static void solveFor(Pentomino[] pentominoes, Item[][][] cargo) {
+    if (solved) return;
     if (Backtracking.isFull(cargo)) {
       Backtracking.print3DArray(cargo);
-      Cargo tmp = new Cargo("tmp", cargo);
+      tmp = new Cargo("tmp", cargo);
       tmp.printSolution(Arrays.toItemArray(pentominoes));
-      System.exit(0);
+      return;
     }
     for (int i = 0; i < cargo.length; i++) {
       for (int j = 0; j < cargo[i].length; j++) {
@@ -15,7 +19,9 @@ public class PBacktracking {
               for (Pentomino pentomino : Pentomino.getAllShapes(pentominoes[t])) {
                 if (canBePut(pentomino, cargo, i, j, k)) {
                   Item[][][] newCargo = insert(pentomino, cargo, i, j, k);
-                  solveFor(pentominoes, newCargo);
+                  if (Backtracking.shouldContinue(newCargo)) {
+                    solveFor(pentominoes, newCargo);
+                  }
                 }
               }
             }
