@@ -295,7 +295,7 @@ public class Pentomino {
       for (int i = 0; i < shape.length; i++) {
         for (int j = 0; j < shape[0].length; j++) {
           for (int k = 0; k < shape[0][0].length; k++) {
-            newShape[k][j][shape[0].length-i] = shape[i][j][k];
+            newShape[k][j][shape.length-i] = shape[i][j][k];
           }
         }
       }
