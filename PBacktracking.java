@@ -2,8 +2,11 @@ public class PBacktracking {
 
   public static Cargo tmp;
   public static boolean solved = false;
+  public static long iterations = 0;
 
   public static void solveFor(Pentomino[] pentominoes, Item[][][] cargo) {
+    iterations++;
+    if (iterations%500_000==0) System.out.println(iterations + " iterations");
     if (solved) return;
     if (Backtracking.isFull(cargo)) {
       solved = true;

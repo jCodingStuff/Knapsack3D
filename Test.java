@@ -28,7 +28,7 @@ public class Test {
     int height = Integer.parseInt(args[0]);
     int width = Integer.parseInt(args[1]);
     int depth = Integer.parseInt(args[2]);
-    Item[][][] cargo = new Item[height][width][depth];
+    Item[][][] cargo = new Item[width][height][depth];
     // Backtracking.print3DArray(cargo);
 
     Backtracking.solveFor(sorted, cargo);
@@ -40,7 +40,7 @@ public class Test {
       System.out.println("The cargo could not be filled :(");
     }
   //   for (int i = 0; i < 20_000_000; i++) {
-  //     Solver mine = new Solver("Greedy", items, new Cargo("Cargo", height, width, depth));
+  //     Solver mine = new Solver("Greedy", items, new Cargo("Cargo", width, height, depth));
   //     mine.fillGreedyCargo();
   //     if (mine.getCargo().getValue() > 238) {
   //       try {

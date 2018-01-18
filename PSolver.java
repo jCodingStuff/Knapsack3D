@@ -87,28 +87,27 @@ public class PSolver {
   * @return the cloned solver object
   */
   public PSolver clone() {
-    Pentomino[] newPentos = Arrays.clonePArray(this.pentos);
-    return new PSolver(this.name, newPentos, this.cargo.clone());
+    return new PSolver(this.name, Arrays.clonePArray(this.pentos), this.cargo.clone());
   }
 
   /**
   * Fill the cargo with the greedy algorithm
   */
   public void fillGreedyCargo() {
-    // Item[] sorted = Item.jSort(this.items);
-    Pentomino[] sorted = Pentomino.getAllShapes(this.pentos);
+    Pentomino[] sorted = Pentomino.sort(this.pentos);
+    Pentomino[] all = Pentomino.getAllShapes(sorted);
     // for (Item item : this.items) System.out.println(item);
     // Loop through the whole cargo and fill any empty space
     for (int j = 0; j < this.cargo.getHeight(); j++) {
       for (int i = 0; i < this.cargo.getWidth(); i++) {
         for (int k = 0; k < this.cargo.getDepth(); k++) {
           if (this.cargo.check(i, j, k) == null) {
-            this.tryFill(sorted, i, j, k);
+            this.tryFill(all, i, j, k);
           }
         }
       }
     }
-    Backtracking.print3DArray(this.cargo.getShape());
+    // Backtracking.print3DArray(this.cargo.getShape());
     this.cargo.printSolution(Arrays.toItemArray(this.pentos), true);
   }
 
