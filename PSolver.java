@@ -131,4 +131,22 @@ public class PSolver {
     }
   }
 
+  /**
+  * Shuffle an array of elements
+  * @param ori original arrey
+  * @return  shuffled array
+  */
+  public static Pentomino[] shuffle(Pentomino[] ori) {
+    Pentomino[] result = new Pentomino[ori.length];
+    int i = 0;
+    while(i < ori.length) {
+      int j = (int) (Math.random()*ori.length);
+      if(result[j] == null){
+        result[j] = ori[i].clone();
+        i++;
+      }
+    }
+    return result;
+  }
+
 }
