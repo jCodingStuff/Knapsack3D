@@ -25,8 +25,8 @@ public class Test {
     // Item[] items = new Item[]{A, B};
 
     // Item[][][] cargo = new Item[33][5][8];
-    int height = Integer.parseInt(args[0]);
-    int width = Integer.parseInt(args[1]);
+    int width = Integer.parseInt(args[0]);
+    int height = Integer.parseInt(args[1]);
     int depth = Integer.parseInt(args[2]);
     Item[][][] cargo = new Item[width][height][depth];
     // Backtracking.print3DArray(cargo);

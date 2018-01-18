@@ -96,6 +96,7 @@ public class PSolver {
   public void fillGreedyCargo() {
     Pentomino[] sorted = Pentomino.sort(this.pentos);
     Pentomino[] all = Pentomino.getAllShapes(sorted);
+    // Pentomino[] all = shuffle(sorted);
     // for (Item item : this.items) System.out.println(item);
     // Loop through the whole cargo and fill any empty space
     for (int j = 0; j < this.cargo.getHeight(); j++) {
