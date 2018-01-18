@@ -72,11 +72,13 @@ public class Backtracking {
       for (int j = 0; j < shape[i].length; j++) {
         for (int k = 0; k < shape[i][j].length; k++) {
           if (shape[i][j][k] == null && isolated(shape, i, j, k)) {
+            // System.out.println("Isolated cell found!");
             return false;
           }
         }
       }
     }
+    // System.out.println("Continuing...");
     return true;
   }
 
