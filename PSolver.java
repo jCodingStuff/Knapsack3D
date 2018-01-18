@@ -10,10 +10,10 @@ public class PSolver {
   * @param pentos the array of items
   * @param cargo the cargo object
   */
-  public PSolver(String name, Cargo cargo)
+  public PSolver(String name, Pentomino[] pentos, Cargo cargo)
   {
     this.name = name;
-    this.pentos = Pentomino.getSorted();
+    this.pentos = pentos;
     this.cargo = cargo;
   }
 
@@ -87,14 +87,15 @@ public class PSolver {
   * @return the cloned solver object
   */
   public PSolver clone() {
-    return new PSolver(this.name, this.cargo.clone());
+    return new PSolver(this.name, Arrays.clonePArray(this.pentos), this.cargo.clone());
   }
 
   /**
   * Fill the cargo with the greedy algorithm
   */
   public void fillGreedyCargo() {
-    Pentomino[] all = Pentomino.getAllShapes(this.pentos);
+    Pentomino[] sorted = Pentomino.sort(this.pentos);
+    Pentomino[] all = Pentomino.getAllShapes(sorted);
     // for (Item item : this.items) System.out.println(item);
     // Loop through the whole cargo and fill any empty space
     for (int j = 0; j < this.cargo.getHeight(); j++) {

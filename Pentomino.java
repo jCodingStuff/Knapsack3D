@@ -22,48 +22,60 @@ public class Pentomino {
   /**
   * Construct a new Pentomino
   * @param name the type of the Pentomino that is wanted
+  * @param value the value for the Pentomino
   */
-  public Pentomino(String name) {
+  public Pentomino(String name, int value) {
     this.name = name;
     switch (name) {
       case "L":
-        this.buildL();
+        this.buildL(value);
         break;
       case "P":
-        this.buildP();
+        this.buildP(value);
         break;
       case "T":
-        this.buildT();
+        this.buildT(value);
         break;
     }
   }
 
   /**
   * Build an L-type pentomino
+  * @param value the value for the pento
   */
-  private void buildL() {
-    this.item = new Item(this.name, 3, 1, 1, 1, new Color(255, 0, 0));
+  private void buildL(int value) {
+    this.item = new Item(this.name, value, 1, 1, 1, new Color(255, 0, 0));
     this.shape = new boolean[][][]{{{true, true, true, true}},
                                    {{true, false, false, false}}};
   }
 
   /**
   * Build an P-type pentomino
+  * @param value the value for the pento
   */
-  private void buildP() {
-    this.item = new Item(this.name, 4, 1, 1, 1, new Color(0, 255, 0));
+  private void buildP(int value) {
+    this.item = new Item(this.name, value, 1, 1, 1, new Color(0, 255, 0));
     this.shape = new boolean[][][]{{{true, true, true}},
                                    {{true, true, false}}};
   }
 
   /**
   * Build an T-type pentomino
+  * @param value the value for the pento
   */
-  private void buildT() {
-    this.item = new Item(this.name, 5, 1, 1, 1, new Color(0, 0, 255));
+  private void buildT(int value) {
+    this.item = new Item(this.name, value, 1, 1, 1, new Color(0, 0, 255));
     this.shape = new boolean[][][]{{{true, false, false}},
                                    {{true, true, true}},
                                    {{true, false, false}}};
+  }
+
+  /**
+  * Get access to the value of the Pento
+  * @return the value of the item that represents the pento
+  */
+  public int getValue() {
+    return this.item.getValue();
   }
 
   /**
@@ -171,7 +183,7 @@ public class Pentomino {
   * @return the deep copy of the Pentomino
   */
   public Pentomino clone() {
-    Pentomino tmp = new Pentomino(this.name);
+    Pentomino tmp = new Pentomino(this.name, this.getValue());
     boolean[][][] bool = new boolean[this.shape.length][this.shape[0].length][this.shape[0][0].length];
     for (int i = 0; i < bool.length; i++) {
       for (int j = 0; j < bool[i].length; j++) {
@@ -210,11 +222,38 @@ public class Pentomino {
   }
 
   /**
-  * Get a sorted array of Pentominoes
-  * @return an array of Pentominoes [T, P, L]
+  * Sort an array of pentominoes
+  * @return an array of sorted pentominoes
   */
-  public static Pentomino[] getSorted() {
-    return new Pentomino[]{new Pentomino("T"), new Pentomino("P"), new Pentomino("L")};
+  public static Pentomino[] sort(Pentomino[] input) {
+    Pentomino[] sorted = new Pentomino[input.length];
+    ArrayList<Pentomino> copy = new ArrayList<Pentomino>();
+    for (Pentomino i : input) {
+      copy.add(i.clone());
+    }
+    for (int i = 0; i < sorted.length; i++) {
+      int index = getMaxIndex(copy);
+      sorted[i] = copy.get(index);
+      copy.remove(index);
+    }
+    return sorted;
+  }
+
+  /**
+  * Get the index from an ArrayList that contains the pento with the highest value
+  * @param input the ArrayList to search
+  * @return the index with the max value
+  */
+  public static int getMaxIndex(ArrayList<Pentomino> input) {
+    int index = 0;
+    int max = Integer.MIN_VALUE;
+    for (int i = 0; i < input.size(); i++) {
+      if (input.get(i).getValue() > max) {
+        index = i;
+        max = input.get(i).getValue();
+      }
+    }
+    return index;
   }
 
   /**
