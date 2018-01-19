@@ -26,7 +26,7 @@ public class Item {
   private String name;
   private int value;
   private int[] shape;
-  private Color color;
+  public Color color;
   private int serialNumber;
 
   /**

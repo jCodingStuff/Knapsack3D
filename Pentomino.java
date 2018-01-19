@@ -15,7 +15,7 @@ import java.util.Arrays;
 
 public class Pentomino {
 
-  private Item item;
+  public Item item;
   private String name;
   private boolean[][][] shape;
 
@@ -44,7 +44,7 @@ public class Pentomino {
   * @param value the value for the pento
   */
   private void buildL(int value) {
-    this.item = new Item(this.name, value, 1, 1, 1, new Color(255, 0, 0));
+    this.item = new Item(this.name, value, 1, 1, 1, new Color(1, 0, 0));
     this.shape = new boolean[][][]{{{true, true, true, true}},
                                    {{true, false, false, false}}};
   }
@@ -54,7 +54,7 @@ public class Pentomino {
   * @param value the value for the pento
   */
   private void buildP(int value) {
-    this.item = new Item(this.name, value, 1, 1, 1, new Color(0, 255, 0));
+    this.item = new Item(this.name, value, 1, 1, 1, new Color(0, 1, 0));
     this.shape = new boolean[][][]{{{true, true, true}},
                                    {{true, true, false}}};
   }
@@ -64,7 +64,7 @@ public class Pentomino {
   * @param value the value for the pento
   */
   private void buildT(int value) {
-    this.item = new Item(this.name, value, 1, 1, 1, new Color(0, 0, 255));
+    this.item = new Item(this.name, value, 1, 1, 1, new Color(0, 0, 1));
     this.shape = new boolean[][][]{{{true, false, false}},
                                    {{true, true, true}},
                                    {{true, false, false}}};

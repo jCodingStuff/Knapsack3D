@@ -48,11 +48,11 @@ public class View extends Application {
 			// Backtracking.solveFor(items, cargo);
 			// Cargo tmp = new Cargo("TMP", Backtracking.tmp.getShape());
 			// tmp.printSolution(items, false);
-			Item A = new Item("A",3,2,2,2, new Color(255,0,0));
+			Item A = new Item("A",3,2,2,2, new Color.rgb(255,0,0));
 			Item B = new Item("B",4,2,2,2, Color.WHITE);
-			Item C = new Item("C",5,4,1,1, new Color(0,255,0));
-			Item D = new Item("D",6,4,1,2, new Color(244, 170, 66));
-			Item E = new Item("E",7,4,2,1, new Color(239, 52, 199));
+			Item C = new Item("C",5,4,1,1, new Color.rgb(0,255,0));
+			Item D = new Item("D",6,4,1,2, new Color.rgb(244, 170, 66));
+			Item E = new Item("E",7,4,2,1, new Color.rgb(239, 52, 199));
 			Item[][][] solution = new Item[3][4][3];
 			solution[0][0][0] = A;
 			solution[0][1][0] = A;
