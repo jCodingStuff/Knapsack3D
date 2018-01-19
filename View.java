@@ -22,12 +22,12 @@ public class View extends Application {
 			scene.setFill(Color.ALICEBLUE);
 			System.out.println("Initial setup done");
 
-			Item A = new Item("A", 3, 2, 2, 4, Color.RED);
-			Item B = new Item("B", 4, 2, 3, 4, Color.GREEN);
+			Item A = new Item("A", 3, 2, 2, 4, Color.GREEN);
+			Item B = new Item("B", 4, 2, 3, 4, Color.RED);
 			Item C = new Item("C", 5, 3, 3, 3, Color.BLUE);
 			Item[] items = new Item[]{A, B, C};
 
-			Item[][][] cargo = new Item[2][5][8];
+			Item[][][] cargo = new Item[10][5][8];
 
 			addToRoot(items, cargo, rotationGroup, root);
 			addSlider(rotationGroup, root);
@@ -47,7 +47,6 @@ public class View extends Application {
 			Backtracking.solveFor(items, cargo);
 			Cargo tmp = new Cargo("TMP", Backtracking.tmp.getShape());
 			tmp.printSolution(items, false);
-
 			// Item A = new Item("A",3,2,2,2, Color.AQUA);
 			// Item B = new Item("B",4,2,2,2, Color.WHITE);
 			// Item C = new Item("C",5,4,1,1, Color.GREEN);
@@ -56,6 +55,44 @@ public class View extends Application {
 			// Item[][][] solution = new Item[3][4][3];
 			// solution[0][0][0] = A;
 			// solution[0][1][0] = A;
+			// solution[1][0][0] = A;
+			// solution[1][1][0] = A;
+			// solution[0][0][1] = A;
+			// solution[0][1][1] = A;
+			// solution[1][0][1] = A;
+			// solution[1][1][1] = A;
+      //
+			// solution[0][2][0] = B;
+			// solution[0][3][0] = B;
+			// solution[1][2][0] = B;
+			// solution[1][3][0] = B;
+			// solution[0][2][1] = B;
+			// solution[0][3][1] = B;
+			// solution[1][2][1] = B;
+			// solution[1][3][1] = B;
+      //
+			// solution[2][0][0] = C;
+			// solution[2][1][0] = C;
+			// solution[2][2][0] = C;
+			// solution[2][3][0] = C;
+      //
+			// solution[2][0][1] = D;
+			// solution[2][1][1] = D;
+			// solution[2][2][1] = D;
+			// solution[2][3][1] = D;
+			// solution[2][0][2] = D;
+			// solution[2][1][2] = D;
+			// solution[2][2][2] = D;
+			// solution[2][3][2] = D;
+      //
+			// solution[0][0][2] = E;
+			// solution[0][1][2] = E;
+			// solution[0][2][2] = E;
+			// solution[0][3][2] = E;
+			// solution[1][0][2] = E;
+			// solution[1][1][2] = E;
+			// solution[1][2][2] = E;
+			// solution[1][3][2] = E;
 			// solution[1][0][0] = A;
 			// solution[1][1][0] = A;
 			// solution[0][0][1] = A;
