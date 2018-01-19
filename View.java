@@ -22,7 +22,7 @@ public class View extends Application {
 			scene.setFill(Color.ALICEBLUE);
 			System.out.println("Initial setup done");
 
-			Item[][][] cargo = new Item[1][5][8];
+			Item[][][] cargo = new Item[33][5][8];
 
 			Item A = new Item("A", 3, 2, 2, 4, Color.GREEN);
 			Item B = new Item("B", 4, 2, 3, 4, Color.RED);
@@ -35,14 +35,46 @@ public class View extends Application {
 			Pentomino T = new Pentomino("T", 5);
 			Pentomino[] pentominoes = new Pentomino[]{L, P, T};
 
-
-			addToRoot(pentominoes, cargo, rotationGroup, root);
+			greedyToRoot(pentominoes, cargo, rotationGroup, root);
+			// addToRoot(pentominoes, cargo, rotationGroup, root);
 			addSlider(rotationGroup, root);
 			System.out.println("Finalizing");
 
 			scene.setCamera(new PerspectiveCamera());
 			stage.setScene(scene);
 			stage.show();
+		}
+
+		/**
+		*	Solve with greedy and add to rotation group
+		*	@param items items given to solve
+		* @param cargo cargo that will be represented
+		*/
+		public void greedyToRoot(Item[] items, Item[][][] cargo, Group rotationGroup, Group root) {
+			Cargo tmp = new Cargo("tmp", cargo);
+			Solver mySolver = new Solver("mySolver", items, tmp);
+			mySolver.fillGreedyCargo();
+			addBoxes(rotationGroup, tmp.getShape());
+			setupRG(rotationGroup);
+			root.getChildren().add(rotationGroup);
+
+			System.out.println("AddToRoot done");
+		}
+
+		/**
+		*	Solve with greedy and add to rotation group
+		*	@param pentos items given to solve
+		* @param cargo cargo that will be represented
+		*/
+		public void greedyToRoot(Pentomino[] pentos, Item[][][] cargo, Group rotationGroup, Group root) {
+			Cargo tmp = new Cargo("tmp", cargo);
+			PSolver mySolver = new PSolver("mySolver", pentos, tmp);
+			mySolver.fillGreedyCargo();
+			addBoxes(rotationGroup, tmp.getShape());
+			setupRG(rotationGroup);
+			root.getChildren().add(rotationGroup);
+
+			System.out.println("AddToRoot done");
 		}
 
 		/**
@@ -124,9 +156,11 @@ public class View extends Application {
 					System.out.println("Loop 2");
 					for (int k = 0; k < items[i][j].length; k++) {
 						System.out.println("Loop 3");
-						Box box = makeBox(items[i][j][k]);
-						coordinates(box,i,j,k);
-						rotationGroup.getChildren().add(box);
+						if (items[i][j][k] != null) {
+							Box box = makeBox(items[i][j][k]);
+							coordinates(box,i,j,k);
+							rotationGroup.getChildren().add(box);
+						}
 					}
 				}
 			}
