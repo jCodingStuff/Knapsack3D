@@ -9,20 +9,18 @@ import javafx.scene.control.*;
 import javafx.scene.paint.*;
 
 public class View extends Application {
-		public static void main (String[] args) {
-			View test = new View();
-
-		}
 
 		final int SIDE = 40;
 
 		public void start(final Stage stage) {
+			System.out.println("Start");
 			stage.setTitle("Project 1.4 - Cargo");
 
 			Group rotationGroup = new Group();
 			Group root = new Group();
 			Scene scene = new Scene(root, 600, 600, true);
 			scene.setFill(Color.ALICEBLUE);
+			System.out.println("Initial setup done");
 
 			Item A = new Item("A", 3, 2, 2, 4);
 			Item B = new Item("B", 4, 2, 3, 4);
@@ -33,6 +31,7 @@ public class View extends Application {
 
 			addToRoot(items, cargo, rotationGroup, root);
 			addSlider(rotationGroup, root);
+			System.out.println("Finalizing");
 
 			scene.setCamera(new PerspectiveCamera());
 			stage.setScene(scene);
@@ -48,11 +47,11 @@ public class View extends Application {
 			// Backtracking.solveFor(items, cargo);
 			// Cargo tmp = new Cargo("TMP", Backtracking.tmp.getShape());
 			// tmp.printSolution(items, false);
-			Item A = new Item("A",3,2,2,2, new Color.rgb(255,0,0));
+			Item A = new Item("A",3,2,2,2, Color.AQUA);
 			Item B = new Item("B",4,2,2,2, Color.WHITE);
-			Item C = new Item("C",5,4,1,1, new Color.rgb(0,255,0));
-			Item D = new Item("D",6,4,1,2, new Color.rgb(244, 170, 66));
-			Item E = new Item("E",7,4,2,1, new Color.rgb(239, 52, 199));
+			Item C = new Item("C",5,4,1,1, Color.GREEN);
+			Item D = new Item("D",6,4,1,2, Color.BLUEVIOLET);
+			Item E = new Item("E",7,4,2,1, Color.CORAL);
 			Item[][][] solution = new Item[3][4][3];
 			solution[0][0][0] = A;
 			solution[0][1][0] = A;
@@ -99,12 +98,15 @@ public class View extends Application {
 			addBoxes(rotationGroup, solution);
 			setupRG(rotationGroup);
 			root.getChildren().add(rotationGroup);
+
+			System.out.println("AddToRoot done");
 		}
 
 		/*
 		 * Create a box that corresponds to a specific item
 		 */
 		public Box makeBox(Item item) {
+			System.out.println("Making box");
 			Box box = new Box(SIDE,SIDE,SIDE);
 			PhongMaterial mat = new PhongMaterial();
 			mat.setSpecularColor(item.getColor());
@@ -115,6 +117,7 @@ public class View extends Application {
 
 
 		public void addSlider(Group rotationGroup, Group root) {
+			System.out.println("Adding slider");
 			Slider s = new Slider(0,360,0);
 			s.setBlockIncrement(1);
 			s.setTranslateX(225);
@@ -129,10 +132,14 @@ public class View extends Application {
 		 * @param items The solution matrix to retrieve the items from
 		 */
 		public void addBoxes(Group rotationGroup, Item[][][] items) {
+			System.out.println("Adding Boxes");
 
 			for (int i = 0; i < items.length; i++) {
+				System.out.println("Loop 1");
 				for (int j = 0; j < items[i].length; j++) {
+					System.out.println("Loop 2");
 					for (int k = 0; k < items[i][j].length; k++) {
+						System.out.println("Loop 3");
 						Box box = makeBox(items[i][j][k]);
 						coordinates(box,i,j,k);
 						rotationGroup.getChildren().add(box);
@@ -149,6 +156,7 @@ public class View extends Application {
 		 * @param z The z coordinate
 		 */
 		public void coordinates(Box box, double x, double y, double z) {
+			System.out.println("Setting Coordinates");
 			box.setTranslateX(x*SIDE);
 			box.setTranslateY(y*SIDE);
 			box.setTranslateZ(z*SIDE);
@@ -159,6 +167,7 @@ public class View extends Application {
 		 * @param rotationGroup The rotation group to set up
 		 */
 		public void setupRG(Group rotationGroup) {
+			System.out.println("SettingRG");
 			rotationGroup.setTranslateX(125);
 			rotationGroup.setTranslateY(125);
 			rotationGroup.setRotationAxis(Rotate.Y_AXIS);
