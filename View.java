@@ -38,8 +38,10 @@ public class View extends Application {
 			stage.show();
 		}
 
-		/*
-		 * Adding everything to the rotation group
+		/**
+		 * Adding Items to the rotation group
+		 * @param items items given to solve
+		 * @param cargo cargo that will be represented
 		 */
 		public void addToRoot(Item[] items, Item[][][] cargo, Group rotationGroup, Group root) {
 
@@ -47,91 +49,6 @@ public class View extends Application {
 			Backtracking.solveFor(items, cargo);
 			Cargo tmp = new Cargo("TMP", Backtracking.tmp.getShape());
 			tmp.printSolution(items, false);
-			// Item A = new Item("A",3,2,2,2, Color.AQUA);
-			// Item B = new Item("B",4,2,2,2, Color.WHITE);
-			// Item C = new Item("C",5,4,1,1, Color.GREEN);
-			// Item D = new Item("D",6,4,1,2, Color.BLUEVIOLET);
-			// Item E = new Item("E",7,4,2,1, Color.CORAL);
-			// Item[][][] solution = new Item[3][4][3];
-			// solution[0][0][0] = A;
-			// solution[0][1][0] = A;
-			// solution[1][0][0] = A;
-			// solution[1][1][0] = A;
-			// solution[0][0][1] = A;
-			// solution[0][1][1] = A;
-			// solution[1][0][1] = A;
-			// solution[1][1][1] = A;
-      //
-			// solution[0][2][0] = B;
-			// solution[0][3][0] = B;
-			// solution[1][2][0] = B;
-			// solution[1][3][0] = B;
-			// solution[0][2][1] = B;
-			// solution[0][3][1] = B;
-			// solution[1][2][1] = B;
-			// solution[1][3][1] = B;
-      //
-			// solution[2][0][0] = C;
-			// solution[2][1][0] = C;
-			// solution[2][2][0] = C;
-			// solution[2][3][0] = C;
-      //
-			// solution[2][0][1] = D;
-			// solution[2][1][1] = D;
-			// solution[2][2][1] = D;
-			// solution[2][3][1] = D;
-			// solution[2][0][2] = D;
-			// solution[2][1][2] = D;
-			// solution[2][2][2] = D;
-			// solution[2][3][2] = D;
-      //
-			// solution[0][0][2] = E;
-			// solution[0][1][2] = E;
-			// solution[0][2][2] = E;
-			// solution[0][3][2] = E;
-			// solution[1][0][2] = E;
-			// solution[1][1][2] = E;
-			// solution[1][2][2] = E;
-			// solution[1][3][2] = E;
-			// solution[1][0][0] = A;
-			// solution[1][1][0] = A;
-			// solution[0][0][1] = A;
-			// solution[0][1][1] = A;
-			// solution[1][0][1] = A;
-			// solution[1][1][1] = A;
-      //
-			// solution[0][2][0] = B;
-			// solution[0][3][0] = B;
-			// solution[1][2][0] = B;
-			// solution[1][3][0] = B;
-			// solution[0][2][1] = B;
-			// solution[0][3][1] = B;
-			// solution[1][2][1] = B;
-			// solution[1][3][1] = B;
-      //
-			// solution[2][0][0] = C;
-			// solution[2][1][0] = C;
-			// solution[2][2][0] = C;
-			// solution[2][3][0] = C;
-      //
-			// solution[2][0][1] = D;
-			// solution[2][1][1] = D;
-			// solution[2][2][1] = D;
-			// solution[2][3][1] = D;
-			// solution[2][0][2] = D;
-			// solution[2][1][2] = D;
-			// solution[2][2][2] = D;
-			// solution[2][3][2] = D;
-      //
-			// solution[0][0][2] = E;
-			// solution[0][1][2] = E;
-			// solution[0][2][2] = E;
-			// solution[0][3][2] = E;
-			// solution[1][0][2] = E;
-			// solution[1][1][2] = E;
-			// solution[1][2][2] = E;
-			// solution[1][3][2] = E;
-
 
 			addBoxes(rotationGroup, tmp.getShape());
 			setupRG(rotationGroup);
@@ -140,8 +57,28 @@ public class View extends Application {
 			System.out.println("AddToRoot done");
 		}
 
-		/*
+		/**
+		 * Adding Pentominoes to the rotation group
+		 * @param pentominoes pentominoes given to solve
+		 * @param cargo cargo that will be represented
+		 */
+		public void addToRoot(Pentomino[] pentominoes, Pentomino[][][] cargo, Group rotationGroup, Group root) {
+
+			// <here goes the solver, with items as items to use and cargo as cargo settings>
+			Backtracking.solveFor(items, cargo);
+			Cargo tmp = new Cargo("TMP", Backtracking.tmp.getShape());
+			tmp.printSolution(items, false);
+
+			addBoxes(rotationGroup, tmp.getShape());
+			setupRG(rotationGroup);
+			root.getChildren().add(rotationGroup);
+
+			System.out.println("AddToRoot done");
+		}
+
+		/**
 		 * Create a box that corresponds to a specific item
+		 * @param item item from which the box will be created
 		 */
 		public Box makeBox(Item item) {
 			System.out.println("Making box");
@@ -153,7 +90,9 @@ public class View extends Application {
 			return box;
 		}
 
-
+		/**
+		* Adds a slider to rotate the 3d representation in the x
+		*/
 		public void addSlider(Group rotationGroup, Group root) {
 			System.out.println("Adding slider");
 			Slider s = new Slider(0,360,0);
@@ -164,7 +103,7 @@ public class View extends Application {
 			root.getChildren().add(s);
 		}
 
-		/*
+		/**
 		 * Add the boxes to the rotation group
 		 * @param rotationGroup The group the items are added to
 		 * @param items The solution matrix to retrieve the items from
@@ -186,11 +125,11 @@ public class View extends Application {
 			}
 		}
 
-		/*
+		/**
 		 * Set the coordinates of a box
 		 * @param Box of which to set the coordinates
 		 * @param x The x coordinate
-		 * @paran y The y coordinate
+		 * @param y The y coordinate
 		 * @param z The z coordinate
 		 */
 		public void coordinates(Box box, double x, double y, double z) {
@@ -200,7 +139,7 @@ public class View extends Application {
 			box.setTranslateZ(z*SIDE);
 		}
 
-		/*
+		/**
 		 * Set up the rotation group
 		 * @param rotationGroup The rotation group to set up
 		 */
