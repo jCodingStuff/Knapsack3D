@@ -194,10 +194,6 @@ public class BasicConstruct extends JFrame {
     Item[] items = {A,B,C};
     Cargo cargo = new Cargo("cargo",20,5,8);
 
-    /*for (int i = 0; i<items.length; i++) {
-    	Box items[i].getName() = new Box(items[i].getWidth(),items[i].getHeight(),items[i].getDepth(), appearance)
-    }*/
-
 
     Backtracking.solveFor(items,cargo.getShape());
     Item[][][] solution = Backtracking.tmp.getShape();
