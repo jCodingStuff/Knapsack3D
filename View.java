@@ -45,12 +45,58 @@ public class View extends Application {
 		public void addToRoot(Item[] items, Item[][][] cargo, Group rotationGroup, Group root) {
 
 			// <here goes the solver, with items as items to use and cargo as cargo settings>
-			Backtracking.solveFor(items, cargo);
-			Cargo tmp = new Cargo("TMP", Backtracking.tmp.getShape());
-			tmp.printSolution(items, false);
+			// Backtracking.solveFor(items, cargo);
+			// Cargo tmp = new Cargo("TMP", Backtracking.tmp.getShape());
+			// tmp.printSolution(items, false);
+			Item A = new Item("A",3,2,2,2, new Color(255,0,0));
+			Item B = new Item("B",4,2,2,2, Color.WHITE);
+			Item C = new Item("C",5,4,1,1, new Color(0,255,0));
+			Item D = new Item("D",6,4,1,2, new Color(244, 170, 66));
+			Item E = new Item("E",7,4,2,1, new Color(239, 52, 199));
+			Item[][][] solution = new Item[3][4][3];
+			solution[0][0][0] = A;
+			solution[0][1][0] = A;
+			solution[1][0][0] = A;
+			solution[1][1][0] = A;
+			solution[0][0][1] = A;
+			solution[0][1][1] = A;
+			solution[1][0][1] = A;
+			solution[1][1][1] = A;
+
+			solution[0][2][0] = B;
+			solution[0][3][0] = B;
+			solution[1][2][0] = B;
+			solution[1][3][0] = B;
+			solution[0][2][1] = B;
+			solution[0][3][1] = B;
+			solution[1][2][1] = B;
+			solution[1][3][1] = B;
+
+			solution[2][0][0] = C;
+			solution[2][1][0] = C;
+			solution[2][2][0] = C;
+			solution[2][3][0] = C;
+
+			solution[2][0][1] = D;
+			solution[2][1][1] = D;
+			solution[2][2][1] = D;
+			solution[2][3][1] = D;
+			solution[2][0][2] = D;
+			solution[2][1][2] = D;
+			solution[2][2][2] = D;
+			solution[2][3][2] = D;
+
+			solution[0][0][2] = E;
+			solution[0][1][2] = E;
+			solution[0][2][2] = E;
+			solution[0][3][2] = E;
+			solution[1][0][2] = E;
+			solution[1][1][2] = E;
+			solution[1][2][2] = E;
+			solution[1][3][2] = E;
 
 
-			addBoxes(rotationGroup, tmp.getShape());
+			addBoxes(rotationGroup, solution);
 			setupRG(rotationGroup);
 			root.getChildren().add(rotationGroup);
 		}
