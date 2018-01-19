@@ -20,7 +20,7 @@ public class Test {
     Item C = new Item("C", 5, 3, 3, 3);
 
     Item[] items = new Item[]{A, B, C};
-    Item[] sorted = Item.jSort(items);
+    // Item[] sorted = Item.jSort(items);
     // for (Item item : sorted) System.out.println(item.getName());
     // Item[] items = new Item[]{A, B};
     // Pentomino L = new Pentomino("L", 3);
@@ -36,7 +36,7 @@ public class Test {
     Item[][][] cargo = new Item[width][height][depth];
     // Backtracking.print3DArray(cargo);
 
-    Backtracking.solveFor(sorted, cargo);
+    Backtracking.solveFor(items, cargo);
     if (Backtracking.tmp != null) {
       Cargo tmp = new Cargo("TMP", Backtracking.tmp.getShape());
       tmp.printSolution(items, false);

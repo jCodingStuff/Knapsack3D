@@ -47,14 +47,14 @@ public class Backtracking {
                 // System.out.println(canBePut(item, shape, i, j, k));
                 if (canBePut(item, shape, i, j, k)) {
                   Item[][][] newShape = insert(item, shape, i, j, k);
-                  // System.out.println("Inserting " + item.getName());
+                  System.out.println("Inserting " + item.getName());
                   if (shouldContinue(newShape)) {
                     solveFor(items, newShape);
                   }
                 }
               }
             }
-            // System.out.println("Going back!");
+            System.out.println("Going back!");
             return;
           }
         }
