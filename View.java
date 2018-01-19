@@ -17,7 +17,7 @@ public class View extends Application {
 			
 			Group rotationGroup = new Group();
 			Group root = new Group();
-			Scene scene = new Scene(root, 1000, 1000, true);
+			Scene scene = new Scene(root, 600, 600, true);
 			scene.setFill(Color.ALICEBLUE);
 			
 
