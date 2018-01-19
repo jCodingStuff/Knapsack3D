@@ -22,14 +22,21 @@ public class View extends Application {
 			scene.setFill(Color.ALICEBLUE);
 			System.out.println("Initial setup done");
 
+			Item[][][] cargo = new Item[1][5][8];
+
 			Item A = new Item("A", 3, 2, 2, 4, Color.GREEN);
 			Item B = new Item("B", 4, 2, 3, 4, Color.RED);
 			Item C = new Item("C", 5, 3, 3, 3, Color.BLUE);
 			Item[] items = new Item[]{A, B, C};
 
-			Item[][][] cargo = new Item[10][5][8];
 
-			addToRoot(items, cargo, rotationGroup, root);
+			Pentomino L = new Pentomino("L", 3);
+			Pentomino P = new Pentomino("P", 4);
+			Pentomino T = new Pentomino("T", 5);
+			Pentomino[] pentominoes = new Pentomino[]{L, P, T};
+
+
+			addToRoot(pentominoes, cargo, rotationGroup, root);
 			addSlider(rotationGroup, root);
 			System.out.println("Finalizing");
 
@@ -62,12 +69,12 @@ public class View extends Application {
 		 * @param pentominoes pentominoes given to solve
 		 * @param cargo cargo that will be represented
 		 */
-		public void addToRoot(Pentomino[] pentominoes, Pentomino[][][] cargo, Group rotationGroup, Group root) {
+		public void addToRoot(Pentomino[] pentominoes, Item[][][] cargo, Group rotationGroup, Group root) {
 
 			// <here goes the solver, with items as items to use and cargo as cargo settings>
-			Backtracking.solveFor(items, cargo);
-			Cargo tmp = new Cargo("TMP", Backtracking.tmp.getShape());
-			tmp.printSolution(items, false);
+			PBacktracking.solveFor(pentominoes, cargo);
+			Cargo tmp = new Cargo("TMP", PBacktracking.tmp.getShape());
+			// tmp.printSolution(pentominoes, false);
 
 			addBoxes(rotationGroup, tmp.getShape());
 			setupRG(rotationGroup);
