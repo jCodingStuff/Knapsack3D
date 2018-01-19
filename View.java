@@ -20,7 +20,7 @@ public class View extends Application {
 			Scene scene = new Scene(root, 600, 600, true);
 			scene.setFill(Color.ALICEBLUE);
 			
-
+			addToRoot(..., rotationGroup, root);
 			addSlider(rotationGroup, root);
 			
 			scene.setCamera(new PerspectiveCamera());
