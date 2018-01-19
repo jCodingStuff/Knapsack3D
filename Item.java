@@ -18,7 +18,7 @@
 */
 import java.util.ArrayList;
 import java.util.Arrays;
-import javafx.scene.paint.*;;
+import java.awt.Color;
 public class Item {
 
   private static int counter = 0;
