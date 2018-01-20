@@ -4,8 +4,12 @@ public class PBacktracking {
   public static boolean solved = false;
   public static long iterations = 0;
 
-  public static void solveFor(Pentomino[] pentominoes, Item[][][] cargo) {
+  public static void solveFor(Pentomino[] pentominoes, Item[][][] cargo, int counter) {
     iterations++;
+    if (counter == 0) {
+      tmp = null;
+      solved = false;
+    }
     if (iterations%500_000==0) System.out.println(iterations + " iterations");
     if (solved) return;
     if (Backtracking.isFull(cargo)) {
@@ -25,7 +29,7 @@ public class PBacktracking {
                   // System.out.println("Putting " + pentomino.getItem().getName());
                   Item[][][] newCargo = insert(pentomino, cargo, i, j, k);
                   if (Backtracking.shouldContinue(newCargo)) {
-                    solveFor(pentominoes, newCargo);
+                    solveFor(pentominoes, newCargo, counter + 1);
                   }
                 }
               }
