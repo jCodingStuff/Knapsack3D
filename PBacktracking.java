@@ -5,12 +5,12 @@ public class PBacktracking {
   public static long iterations = 0;
 
   public static void solveFor(Pentomino[] pentominoes, Item[][][] cargo, int counter) {
-    iterations++;
+    // iterations++;
     if (counter == 0) {
       tmp = null;
       solved = false;
     }
-    if (iterations%500_000==0) System.out.println(iterations + " iterations");
+    // if (iterations%500_000==0) System.out.println(iterations + " iterations");
     if (solved) return;
     if (Backtracking.isFull(cargo)) {
       solved = true;
