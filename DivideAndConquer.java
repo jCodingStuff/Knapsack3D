@@ -2,6 +2,10 @@ import java.util.ArrayList;
 
 public class DivideAndConquer {
 
+  public static Item[][][] solve(Item[] items, Item[][][] cargo) {
+
+  }
+
   /**
   * Merge a set of Item[][][] to a bigger one
   * @param set the set of items to merge
@@ -31,6 +35,12 @@ public class DivideAndConquer {
     return result;
   }
 
+  /**
+  * Put a cargo in the next empty spot of the bigger one
+  * @param result the bigger cargo
+  * @param shape the little cargo
+  * @param axis the axis that is being followed
+  */
   private static void put(Item[][][] result, Item[][][] shape, int axis) {
     boolean flag = false;
     switch (axis) {
@@ -70,6 +80,14 @@ public class DivideAndConquer {
     }
   }
 
+  /**
+  * Put a little cargo in a spot of a bigger one
+  * @param result the bigger cargo
+  * @param shape the little cargo
+  * @param i the position along the x-axis
+  * @param j the position along the y-axis
+  * @param k the position along the z-axis
+  */
   private static void insert(Item[][][] result, Item[][][] shape, int i, int j, int k) {
     for (int w = 0; w < shape.length; w++) {
       for (int h = 0; h < shape[0].length; h++) {
@@ -80,6 +98,13 @@ public class DivideAndConquer {
     }
   }
 
+
+  /**
+  * Sum the size of a dimension of a set of cargos
+  * @param set the set of cargos
+  * @param axis the dimension to sum
+  * @return the sum
+  */
   private static int sumDimension(ArrayList<Item[][][]> set, int axis) {
     int result = 0;
     for (Item[][][] shape : set) {
