@@ -1,9 +1,105 @@
 import java.util.ArrayList;
+import java.util.Map;
+import java.util.HashMap;
 
 public class DivideAndConquer {
 
-  public static Item[][][] solve(Item[] items, Item[][][] cargo) {
+  public static Item[][][] solve(Item[] items, Item[][][] cargo, int limit) {
+    int axis = getMaxDim(cargo);
+    int max = 0;
+    switch (axis) {
+      case 0:
+        max += cargo.length;
+        break;
+      case 1:
+        max += cargo[0].length;
+        break;
+      case 2:
+        max += cargo[0][0].length;
+        break;
+    }
+    int width = cargo.length;
+    int height = cargo[0].length;
+    int depth = cargo[0][0].length;
+    Map<Integer, Item[][][]> map = new HashMap<Integer, Item[][][]>();
 
+    for (int index = 1; index <= limit; index++) {
+      switch (axis) {
+        case 0:
+          Backtracking.solveFor(items, new Item[index][height][depth], 0);
+          break;
+        case 1:
+          Backtracking.solveFor(items, new Item[width][index][depth], 0);
+          break;
+        case 2:
+          Backtracking.solveFor(items, new Item[width][height][index], 0);
+          break;
+      }
+      if (Backtracking.tmp != null) {
+        map.put(index, Backtracking.tmp.getShape());
+      }
+    }
+
+    int[] keys = new int[map.size()];
+    int counter = 0;
+    for (int i = 1; i <= limit; i++) {
+      if (map.containsKey(i)) {
+        keys[counter] = i;
+        counter++
+      }
+    }
+
+    // Create a new dynamic programming table
+    boolean[][] T = new boolean[keys.length + 1][max + 1];
+    // Fill first row
+    for (int i = 0; i < T.length; i++) T[i][0] = true;
+    // Fill the matrix
+    for (int i = 1; i < T.length; i++) {
+      for (int j = 1; j < T[0].length; j++) {
+        if (j < keys[i-1]) {
+          T[i][j] = T[i-1][j];
+        }
+        else {
+          T[i][j] = T[i-1][j] || T[i][j-keys[i-1]];
+        }
+      }
+    }
+    amounts[] = retrace(T, keys);
+  }
+
+  private static int[] retrace(boolean[][] T, int[] keys) {
+    int[] amounts = new int[keys.length];
+    int i = T.length;
+    int j = T[0].length;
+    while (T[i][j] == false) {
+      i--;
+    }
+    while (j > 0) {
+      if (T[i-1][j] == true) {
+        i--;
+      }
+      else {
+        amounts[i-1]++;
+        j - keys[i-1];
+      }
+    }
+    return amounts;
+  }
+
+  /**
+  * Get the longest axis of a cargo
+  * @param cargo the cargo to analize
+  * @return which axis is the longest
+  */
+  private static getMaxDim(Item[][][] cargo) {
+    int width = cargo.length;
+    int height = cargo[0].length;
+    int depth = cargo[0][0].length;
+    int result = Math.max(width, Math.max(height, depth));
+    if (result == width) return 0;
+    else if (result == height) return 1;
+    else if (result == depth) return 2;
+    else return -1;
   }
 
   /**
@@ -12,27 +108,10 @@ public class DivideAndConquer {
   * @param axis the axis that follows the merge
   * @return the merged result
   */
-  public static Item[][][] merge(ArrayList<Item[][][]> set, int axis) {
-    Item[][][] result = null;
-    int sum = sumDimension(set, axis);
-    switch (axis) {
-      case 0: // X
-        result = new Item[sum][set.get(0)[0].length][set.get(0)[0][0].length];
-        break;
-      case 1: // Y
-        result = new Item[set.get(0).length][sum][set.get(0)[0][0].length];
-        break;
-      case 2: // Z
-        result = new Item[set.get(0).length][set.get(0)[0].length][sum];
-        break;
-      default: // DUMB
-        System.out.println("Axis input invalid");
-        break;
-    }
+  private static void merge(Item[][][] cargo, ArrayList<Item[][][]> set, int axis) {
     for (Item[][][] shape : set) {
-      put(result, shape, axis);
+      put(cargo, shape, axis);
     }
-    return result;
   }
 
   /**
