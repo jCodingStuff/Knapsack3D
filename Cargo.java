@@ -10,6 +10,8 @@ public class Cargo {
 
   private String name;
   private Item[][][] shape;
+  private String result;
+  private int value;
 
   /**
   * Default Cargo constructor
@@ -31,6 +33,22 @@ public class Cargo {
   public Cargo(String name, Item[][][] shape) {
     this.name = name;
     this.shape = shape;
+  }
+
+  /**
+  * Get access to the filled in the cargo
+  * @return the properties of the filled cargo
+  */
+  public String getResult() {
+    return this.result;
+  }
+
+  /**
+  * Get access to the value stored in the cargo
+  * @return the value stored
+  */
+  public int getValue() {
+    return this.value;
   }
 
   /**
@@ -129,6 +147,43 @@ public class Cargo {
   }
 
   /**
+  * See if a pento fits in a certain position of the cargo
+  * @param pento the pento to check
+  * @param i the position on the x axis
+  * @param j the position on the y axis
+  * @param k the position on the z axis
+  * @return true if the pento fits, false otherwise
+  */
+  public boolean canBePut(Pentomino pento, int i, int j, int k) {
+    boolean permission = true;
+    boolean[][][] pShape = pento.getShape();
+    int[] start = pento.getStartCoordinates();
+    int w = 0;
+    while (permission && w < pShape.length) {
+      int h = 0;
+      while (permission && h < pShape[w].length) {
+        int d = 0;
+        while (permission && d < pShape[w][h].length) {
+          int x = w + i - start[0], y = h + j - start[1], z = d + k - start[2];
+          if (x < 0 || y < 0 || z < 0) {
+            permission = false;
+          }
+          if (x >= this.shape.length || y >= this.shape[0].length || z >= this.shape[0][0].length) {
+            permission = false;
+          }
+          if (permission && pShape[w][h][d] == true && this.shape[x][y][z] != null) {
+            permission = false;
+          }
+          d++;
+        }
+        h++;
+      }
+      w++;
+    }
+    return permission;
+  }
+
+  /**
   * Put an item in a given position of the cargo
   * @param item the item to fit
   * @param i the position along the x-axis
@@ -141,6 +196,31 @@ public class Cargo {
       for (int h = 0; h < item.getHeight(); h++) {
         for (int d = 0; d < item.getDepth(); d++) {
           this.shape[w + i][h + j][d + k] = newItem;
+        }
+      }
+    }
+  }
+
+  /**
+  * Put a pento in a given position of the cargo
+  * @param pent the pento to fit
+  * @param i the position along the x-axis
+  * @param j the position along the y-axis
+  * @param k the position along the z-axis
+  */
+  public void put(Pentomino pent, int i, int j, int k) {
+    Pentomino newPent = pent.clone();
+    Item item = newPent.getItem();
+    boolean[][][] pShape = newPent.getShape();
+    int[] start = pent.getStartCoordinates();
+    for (int w = 0; w < pShape.length; w++) {
+      for (int h = 0; h < pShape[w].length; h++) {
+        for (int d = 0; d < pShape[w][h].length; d++) {
+          int x = w + i - start[0], y = h + j - start[1], z = d + k - start[2];
+          if (pShape[w][h][d] == true) {
+            // System.out.println("x=" + x + ", y=" + y + ", z=" + z);
+            this.shape[x][y][z] = item;
+          }
         }
       }
     }
@@ -180,8 +260,9 @@ public class Cargo {
   /**
   * Print the amount of each type of item in the cargo
   * @param items the set of items
+  * @param pentos is the solution for pentos
   */
-  public void printSolution(Item[] items) {
+  public void printSolution(Item[] items, boolean pentos) {
     int[] amounts = new int[items.length];
     int volumeUsed = 0;
     int valueStored = 0;
@@ -198,12 +279,16 @@ public class Cargo {
         }
       }
     }
-    System.out.println("Volume stored -> " + volumeUsed + " out of " + this.getVolume());
-    System.out.println("Value stored -> " + valueStored);
-    System.out.println("Item amounts:");
+    if (pentos) volumeUsed *= 5;
+    this.value = valueStored;
+    this.result = "";
+    this.result += "Volume stored -> " + volumeUsed + " out of " + this.getVolume();
+    this.result += "\nValue stored -> " + valueStored;
+    this.result += "\nItem amounts:";
     for (int t = 0; t < items.length; t++) {
-      System.out.println(" - " + items[t].getName() + " -> " + amounts[t]);
+      this.result += "\n - " + items[t].getName() + " -> " + amounts[t];
     }
+    System.out.println(this.result);
   }
 
 }

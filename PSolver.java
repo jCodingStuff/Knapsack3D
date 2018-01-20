@@ -1,33 +1,19 @@
-/**
-* A class to solve using items and cargo
-* @author Sarah Waseem
-* @version 0.1, 09-01-2018
-*
-* @author Julián Marrades
-* @version 0.2, 09-01-2018
-*
-* @author Julián Marrades
-* @version 0.3, 10-01-2018
-*
-* @author Julián Marrades
-* @version 0.4, 12-01-2018
-*/
-public class Solver
-{
-  private Item[] items;
+public class PSolver {
+
+  private Pentomino[] pentos;
   private Cargo cargo;
   private String name;
 
   /**
   * Default Solver constructor
   * @param name the name of the solver
-  * @param items the array of items
+  * @param pentos the array of items
   * @param cargo the cargo object
   */
-  public Solver(String name, Item[] items, Cargo cargo)
+  public PSolver(String name, Pentomino[] pentos, Cargo cargo)
   {
     this.name = name;
-    this.items = items;
+    this.pentos = pentos;
     this.cargo = cargo;
   }
 
@@ -51,17 +37,17 @@ public class Solver
   * Get access to the items
   * @return the items
   */
-  public Item[] getItems()
+  public Pentomino[] getPentos()
   {
-    return this.items;
+    return this.pentos;
   }
   /**
   * Sets the items
   * @param items the new array of items
   */
-  public void setItems(Item[] items)
+  public void setPentos(Pentomino[] pentos)
   {
-    this.items = items;
+    this.pentos = pentos;
   }
   /**
   * Gets access to cargo
@@ -89,9 +75,9 @@ public class Solver
     String result = this.getClass().getName() + ":\n";
     result += " - Name -> " + this.name;
     result += "\n - Cargo -> " + this.cargo.toString();
-    result += "\n - Items:";
-    for (Item item : this.items) {
-      result += "\n\t- " + item.toString();
+    result += "\n - Pentominoes:";
+    for (Pentomino pento : this.pentos) {
+      result += "\n\t- " + pento.toString();
     }
     return result;
   }
@@ -100,20 +86,18 @@ public class Solver
   * Clone the current Solver
   * @return the cloned solver object
   */
-  public Solver clone() {
-    Item[] new_items = Arrays.cloneArray(this.items);
-    return new Solver(this.name, new_items, this.cargo.clone());
+  public PSolver clone() {
+    return new PSolver(this.name, Arrays.clonePArray(this.pentos), this.cargo.clone());
   }
 
   /**
   * Fill the cargo with the greedy algorithm
   */
   public void fillGreedyCargo() {
-    // Item[] sorted = Item.jSort(this.items);
-    Item[] sorted = Item.getAllShapes(this.items);
+    Pentomino[] sorted = Pentomino.sort(this.pentos);
+    Pentomino[] all = Pentomino.getAllShapes(sorted);
+    // Pentomino[] all = shuffle(sorted);
     // for (Item item : this.items) System.out.println(item);
-    // Backtracking.printArray(shuffle(sorted));
-    Item[] all = shuffle(sorted);
     // Loop through the whole cargo and fill any empty space
     for (int j = 0; j < this.cargo.getHeight(); j++) {
       for (int i = 0; i < this.cargo.getWidth(); i++) {
@@ -125,7 +109,26 @@ public class Solver
       }
     }
     // Backtracking.print3DArray(this.cargo.getShape());
-    this.cargo.printSolution(this.items, false);
+    this.cargo.printSolution(Arrays.toItemArray(this.pentos), true);
+  }
+
+  /**
+  * Try to fit an item from a set in a position
+  * @param pentos the set of pentos which can be put in the cargo
+  * @param i the position along the x-axis
+  * @param j the position along the y-axis
+  * @param k the position along the z-axis
+  */
+  private void tryFill(Pentomino[] pentos, int i, int j, int k) {
+    boolean filled = false;
+    int index = 0;
+    while (!filled && index < pentos.length) {
+      if (this.cargo.canBePut(pentos[index], i, j, k)) {
+        this.cargo.put(pentos[index], i, j, k);
+        filled = true;
+      }
+      index++;
+    }
   }
 
   /**
@@ -133,8 +136,8 @@ public class Solver
   * @param ori original arrey
   * @return  shuffled array
   */
-  public static Item[] shuffle(Item[] ori) {
-    Item[] result = new Item[ori.length];
+  public static Pentomino[] shuffle(Pentomino[] ori) {
+    Pentomino[] result = new Pentomino[ori.length];
     int i = 0;
     while(i < ori.length) {
       int j = (int) (Math.random()*ori.length);
@@ -144,26 +147,6 @@ public class Solver
       }
     }
     return result;
-  }
-
-
-  /**
-  * Try to fit an item from a set in a position
-  * @param items the set of items which can be put in the cargo
-  * @param i the position along the x-axis
-  * @param j the position along the y-axis
-  * @param k the position along the z-axis
-  */
-  private void tryFill(Item[] items, int i, int j, int k) {
-    boolean filled = false;
-    int index = 0;
-    while (!filled && index < items.length) {
-      if (this.cargo.canBePut(items[index], i, j, k)) {
-        this.cargo.put(items[index], i, j, k);
-        filled = true;
-      }
-      index++;
-    }
   }
 
 }
