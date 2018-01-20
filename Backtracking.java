@@ -23,10 +23,10 @@ public class Backtracking {
   */
   public static long iterations = 0;
   public static void solveFor(Item[] items, Item[][][] shape) {
-    iterations++;
-    if(iterations%500_000 == 0) {
-      System.out.println(iterations + " iterations");
-    }
+    // iterations++;
+    // if(iterations == 500_000) {
+    //   System.out.println(iterations + " iterations");
+    // }
     if (solved) return;
     if (isFull(shape)) {
       // System.out.println("The cargo is full");
