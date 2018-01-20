@@ -36,14 +36,14 @@ public class Test {
     Item[][][] cargo = new Item[width][height][depth];
     // Backtracking.print3DArray(cargo);
     long t1 = System.nanoTime();
-    Backtracking.solveFor(sorted, cargo);
+    Backtracking.solveFor(sorted, cargo, 0);
     long t2 = System.nanoTime();
 
     System.out.println(t2-t1);
 
     if (Backtracking.tmp != null) {
       Cargo tmp = new Cargo("TMP", Backtracking.tmp.getShape());
-      tmp.printSolution(items, false);
+      tmp.printSolution(items, false, true);
     }
     else {
       System.out.println("The cargo could not be filled :(");

@@ -93,12 +93,13 @@ public class PSolver {
   /**
   * Fill the cargo with the greedy algorithm
   * @param random will the greedy be random?
+  * @param output is output wanted?
   */
-  public void fillGreedyCargo(boolean random) {
+  public void fillGreedyCargo(boolean random, boolean output) {
     Pentomino[] sorted = null;
     Pentomino[] all = null;
     if (random) {
-      sorted = Pentomino.getAllShapes(this.items);
+      sorted = Pentomino.getAllShapes(this.pentos);
       all = shuffle(sorted);
     }
     else {
@@ -116,7 +117,7 @@ public class PSolver {
       }
     }
     // Backtracking.print3DArray(this.cargo.getShape());
-    this.cargo.printSolution(Arrays.toItemArray(this.pentos), true);
+    this.cargo.printSolution(Arrays.toItemArray(this.pentos), true, output);
   }
 
   /**

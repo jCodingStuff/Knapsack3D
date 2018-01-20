@@ -108,8 +108,9 @@ public class Solver
   /**
   * Fill the cargo with the greedy algorithm
   * @param random is random filling wanted?
+  * @param output want to get detailed solution?
   */
-  public void fillGreedyCargo(boolean random) {
+  public void fillGreedyCargo(boolean random, boolean output) {
     Item[] sorted = null;
     Item[] all = null;
     if (random) {
@@ -131,7 +132,7 @@ public class Solver
       }
     }
     // Backtracking.print3DArray(this.cargo.getShape());
-    this.cargo.printSolution(this.items, false);
+    this.cargo.printSolution(this.items, false, output);
   }
 
   /**
