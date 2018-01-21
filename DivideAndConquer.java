@@ -13,24 +13,27 @@ public class DivideAndConquer {
       case 2: max = cargo[0][0].length; break;
     }
 
-    Map<Integer, Item[][][]> map = new HashMap<Integer, Item[][][]>();
-    fillMap(map, pentos, cargo, axis, limit, optimized);
+    Map<Integer, Item[][][]> canSolve = new HashMap<Integer, Item[][][]>();
+    Map<Integer, Integer> values = new HashMap<Integer, Integer>();;
+    fillMaps(canSolve, values, pentos, cargo, axis, limit, optimized);
 
-    int[] keys = new int[map.size()];
+    int[] keys = new int[canSolve.size()];
+    int[] profits = new int[canSolve.size()];
     int counter = 0;
     for (int i = 1; i <= limit; i++) {
-      if (map.containsKey(i)) {
+      if (canSolve.containsKey(i)) {
         keys[counter] = i;
+        profits[counter] = values.get(i);
         counter++;
       }
     }
 
     // Create a new dynamic programming table
-    boolean[][] T = new boolean[keys.length + 1][max + 1];
-    fillDynamic(T, keys);
+    int[][] T = new int[keys.length + 1][max + 1];
+    fillDynamic(T, keys, profits);
 
     int[] amounts = retrace(T, keys);
-    ArrayList<Item[][][]> set = getSet(map, keys, amounts);
+    ArrayList<Item[][][]> set = getSet(canSolve, keys, amounts);
     Item[][][] result = new Item[cargo.length][cargo[0].length][cargo[0][0].length];
     merge(result, set, axis);
     return result;
@@ -45,24 +48,27 @@ public class DivideAndConquer {
       case 2: max = cargo[0][0].length; break;
     }
 
-    Map<Integer, Item[][][]> map = new HashMap<Integer, Item[][][]>();
-    fillMap(map, items, cargo, axis, limit, optimized);
+    Map<Integer, Item[][][]> canSolve = new HashMap<Integer, Item[][][]>();
+    Map<Integer, Integer> values = new HashMap<Integer, Integer>();
+    fillMaps(canSolve, values, items, cargo, axis, limit, optimized);
 
-    int[] keys = new int[map.size()];
+    int[] keys = new int[canSolve.size()];
+    int[] profits = new int[canSolve.size()];
     int counter = 0;
     for (int i = 1; i <= limit; i++) {
-      if (map.containsKey(i)) {
+      if (canSolve.containsKey(i)) {
         keys[counter] = i;
+        profits[counter] = values.get(i);
         counter++;
       }
     }
 
     // Create a new dynamic programming table
-    boolean[][] T = new boolean[keys.length + 1][max + 1];
-    fillDynamic(T, keys);
+    int[][] T = new int[keys.length + 1][max + 1];
+    fillDynamic(T, keys, profits);
 
     int[] amounts = retrace(T, keys);
-    ArrayList<Item[][][]> set = getSet(map, keys, amounts);
+    ArrayList<Item[][][]> set = getSet(canSolve, keys, amounts);
     Item[][][] result = new Item[cargo.length][cargo[0].length][cargo[0][0].length];
     merge(result, set, axis);
     return result;
@@ -101,23 +107,20 @@ public class DivideAndConquer {
     return fut;
   }
 
-  private static void fillDynamic(boolean[][] T, int[] keys) {
-    // Fill first row
-    for (int i = 0; i < T.length; i++) T[i][0] = true;
-    // Fill the matrix
+  private static void fillDynamic(int[][] T, int[] keys, int[] profits) {
     for (int i = 1; i < T.length; i++) {
       for (int j = 1; j < T[0].length; j++) {
         if (j < keys[i-1]) {
           T[i][j] = T[i-1][j];
         }
         else {
-          T[i][j] = T[i-1][j] || T[i][j-keys[i-1]];
+          T[i][j] = Math.max(T[i-1][j], profits[i-1] + T[i][j-keys[i-1]]);
         }
       }
     }
   }
 
-  private static void fillMap(Map<Integer, Item[][][]> map, Pentomino[] pentos, Item[][][] cargo, int axis, int limit, boolean optimized) {
+  private static void fillMaps(Map<Integer, Item[][][]> canSolve, Map<Integer, Integer> values, Pentomino[] pentos, Item[][][] cargo, int axis, int limit, boolean optimized) {
     int width = cargo.length, height = cargo[0].length, depth = cargo[0][0].length;
     for (int index = 1; index <= limit; index++) {
       switch (axis) {
@@ -132,12 +135,25 @@ public class DivideAndConquer {
           break;
       }
       if (PBacktracking.tmp != null) { // If solved
-        map.put(index, PBacktracking.tmp.getShape());
+        canSolve.put(index, PBacktracking.tmp.getShape());
+        values.put(index, getValue(PBacktracking.tmp.getShape(), pentos));
       }
     }
   }
 
-  private static void fillMap(Map<Integer, Item[][][]> map, Item[] items, Item[][][] cargo, int axis, int limit, boolean optimized) {
+  private static int getValue(Item[][][] cargo, Pentomino[] pentos) {
+    Cargo tmp = new Cargo("tmp", cargo);
+    tmp.printSolution(Arrays.toItemArray(pentos), true, false);
+    return tmp.getValue();
+  }
+
+  private static int getValue(Item[][][] cargo, Item[] items) {
+    Cargo tmp = new Cargo("tmp", cargo);
+    tmp.printSolution(items, false, false);
+    return tmp.getValue();
+  }
+
+  private static void fillMaps(Map<Integer, Item[][][]> canSolve, Map<Integer, Integer> values, Item[] items, Item[][][] cargo, int axis, int limit, boolean optimized) {
     int width = cargo.length, height = cargo[0].length, depth = cargo[0][0].length;
     for (int index = 1; index <= limit; index++) {
       switch (axis) {
@@ -152,20 +168,18 @@ public class DivideAndConquer {
           break;
       }
       if (Backtracking.tmp != null) { // If solved
-        map.put(index, Backtracking.tmp.getShape());
+        canSolve.put(index, Backtracking.tmp.getShape());
+        values.put(index, getValue(Backtracking.tmp.getShape(), items));
       }
     }
   }
 
-  private static int[] retrace(boolean[][] T, int[] keys) {
+  private static int[] retrace(int[][] T, int[] keys) {
     int[] amounts = new int[keys.length];
     int i = T.length - 1;
     int j = T[0].length - 1;
-    while (T[i][j] == false) {
-      j--;
-    }
-    while (j > 0) {
-      if (T[i-1][j] == true) {
+    while (T[i][j] != 0) {
+      if (T[i-1][j] == T[i][j]) {
         i--;
       }
       else {
