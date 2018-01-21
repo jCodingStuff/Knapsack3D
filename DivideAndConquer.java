@@ -37,7 +37,34 @@ public class DivideAndConquer {
   }
 
   private static ArrayList<Item[][][]> getSet(Map<Integer, Item[][][]> map, int[] keys, int[] amounts) {
-    
+    ArrayList<Item[][][]> result = new ArrayList<Item[][][]>();
+    for (int i = 0; i < keys.length; i++) {
+      for (int j = 0; j < amounts[i]; j++) {
+        result.add(smartCopy(map.get(i)));
+      }
+    }
+    return result;
+  }
+
+  private static Item[][][] smartCopy(Item[][][] ori) {
+    Map<Integer, Integer> oldToNew = new HashMap<Integer, Integer>();
+    Map<Integer, Item> newToItem = new HashMap<Integer, Item>();
+    Item[][][] fut = new Item[ori.length][ori[0].length][ori[0][0].length];
+    for (int i = 0; i < ori.length; i++) {
+      for (int j = 0; j < ori[0].length; j++) {
+        for (int k = 0; k < ori[0][0].length; k++) {
+          if (oldToNew.get(ori[i][j][k].serialNumber()) == null) {
+            fut[i][j][k] = ori[i][j][k].clone();
+            oldToNew.put(ori[i][j][k].serialNumber(), fut[i][j][k].serialNumber());
+            newToItem.put(fut[i][j][k].serialNumber(), fut[i][j][k]);
+          }
+          else {
+            fut[i][j][k] = newToItem.get(oldToNew.get(ori[i][j][k].serialNumber()));
+          }
+        }
+      }
+    }
+    return fut;
   }
 
   private static void fillDynamic(boolean[][] T, int[] keys) {
