@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 public class DivideAndConquer {
 
-  public static Item[][][] solve(Item[] items, Item[][][] cargo, int limit) {
+  public static Item[][][] solve(Item[] items, Item[][][] cargo, int limit, boolean optimized) {
     int axis = getMaxDim(cargo);
     int max = 0;
     switch (axis) {
@@ -14,7 +14,7 @@ public class DivideAndConquer {
     }
 
     Map<Integer, Item[][][]> map = new HashMap<Integer, Item[][][]>();
-    fillMap(map, items, cargo, axis, limit);
+    fillMap(map, items, cargo, axis, limit, optimized);
 
     int[] keys = new int[map.size()];
     int counter = 0;
@@ -83,18 +83,18 @@ public class DivideAndConquer {
     }
   }
 
-  private static void fillMap(Map<Integer, Item[][][]> map, Item[] items, Item[][][] cargo, int axis, int limit) {
+  private static void fillMap(Map<Integer, Item[][][]> map, Item[] items, Item[][][] cargo, int axis, int limit, boolean optimized) {
     int width = cargo.length, height = cargo[0].length, depth = cargo[0][0].length;
     for (int index = 1; index <= limit; index++) {
       switch (axis) {
         case 0:
-          Backtracking.solveFor(items, new Item[index][height][depth], 0);
+          Backtracking.solveFor(items, new Item[index][height][depth], optimized, 0);
           break;
         case 1:
-          Backtracking.solveFor(items, new Item[width][index][depth], 0);
+          Backtracking.solveFor(items, new Item[width][index][depth], optimized, 0);
           break;
         case 2:
-          Backtracking.solveFor(items, new Item[width][height][index], 0);
+          Backtracking.solveFor(items, new Item[width][height][index], optimized, 0);
           break;
       }
       if (Backtracking.tmp != null) { // If solved

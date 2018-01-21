@@ -4,7 +4,7 @@ public class PBacktracking {
   public static boolean solved = false;
   public static long iterations = 0;
 
-  public static void solveFor(Pentomino[] pentominoes, Item[][][] cargo, int counter) {
+  public static void solveFor(Pentomino[] pentominoes, Item[][][] cargo, boolean optimized, int counter) {
     // iterations++;
     if (counter == 0) {
       tmp = null;
@@ -28,8 +28,13 @@ public class PBacktracking {
                 if (canBePut(pentomino, cargo, i, j, k)) {
                   // System.out.println("Putting " + pentomino.getItem().getName());
                   Item[][][] newCargo = insert(pentomino, cargo, i, j, k);
-                  if (Backtracking.shouldContinue(newCargo)) {
-                    solveFor(pentominoes, newCargo, counter + 1);
+                  if (optimized) {
+                    if (Backtracking.shouldContinue(newCargo)) {
+                      solveFor(pentominoes, newCargo, counter + 1);
+                    }
+                  }
+                  else {
+                    solveFor(pentominoes, newCargo, optimized, counter + 1);
                   }
                 }
               }
