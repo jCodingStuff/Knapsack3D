@@ -4,6 +4,38 @@ import java.util.HashMap;
 
 public class DivideAndConquer {
 
+  public static Item[][][] solve(Pentomino[] pentos, Item[][][] cargo, int limit, boolean optimized) {
+    int axis = getMaxDim(cargo);
+    int max = 0;
+    switch (axis) {
+      case 0: max = cargo.length; break;
+      case 1: max = cargo[0].length; break;
+      case 2: max = cargo[0][0].length; break;
+    }
+
+    Map<Integer, Item[][][]> map = new HashMap<Integer, Item[][][]>();
+    fillMap(map, pentos, cargo, axis, limit, optimized);
+
+    int[] keys = new int[map.size()];
+    int counter = 0;
+    for (int i = 1; i <= limit; i++) {
+      if (map.containsKey(i)) {
+        keys[counter] = i;
+        counter++;
+      }
+    }
+
+    // Create a new dynamic programming table
+    boolean[][] T = new boolean[keys.length + 1][max + 1];
+    fillDynamic(T, keys);
+
+    int[] amounts = retrace(T, keys);
+    ArrayList<Item[][][]> set = getSet(map, keys, amounts);
+    Item[][][] result = new Item[cargo.length][cargo[0].length][cargo[0][0].length];
+    merge(result, set, axis);
+    return result;
+  }
+
   public static Item[][][] solve(Item[] items, Item[][][] cargo, int limit, boolean optimized) {
     int axis = getMaxDim(cargo);
     int max = 0;
@@ -40,7 +72,7 @@ public class DivideAndConquer {
     ArrayList<Item[][][]> result = new ArrayList<Item[][][]>();
     for (int i = 0; i < keys.length; i++) {
       for (int j = 0; j < amounts[i]; j++) {
-        result.add(smartCopy(map.get(i)));
+        result.add(smartCopy(map.get(keys[i])));
       }
     }
     return result;
@@ -53,13 +85,15 @@ public class DivideAndConquer {
     for (int i = 0; i < ori.length; i++) {
       for (int j = 0; j < ori[0].length; j++) {
         for (int k = 0; k < ori[0][0].length; k++) {
-          if (oldToNew.get(ori[i][j][k].serialNumber()) == null) {
-            fut[i][j][k] = ori[i][j][k].clone();
-            oldToNew.put(ori[i][j][k].serialNumber(), fut[i][j][k].serialNumber());
-            newToItem.put(fut[i][j][k].serialNumber(), fut[i][j][k]);
-          }
-          else {
-            fut[i][j][k] = newToItem.get(oldToNew.get(ori[i][j][k].serialNumber()));
+          if (ori[i][j][k] != null) {
+            if (oldToNew.get(ori[i][j][k].serialNumber()) == null) {
+              fut[i][j][k] = ori[i][j][k].clone();
+              oldToNew.put(ori[i][j][k].serialNumber(), fut[i][j][k].serialNumber());
+              newToItem.put(fut[i][j][k].serialNumber(), fut[i][j][k]);
+            }
+            else {
+              fut[i][j][k] = newToItem.get(oldToNew.get(ori[i][j][k].serialNumber()));
+            }
           }
         }
       }
@@ -79,6 +113,26 @@ public class DivideAndConquer {
         else {
           T[i][j] = T[i-1][j] || T[i][j-keys[i-1]];
         }
+      }
+    }
+  }
+
+  private static void fillMap(Map<Integer, Item[][][]> map, Pentomino[] pentos, Item[][][] cargo, int axis, int limit, boolean optimized) {
+    int width = cargo.length, height = cargo[0].length, depth = cargo[0][0].length;
+    for (int index = 1; index <= limit; index++) {
+      switch (axis) {
+        case 0:
+          PBacktracking.solveFor(pentos, new Item[index][height][depth], optimized, 0);
+          break;
+        case 1:
+          PBacktracking.solveFor(pentos, new Item[width][index][depth], optimized, 0);
+          break;
+        case 2:
+          PBacktracking.solveFor(pentos, new Item[width][height][index], optimized, 0);
+          break;
+      }
+      if (PBacktracking.tmp != null) { // If solved
+        map.put(index, PBacktracking.tmp.getShape());
       }
     }
   }
@@ -105,8 +159,8 @@ public class DivideAndConquer {
 
   private static int[] retrace(boolean[][] T, int[] keys) {
     int[] amounts = new int[keys.length];
-    int i = T.length;
-    int j = T[0].length;
+    int i = T.length - 1;
+    int j = T[0].length - 1;
     while (T[i][j] == false) {
       j--;
     }
