@@ -23,6 +23,7 @@ public class View extends Application {
 			System.out.println("Initial setup done");
 
 			Item[][][] cargo = new Item[33][5][8];
+			// Item[][][] cargo = new Item[23][9][15];
 
 			Item A = new Item("A", 3, 2, 2, 4, Color.GREEN);
 			Item B = new Item("B", 4, 2, 3, 4, Color.RED);
@@ -35,7 +36,8 @@ public class View extends Application {
 			Pentomino T = new Pentomino("T", 5);
 			Pentomino[] pentominoes = new Pentomino[]{L, P, T};
 
-			greedyToRoot(pentominoes, cargo, rotationGroup, root);
+			dynamicToRoot(pentominoes, cargo, 1, true, rotationGroup, root);
+			// greedyToRoot(pentominoes, cargo, rotationGroup, root);
 			// addToRoot(pentominoes, cargo, rotationGroup, root);
 			addSlider(rotationGroup, root);
 			System.out.println("Finalizing");
@@ -43,6 +45,24 @@ public class View extends Application {
 			scene.setCamera(new PerspectiveCamera());
 			stage.setScene(scene);
 			stage.show();
+		}
+
+		public void dynamicToRoot(Item[] items, Item[][][] cargo, int limit, boolean optimized, Group rotationGroup, Group root) {
+			Item[][][] result = DivideAndConquer.solve(items, cargo, limit, optimized);
+			addBoxes(rotationGroup, result);
+			setupRG(rotationGroup);
+			root.getChildren().add(rotationGroup);
+
+			System.out.println("AddToRoot done");
+		}
+
+		public void dynamicToRoot(Pentomino[] pentos, Item[][][] cargo, int limit, boolean optimized, Group rotationGroup, Group root) {
+			Item[][][] result = DivideAndConquer.solve(pentos, cargo, limit, optimized);
+			addBoxes(rotationGroup, result);
+			setupRG(rotationGroup);
+			root.getChildren().add(rotationGroup);
+
+			System.out.println("AddToRoot done");
 		}
 
 		/**
