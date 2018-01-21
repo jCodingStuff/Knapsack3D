@@ -8,49 +8,39 @@ public class DivideAndConquer {
     int axis = getMaxDim(cargo);
     int max = 0;
     switch (axis) {
-      case 0:
-        max += cargo.length;
-        break;
-      case 1:
-        max += cargo[0].length;
-        break;
-      case 2:
-        max += cargo[0][0].length;
-        break;
+      case 0: max = cargo.length; break;
+      case 1: max = cargo[0].length; break;
+      case 2: max = cargo[0][0].length; break;
     }
-    int width = cargo.length;
-    int height = cargo[0].length;
-    int depth = cargo[0][0].length;
-    Map<Integer, Item[][][]> map = new HashMap<Integer, Item[][][]>();
 
-    for (int index = 1; index <= limit; index++) {
-      switch (axis) {
-        case 0:
-          Backtracking.solveFor(items, new Item[index][height][depth], 0);
-          break;
-        case 1:
-          Backtracking.solveFor(items, new Item[width][index][depth], 0);
-          break;
-        case 2:
-          Backtracking.solveFor(items, new Item[width][height][index], 0);
-          break;
-      }
-      if (Backtracking.tmp != null) {
-        map.put(index, Backtracking.tmp.getShape());
-      }
-    }
+    Map<Integer, Item[][][]> map = new HashMap<Integer, Item[][][]>();
+    fillMap(map, items, cargo, axis, limit);
 
     int[] keys = new int[map.size()];
     int counter = 0;
     for (int i = 1; i <= limit; i++) {
       if (map.containsKey(i)) {
         keys[counter] = i;
-        counter++
+        counter++;
       }
     }
 
     // Create a new dynamic programming table
     boolean[][] T = new boolean[keys.length + 1][max + 1];
+    fillDynamic(T, keys);
+
+    int[] amounts = retrace(T, keys);
+    ArrayList<Item[][][]> set = getSet(map, keys, amounts);
+    Item[][][] result = new Item[cargo.length][cargo[0].length][cargo[0][0].length];
+    merge(result, set, axis);
+    return result;
+  }
+
+  private static ArrayList<Item[][][]> getSet(Map<Integer, Item[][][]> map, int[] keys, int[] amounts) {
+    
+  }
+
+  private static void fillDynamic(boolean[][] T, int[] keys) {
     // Fill first row
     for (int i = 0; i < T.length; i++) T[i][0] = true;
     // Fill the matrix
@@ -64,7 +54,26 @@ public class DivideAndConquer {
         }
       }
     }
-    amounts[] = retrace(T, keys);
+  }
+
+  private static void fillMap(Map<Integer, Item[][][]> map, Item[] items, Item[][][] cargo, int axis, int limit) {
+    int width = cargo.length, height = cargo[0].length, depth = cargo[0][0].length;
+    for (int index = 1; index <= limit; index++) {
+      switch (axis) {
+        case 0:
+          Backtracking.solveFor(items, new Item[index][height][depth], 0);
+          break;
+        case 1:
+          Backtracking.solveFor(items, new Item[width][index][depth], 0);
+          break;
+        case 2:
+          Backtracking.solveFor(items, new Item[width][height][index], 0);
+          break;
+      }
+      if (Backtracking.tmp != null) { // If solved
+        map.put(index, Backtracking.tmp.getShape());
+      }
+    }
   }
 
   private static int[] retrace(boolean[][] T, int[] keys) {
@@ -72,7 +81,7 @@ public class DivideAndConquer {
     int i = T.length;
     int j = T[0].length;
     while (T[i][j] == false) {
-      i--;
+      j--;
     }
     while (j > 0) {
       if (T[i-1][j] == true) {
@@ -80,7 +89,7 @@ public class DivideAndConquer {
       }
       else {
         amounts[i-1]++;
-        j - keys[i-1];
+        j -= keys[i-1];
       }
     }
     return amounts;
@@ -91,7 +100,7 @@ public class DivideAndConquer {
   * @param cargo the cargo to analize
   * @return which axis is the longest
   */
-  private static getMaxDim(Item[][][] cargo) {
+  private static int getMaxDim(Item[][][] cargo) {
     int width = cargo.length;
     int height = cargo[0].length;
     int depth = cargo[0][0].length;
