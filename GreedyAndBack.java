@@ -20,7 +20,7 @@ public class GreedyAndBack {
     Cargo cargo = new Cargo("tmpCargo", shape);
     Solver solver = new Solver("solver", items, cargo);
     solver.fillGreedyCargo(random, false);
-    Backtracking.solveFor(items, cargo.getShape(), 0);
+    Backtracking.solveFor(items, cargo.getShape(), false, 0);
     if (Backtracking.tmp != null) cargo.setShape(Backtracking.tmp.getShape());
     cargo.printSolution(items, false, true);
   }
@@ -29,7 +29,7 @@ public class GreedyAndBack {
     Cargo cargo = new Cargo("tmpCargo", shape);
     PSolver solver = new PSolver("solver", pentos, cargo);
     solver.fillGreedyCargo(random, false);
-    PBacktracking.solveFor(pentos, cargo.getShape(), 0);
+    PBacktracking.solveFor(pentos, cargo.getShape(), true, 0);
     if (PBacktracking.tmp != null) cargo.setShape(PBacktracking.tmp.getShape());
     cargo.printSolution(Arrays.toItemArray(pentos), true, true);
   }

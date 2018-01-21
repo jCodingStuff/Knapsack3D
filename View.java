@@ -85,7 +85,7 @@ public class View extends Application {
 		public void addToRoot(Item[] items, Item[][][] cargo, Group rotationGroup, Group root) {
 
 			// <here goes the solver, with items as items to use and cargo as cargo settings>
-			Backtracking.solveFor(items, cargo, 0);
+			Backtracking.solveFor(items, cargo, false, 0);
 			Cargo tmp = new Cargo("TMP", Backtracking.tmp.getShape());
 			tmp.printSolution(items, false, true);
 
@@ -104,7 +104,7 @@ public class View extends Application {
 		public void addToRoot(Pentomino[] pentominoes, Item[][][] cargo, Group rotationGroup, Group root) {
 
 			// <here goes the solver, with items as items to use and cargo as cargo settings>
-			PBacktracking.solveFor(pentominoes, cargo, 0);
+			PBacktracking.solveFor(pentominoes, cargo, true, 0);
 			Cargo tmp = new Cargo("TMP", PBacktracking.tmp.getShape());
 			// tmp.printSolution(pentominoes, false);
 

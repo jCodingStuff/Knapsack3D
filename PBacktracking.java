@@ -30,7 +30,7 @@ public class PBacktracking {
                   Item[][][] newCargo = insert(pentomino, cargo, i, j, k);
                   if (optimized) {
                     if (Backtracking.shouldContinue(newCargo)) {
-                      solveFor(pentominoes, newCargo, counter + 1);
+                      solveFor(pentominoes, newCargo, optimized, counter + 1);
                     }
                   }
                   else {

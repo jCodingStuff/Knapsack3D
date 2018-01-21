@@ -36,7 +36,7 @@ public class Test {
     Item[][][] cargo = new Item[width][height][depth];
     // Backtracking.print3DArray(cargo);
     long t1 = System.nanoTime();
-    Backtracking.solveFor(sorted, cargo, 0);
+    Backtracking.solveFor(sorted, cargo, false, 0);
     long t2 = System.nanoTime();
 
     System.out.println(t2-t1);
