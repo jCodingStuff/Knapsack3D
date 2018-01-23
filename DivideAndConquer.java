@@ -2,8 +2,20 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
 
+/**
+* A class to hold the D&Q + Dynamic Programming algorithm
+*/
+
 public class DivideAndConquer {
 
+  /**
+  * Fill the cargo
+  * @param pentos the set of Pentominoes available
+  * @param cargo the cargo to fill
+  * @param limit the limit of dimension you want
+  * @param optimized is optimization wanted?
+  * @return the filled cargo
+  */
   public static Item[][][] solve(Pentomino[] pentos, Item[][][] cargo, int limit, boolean optimized) {
     int axis = getMaxDim(cargo);
     int max = 0;
@@ -39,6 +51,14 @@ public class DivideAndConquer {
     return result;
   }
 
+  /**
+  * Fill the cargo
+  * @param pentos the set of Items available
+  * @param cargo the cargo to fill
+  * @param limit the limit of dimension you want
+  * @param optimized is optimization wanted?
+  * @return the filled cargo
+  */
   public static Item[][][] solve(Item[] items, Item[][][] cargo, int limit, boolean optimized) {
     int axis = getMaxDim(cargo);
     int max = 0;
@@ -74,6 +94,13 @@ public class DivideAndConquer {
     return result;
   }
 
+  /**
+  * Collect the set of slices that will be used to fill the cargo
+  * @param map the relation between the dimension and the slice itself
+  * @param keys the array containing the dimensions solved
+  * @param amounts the amount of each dimension
+  * @return an ArrayList containing the slices needed to fill the cargo
+  */
   private static ArrayList<Item[][][]> getSet(Map<Integer, Item[][][]> map, int[] keys, int[] amounts) {
     ArrayList<Item[][][]> result = new ArrayList<Item[][][]>();
     for (int i = 0; i < keys.length; i++) {
@@ -84,6 +111,11 @@ public class DivideAndConquer {
     return result;
   }
 
+  /**
+  * Create a deep copy of a slice, so that the serialNumbers still have sense
+  * @param ori the slice to copy
+  * @return the copy of the slice
+  */
   private static Item[][][] smartCopy(Item[][][] ori) {
     Map<Integer, Integer> oldToNew = new HashMap<Integer, Integer>();
     Map<Integer, Item> newToItem = new HashMap<Integer, Item>();
@@ -107,6 +139,12 @@ public class DivideAndConquer {
     return fut;
   }
 
+  /**
+  * Fill the dynamic programming matrix
+  * @param I the matrix
+  * @param keys the dimensions
+  * @param profits the values of the dimensions
+  */
   private static void fillDynamic(int[][] T, int[] keys, int[] profits) {
     for (int i = 1; i < T.length; i++) {
       for (int j = 1; j < T[0].length; j++) {
@@ -120,6 +158,16 @@ public class DivideAndConquer {
     }
   }
 
+  /**
+  * Fill Dimension-Content and Dimension-Value mappings
+  * @param canSolve the Dimension-Content mapping
+  * @param values the Dimension-Value mapping
+  * @param pentos the set of Pentominoes available
+  * @param cargo the cargo to fill
+  * @param axis the longest dimension of the cargo
+  * @param limit the limit for the dimension
+  * @param optimized is optimization wanted?
+  */
   private static void fillMaps(Map<Integer, Item[][][]> canSolve, Map<Integer, Integer> values, Pentomino[] pentos, Item[][][] cargo, int axis, int limit, boolean optimized) {
     int width = cargo.length, height = cargo[0].length, depth = cargo[0][0].length;
     for (int index = 1; index <= limit; index++) {
@@ -141,18 +189,40 @@ public class DivideAndConquer {
     }
   }
 
+  /**
+  * Get the value stored in a 3D Item array
+  * @param cargo the 3D Item array
+  * @param pentos the set of Pentominoes stored
+  * @return the value
+  */
   private static int getValue(Item[][][] cargo, Pentomino[] pentos) {
     Cargo tmp = new Cargo("tmp", cargo);
     tmp.printSolution(Arrays.toItemArray(pentos), true, false);
     return tmp.getValue();
   }
 
+  /**
+  * Get the value stored in a 3D Item array
+  * @param cargo the 3D Item array
+  * @param items the set of Item stored
+  * @return the value
+  */
   private static int getValue(Item[][][] cargo, Item[] items) {
     Cargo tmp = new Cargo("tmp", cargo);
     tmp.printSolution(items, false, false);
     return tmp.getValue();
   }
 
+  /**
+  * Fill Dimension-Content and Dimension-Value mappings
+  * @param canSolve the Dimension-Content mapping
+  * @param values the Dimension-Value mapping
+  * @param items the set of Items available
+  * @param cargo the cargo to fill
+  * @param axis the longest dimension of the cargo
+  * @param limit the limit for the dimension
+  * @param optimized is optimization wanted?
+  */
   private static void fillMaps(Map<Integer, Item[][][]> canSolve, Map<Integer, Integer> values, Item[] items, Item[][][] cargo, int axis, int limit, boolean optimized) {
     int width = cargo.length, height = cargo[0].length, depth = cargo[0][0].length;
     for (int index = 1; index <= limit; index++) {
@@ -174,6 +244,12 @@ public class DivideAndConquer {
     }
   }
 
+  /**
+  * Retrace the matrix to get amount of slice
+  * @param T the matrix
+  * @param keys the solved dimensions
+  * @return the amounts
+  */
   private static int[] retrace(int[][] T, int[] keys) {
     int[] amounts = new int[keys.length];
     int i = T.length - 1;
