@@ -55,7 +55,7 @@ public class View {
 			
 			buildItems(aValue, bValue, cValue);
 			buildCargo(width, height, depth);
-			dynamicToRoot(items, cargo, rotGroup, optimized);
+			btToRoot(items, cargo, rotGroup, optimized);
 			
 			initialSetup();
 		}
@@ -81,8 +81,8 @@ public class View {
 		public void showPentoBT(int aValue, int bValue, int cValue, int width, int height, int depth, Group rotGroup, boolean optimized) {
 			
 			buildPentos(aValue, bValue, cValue);
-			buildPCargo(width, height, depth);
-			dynamicToRoot(pentos, cargo, rotGroup, optimized);
+			buildPCargo(width, height, depth); 
+			btToRoot(pentos, cargo, rotGroup, optimized);
 			
 			initialSetup();
 		}
