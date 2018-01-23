@@ -33,14 +33,16 @@ public class ConfirmBox {
       window.close();
     });
 
+    HBox labelLayout = new HBox();
+    labelLayout.setAlignment(Pos.CENTER);
+    labelLayout.getChildren().add(label);
     HBox buttonLayout = new HBox(10);
     buttonLayout.setPadding(new Insets(20, 0, 0, 0));
     buttonLayout.setAlignment(Pos.CENTER);
     buttonLayout.getChildren().addAll(yesButton, noButton);
-    buttonLayout.setAlignment(Pos.CENTER);
-    major.setTop(label);
+    major.setTop(labelLayout);
     major.setCenter(buttonLayout);
-    Scene scene = new Scene(major);
+    Scene scene = new Scene(major, 250, 100);
     window.setScene(scene);
     window.showAndWait();
 
