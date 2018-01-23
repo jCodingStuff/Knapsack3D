@@ -3,6 +3,7 @@ import javafx.stage.*;
 import javafx.scene.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Box;
+import javafx.scene.transform.Translate;
 import javafx.scene.transform.Rotate;
 import java.awt.*;
 import javafx.scene.control.*;
@@ -159,11 +160,6 @@ public class View extends Application {
 					System.out.println("Loop 2");
 					for (int k = 0; k < items[i][j].length; k++) {
 						System.out.println("Loop 3");
-						
-						Box box = makeBox(items[i][j][k]);
-						coordinates(box,i,j,k);
-						rotationGroup.getChildren().add(box);
-
 						if (items[i][j][k] != null) {
 							Box box = makeBox(items[i][j][k]);
 							coordinates(box,i,j,k);
