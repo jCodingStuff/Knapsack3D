@@ -35,9 +35,7 @@ public class Window extends Application {
 
     this.clearButton = new Button("Clear");
     this.clearButton.setOnAction(e -> clearFields());
-
     this.backButton = new Button("Back");
-    this.backButton.setOnAction(e -> this.mainWindow.setScene(this.mainScene));
 
     pentoButton = new Button("Pentominoes");
     pentoButton.setOnAction(e -> this.mainWindow.setScene(createPentoConfigScene()));
@@ -116,6 +114,7 @@ public class Window extends Application {
 
     // Set back Button
     HBox topMenu = new HBox();
+    this.backButton.setOnAction(e -> this.mainWindow.setScene(this.mainScene));
     topMenu.getChildren().add(this.backButton);
 
     majorLayout.setTop(topMenu);
@@ -187,6 +186,7 @@ public class Window extends Application {
 
     // Set back Button
     HBox topMenu = new HBox();
+    this.backButton.setOnAction(e -> this.mainWindow.setScene(this.mainScene));
     topMenu.getChildren().add(this.backButton);
 
     majorLayout.setTop(topMenu);
