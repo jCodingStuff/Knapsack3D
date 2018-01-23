@@ -2,6 +2,8 @@ import java.util.HashMap;
 import java.util.Map;
 import javafx.application.Application;
 import javafx.geometry.Point3D;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.stage.*;
 import javafx.scene.*;
 import javafx.scene.paint.Color;
@@ -11,6 +13,7 @@ import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.*;
 import javafx.scene.transform.*;
+import javafx.scene.layout.HBox;
 
 public class View {
 
@@ -31,62 +34,82 @@ public class View {
 	    Item[][][] shape;
 	    Item[] items;
 	    Pentomino[] pentos;
-	    
+			Stage infoStage;
+
+
+		private void openInfoWindow() {
+			infoStage = new Stage();
+			infoStage.setTitle("Information");
+			HBox layout = new HBox();
+			Label label = new Label(this.cargo.getResult());
+			layout.setPadding(new Insets(20, 20, 20, 20));
+			layout.setAlignment(Pos.CENTER);
+			layout.getChildren().add(label);
+			Scene newScene = new Scene(layout, 300, 200);
+			infoStage.setScene(newScene);
+			infoStage.show();
+		}
 
 		public void showParcelGreedy(boolean random, int aValue, int bValue, int cValue, int width, int height, int depth) {
-			
+
 			buildItems(aValue, bValue, cValue);
 			buildCargo(width, height, depth);
 			greedyToRoot(items, cargo, rotGroup, random);
 
 			initialSetup();
+			openInfoWindow();
 		}
-		
-		public void showParcelDynamic(int aValue, int bValue, int cValue, int width, int height, int depth, int limit, boolean optimized, Group rotGroup) {
-			
+
+		public void showParcelDynamic(int aValue, int bValue, int cValue, int width, int height, int depth, int limit, boolean optimized) {
+
 			buildItems(aValue, bValue, cValue);
 			buildCargo(width, height, depth);
 			dynamicToRoot(items, cargo, limit, optimized, rotGroup);
-			
+
 			initialSetup();
+			openInfoWindow();
 		}
-		
-		public void showParcelBT(int aValue, int bValue, int cValue, int width, int height, int depth, Group rotGroup, boolean optimized) {
-			
+
+		public void showParcelBT(int aValue, int bValue, int cValue, int width, int height, int depth, boolean optimized) {
+
 			buildItems(aValue, bValue, cValue);
 			buildCargo(width, height, depth);
 			btToRoot(items, cargo, rotGroup, optimized);
-			
+
 			initialSetup();
+			openInfoWindow();
 		}
-		
+
 		public void showPentoGreedy(boolean random, int aValue, int bValue, int cValue, int width, int height, int depth) {
-			
+
 			buildPentos(aValue, bValue, cValue);
 			buildPCargo(width, height, depth);
 			greedyToRoot(pentos, cargo, rotGroup, random);
 
 			initialSetup();
+			openInfoWindow();
 		}
-		
-		public void showPentoDynamic(int aValue, int bValue, int cValue, int width, int height, int depth, int limit, boolean optimized, Group rotGroup) {
-			
+
+		public void showPentoDynamic(int aValue, int bValue, int cValue, int width, int height, int depth, int limit, boolean optimized) {
+
 			buildPentos(aValue, bValue, cValue);
 			buildPCargo(width, height, depth);
 			dynamicToRoot(pentos, cargo, limit, optimized, rotGroup);
-			
+
 			initialSetup();
+			openInfoWindow();
 		}
-		
-		public void showPentoBT(int aValue, int bValue, int cValue, int width, int height, int depth, Group rotGroup, boolean optimized) {
-			
+
+		public void showPentoBT(int aValue, int bValue, int cValue, int width, int height, int depth, boolean optimized) {
+
 			buildPentos(aValue, bValue, cValue);
-			buildPCargo(width, height, depth); 
+			buildPCargo(width, height, depth);
 			btToRoot(pentos, cargo, rotGroup, optimized);
-			
+
 			initialSetup();
+			openInfoWindow();
 		}
-		
+
 		public void buildItems(int aValue, int bValue, int cValue) {
 			Item A = new Item("A", aValue, 2, 2, 4);
 			Item B = new Item("B", bValue, 2, 3, 4);
@@ -94,25 +117,25 @@ public class View {
 
 	        this.items = new Item[] {A, B, C};
 		}
-		
+
 		public void buildPentos(int aValue, int bValue, int cValue) {
 			Pentomino L = new Pentomino("L", aValue);
 	        Pentomino P = new Pentomino("P", bValue);
 	        Pentomino T = new Pentomino("T", cValue);
-	        
+
 	        this.pentos = new Pentomino[] {L,P,T};
 		}
-		
+
 		public void buildCargo(int width, int height, int depth) {
 			this.shape = new Item[width][height][depth];
 	        this.cargo = new Cargo("cargo", shape);
 		}
-		
+
 		public void buildPCargo(int width, int height, int depth) {
 		    this.shape = new Item[width][height][depth];
 		    this.cargo = new Cargo("cargo", shape);
 		}
-		
+
 
 //		public void start(final Stage stage) {
 //
@@ -133,9 +156,9 @@ public class View {
 //			scene.setCamera(camera);
 //			stage.show();
 //		}
-		
-		
-		
+
+
+
 		public void initialSetup() {
 			root.getChildren().add(rotGroup);
 	        setupCam();
@@ -145,17 +168,23 @@ public class View {
 			stage.setTitle("Project 1.3 - Cargo");
 			stage.setScene(scene);
 			scene.setCamera(camera);
-			stage.showAndWait();
+			// stage.initModality(Modality.APPLICATION_MODAL);
+			stage.setOnCloseRequest(e -> this.infoStage.close());
+			stage.show();
 		}
 
 		public void dynamicToRoot(Item[] items, Cargo cargo, int limit, boolean optimized, Group rotGroup) {
 			Item[][][] result = DivideAndConquer.solve(items, cargo.getShape(), limit, optimized);
+			this.cargo = new Cargo("whatever", result);
+			this.cargo.printSolution(items, false, false);
 			addBoxes(rotGroup, result);
-		
+
 		}
 
 		public void dynamicToRoot(Pentomino[] pentos, Cargo cargo, int limit, boolean optimized, Group rotGroup) {
 			Item[][][] result = DivideAndConquer.solve(pentos, cargo.getShape(), limit, optimized);
+			this.cargo = new Cargo("whatever", result);
+			this.cargo.printSolution(Arrays.toItemArray(pentos), true, false);
 			addBoxes(rotGroup, result);
 		}
 
@@ -193,11 +222,13 @@ public class View {
 
 			if (PBacktracking.tmp != null ) {
 				addBoxes(rotGroup, PBacktracking.tmp.getShape());
+				this.cargo = new Cargo("whatever", PBacktracking.tmp.getShape());
+				this.cargo.printSolution(Arrays.toItemArray(pentominoes), true, false);
 			} else {
 				System.out.println("BT couldn't solve this cargo");
 			}
 		}
-		
+
 		/**
 		 * Adding Items to the rotation group
 		 * @param items items given to solve
@@ -208,6 +239,8 @@ public class View {
 
 			if (Backtracking.tmp != null ) {
 				addBoxes(rotGroup, Backtracking.tmp.getShape());
+				this.cargo = new Cargo("whatever", Backtracking.tmp.getShape());
+				this.cargo.printSolution(items, false, false);
 			} else {
 				System.out.println("BT couldn't solve this cargo");
 			}

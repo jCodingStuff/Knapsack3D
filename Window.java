@@ -228,6 +228,8 @@ public class Window extends Application {
     boolean random = ConfirmBox.display("Greedy Config", "Choose mode",
                                         "Random", "Discrete");
     clearFields();
+    View view = new View();
+    view.showPentoGreedy(random, this.value1, this.value2, this.value3, this.cargoWidth, this.cargoHeight, this.cargoDepth);
   }
 
   private void launchPentoBack() {
@@ -236,6 +238,8 @@ public class Window extends Application {
     boolean optimized = ConfirmBox.display("Backtracking Config", "Is optimization wanted?",
                                            "Yes", "No");
     clearFields();
+    View view = new View();
+    view.showPentoBT(this.value1, this.value2, this.value3, this.cargoWidth, this.cargoHeight, this.cargoDepth, optimized);
   }
 
   private void launchParcelBack() {
@@ -244,6 +248,8 @@ public class Window extends Application {
     boolean optimized = ConfirmBox.display("Backtracking Config", "Is optimization wanted?",
                                            "Yes", "No");
     clearFields();
+    View view = new View();
+    view.showParcelBT(this.value1, this.value2, this.value3, this.cargoWidth, this.cargoHeight, this.cargoDepth, optimized);
   }
 
   private void launchPentoDynamic() {
@@ -251,6 +257,8 @@ public class Window extends Application {
     if (!cont) return;
     promptDynamic();
     clearFields();
+    View view = new View();
+    view.showPentoDynamic(this.value1, this.value2, this.value3, this.cargoWidth, this.cargoHeight, this.cargoDepth, this.limit, this.dynOptimized);
   }
 
   private void launchParcelDynamic() {
@@ -258,6 +266,8 @@ public class Window extends Application {
     if (!cont) return;
     promptDynamic();
     clearFields();
+    View view = new View();
+    view.showParcelDynamic(this.value1, this.value2, this.value3, this.cargoWidth, this.cargoHeight, this.cargoDepth, this.limit, this.dynOptimized);
   }
 
   private void promptDynamic() {
