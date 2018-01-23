@@ -15,6 +15,7 @@ public class View extends Application {
 		public void start(final Stage stage) {
 			System.out.println("Start");
 			stage.setTitle("Project 1.4 - Cargo");
+			stage.setTitle("Project 1.3 - Cargo");
 
 			Group rotationGroup = new Group();
 			Group root = new Group();
@@ -22,14 +23,23 @@ public class View extends Application {
 			scene.setFill(Color.ALICEBLUE);
 			System.out.println("Initial setup done");
 
-			Item A = new Item("A", 3, 2, 2, 4);
-			Item B = new Item("B", 4, 2, 3, 4);
-			Item C = new Item("C", 5, 3, 3, 3);
+			Item[][][] cargo = new Item[33][5][8];
+			// Item[][][] cargo = new Item[23][9][15];
+
+			Item A = new Item("A", 3, 2, 2, 4, Color.GREEN);
+			Item B = new Item("B", 4, 2, 3, 4, Color.RED);
+			Item C = new Item("C", 5, 3, 3, 3, Color.BLUE);
 			Item[] items = new Item[]{A, B, C};
 
-			Item[][][] cargo = new Item[2][5][8];
 
-			addToRoot(items, cargo, rotationGroup, root);
+			Pentomino L = new Pentomino("L", 3);
+			Pentomino P = new Pentomino("P", 4);
+			Pentomino T = new Pentomino("T", 5);
+			Pentomino[] pentominoes = new Pentomino[]{L, P, T};
+
+			dynamicToRoot(pentominoes, cargo, 1, true, rotationGroup, root);
+			// greedyToRoot(pentominoes, cargo, rotationGroup, root);
+			// btToRoot(pentominoes, cargo, rotationGroup, root);
 			addSlider(rotationGroup, root);
 			System.out.println("Finalizing");
 
@@ -38,72 +48,79 @@ public class View extends Application {
 			stage.show();
 		}
 
-		/*
-		 * Adding everything to the rotation group
-		 */
-		public void addToRoot(Item[] items, Item[][][] cargo, Group rotationGroup, Group root) {
-
-			// <here goes the solver, with items as items to use and cargo as cargo settings>
-			// Backtracking.solveFor(items, cargo);
-			// Cargo tmp = new Cargo("TMP", Backtracking.tmp.getShape());
-			// tmp.printSolution(items, false);
-			Item A = new Item("A",3,2,2,2, Color.AQUA);
-			Item B = new Item("B",4,2,2,2, Color.WHITE);
-			Item C = new Item("C",5,4,1,1, Color.GREEN);
-			Item D = new Item("D",6,4,1,2, Color.BLUEVIOLET);
-			Item E = new Item("E",7,4,2,1, Color.CORAL);
-			Item[][][] solution = new Item[3][4][3];
-			solution[0][0][0] = A;
-			solution[0][1][0] = A;
-			solution[1][0][0] = A;
-			solution[1][1][0] = A;
-			solution[0][0][1] = A;
-			solution[0][1][1] = A;
-			solution[1][0][1] = A;
-			solution[1][1][1] = A;
-
-			solution[0][2][0] = B;
-			solution[0][3][0] = B;
-			solution[1][2][0] = B;
-			solution[1][3][0] = B;
-			solution[0][2][1] = B;
-			solution[0][3][1] = B;
-			solution[1][2][1] = B;
-			solution[1][3][1] = B;
-
-			solution[2][0][0] = C;
-			solution[2][1][0] = C;
-			solution[2][2][0] = C;
-			solution[2][3][0] = C;
-
-			solution[2][0][1] = D;
-			solution[2][1][1] = D;
-			solution[2][2][1] = D;
-			solution[2][3][1] = D;
-			solution[2][0][2] = D;
-			solution[2][1][2] = D;
-			solution[2][2][2] = D;
-			solution[2][3][2] = D;
-
-			solution[0][0][2] = E;
-			solution[0][1][2] = E;
-			solution[0][2][2] = E;
-			solution[0][3][2] = E;
-			solution[1][0][2] = E;
-			solution[1][1][2] = E;
-			solution[1][2][2] = E;
-			solution[1][3][2] = E;
-
-
-			addBoxes(rotationGroup, solution);
+		public void dynamicToRoot(Item[] items, Item[][][] cargo, int limit, boolean optimized, Group rotationGroup, Group root) {
+			Item[][][] result = DivideAndConquer.solve(items, cargo, limit, optimized);
+			addBoxes(rotationGroup, result);
 			setupRG(rotationGroup);
 			root.getChildren().add(rotationGroup);
-			
+
 			System.out.println("AddToRoot done");
 		}
 
-		/*
+		public void dynamicToRoot(Pentomino[] pentos, Item[][][] cargo, int limit, boolean optimized, Group rotationGroup, Group root) {
+			Item[][][] result = DivideAndConquer.solve(pentos, cargo, limit, optimized);
+			addBoxes(rotationGroup, result);
+			setupRG(rotationGroup);
+			root.getChildren().add(rotationGroup);
+
+			System.out.println("AddToRoot done");
+		}
+
+		/**
+		*	Solve with greedy and add to rotation group
+		*	@param items items given to solve
+		* 	@param cargo cargo that will be represented
+		*/
+		public void greedyToRoot(Item[] items, Item[][][] cargo, Group rotationGroup, Group root) {
+			Cargo tmp = new Cargo("tmp", cargo);
+			Solver mySolver = new Solver("mySolver", items, tmp);
+			mySolver.fillGreedyCargo(true, false);
+			addBoxes(rotationGroup, tmp.getShape());
+			setupRG(rotationGroup);
+			root.getChildren().add(rotationGroup);
+
+			System.out.println("AddToRoot done");
+		}
+
+		/**
+		*	Solve with greedy and add to rotation group
+		*	@param pentos items given to solve
+		*	@param cargo cargo that will be represented
+		*/
+		public void greedyToRoot(Pentomino[] pentos, Item[][][] cargo, Group rotationGroup, Group root) {
+			Cargo tmp = new Cargo("tmp", cargo);
+			PSolver mySolver = new PSolver("mySolver", pentos, tmp);
+			mySolver.fillGreedyCargo(true, false);
+			addBoxes(rotationGroup, tmp.getShape());
+			setupRG(rotationGroup);
+			root.getChildren().add(rotationGroup);
+
+			System.out.println("AddToRoot done");
+		}
+
+
+		/**
+		 * Adding Pentominoes to the rotation group
+		 * @param pentominoes pentominoes given to solve
+		 * @param cargo cargo that will be represented
+		 */
+		public void btToRoot(Pentomino[] pentominoes, Item[][][] cargo, Group rotationGroup, Group root) {
+
+			// <here goes the solver, with items as items to use and cargo as cargo settings>
+			PBacktracking.solveFor(pentominoes, cargo, true, 0);
+			Cargo tmp = new Cargo("TMP", PBacktracking.tmp.getShape());
+			// tmp.printSolution(pentominoes, false);
+
+			addBoxes(rotationGroup, tmp.getShape());
+			setupRG(rotationGroup);
+			root.getChildren().add(rotationGroup);
+
+			System.out.println("AddToRoot done");
+		}
+
+		/**
 		 * Create a box that corresponds to a specific item
+		 * @param item item from which the box will be created
 		 */
 		public Box makeBox(Item item) {
 			System.out.println("Making box");
@@ -115,7 +132,9 @@ public class View extends Application {
 			return box;
 		}
 
-
+		/**
+		* Adds a slider to rotate the 3d representation in the x
+		*/
 		public void addSlider(Group rotationGroup, Group root) {
 			System.out.println("Adding slider");
 			Slider s = new Slider(0,360,0);
@@ -126,7 +145,7 @@ public class View extends Application {
 			root.getChildren().add(s);
 		}
 
-		/*
+		/**
 		 * Add the boxes to the rotation group
 		 * @param rotationGroup The group the items are added to
 		 * @param items The solution matrix to retrieve the items from
@@ -140,19 +159,26 @@ public class View extends Application {
 					System.out.println("Loop 2");
 					for (int k = 0; k < items[i][j].length; k++) {
 						System.out.println("Loop 3");
+						
 						Box box = makeBox(items[i][j][k]);
 						coordinates(box,i,j,k);
 						rotationGroup.getChildren().add(box);
+
+						if (items[i][j][k] != null) {
+							Box box = makeBox(items[i][j][k]);
+							coordinates(box,i,j,k);
+							rotationGroup.getChildren().add(box);
+						}
 					}
 				}
 			}
 		}
 
-		/*
+		/**
 		 * Set the coordinates of a box
 		 * @param Box of which to set the coordinates
 		 * @param x The x coordinate
-		 * @paran y The y coordinate
+		 * @param y The y coordinate
 		 * @param z The z coordinate
 		 */
 		public void coordinates(Box box, double x, double y, double z) {
@@ -162,14 +188,17 @@ public class View extends Application {
 			box.setTranslateZ(z*SIDE);
 		}
 
-		/*
+		/**
 		 * Set up the rotation group
 		 * @param rotationGroup The rotation group to set up
 		 */
 		public void setupRG(Group rotationGroup) {
 			System.out.println("SettingRG");
-			rotationGroup.setTranslateX(125);
-			rotationGroup.setTranslateY(125);
-			rotationGroup.setRotationAxis(Rotate.Y_AXIS);
+			final Translate t = new Translate(0.0, 0.0, 0.0);
+		    final Rotate rx = new Rotate(0, 0, 0, 0, Rotate.X_AXIS);
+		    final Rotate ry = new Rotate(0, 0, 0, 0, Rotate.Y_AXIS);
+		    final Rotate rz = new Rotate(0, 0, 0, 0, Rotate.Z_AXIS);
+
+		    rotationGroup.getTransforms().addAll(t, rx, ry, rz);
 		}
 }

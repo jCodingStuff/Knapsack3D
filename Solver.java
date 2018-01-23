@@ -107,13 +107,20 @@ public class Solver
 
   /**
   * Fill the cargo with the greedy algorithm
+  * @param random is random filling wanted?
+  * @param output want to get detailed solution?
   */
-  public void fillGreedyCargo() {
-    // Item[] sorted = Item.jSort(this.items);
-    Item[] sorted = Item.getAllShapes(this.items);
-    // for (Item item : this.items) System.out.println(item);
-    // Backtracking.printArray(shuffle(sorted));
-    Item[] all = shuffle(sorted);
+  public void fillGreedyCargo(boolean random, boolean output) {
+    Item[] sorted = null;
+    Item[] all = null;
+    if (random) {
+      sorted = Item.getAllShapes(this.items);
+      all = shuffle(sorted);
+    }
+    else {
+      sorted = Item.jSort(this.items);
+      all = Item.getAllShapes(sorted);
+    }
     // Loop through the whole cargo and fill any empty space
     for (int j = 0; j < this.cargo.getHeight(); j++) {
       for (int i = 0; i < this.cargo.getWidth(); i++) {
@@ -125,7 +132,7 @@ public class Solver
       }
     }
     // Backtracking.print3DArray(this.cargo.getShape());
-    this.cargo.printSolution(this.items, false);
+    this.cargo.printSolution(this.items, false, output);
   }
 
   /**
