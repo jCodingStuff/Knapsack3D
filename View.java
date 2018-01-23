@@ -25,8 +25,31 @@ public class View extends Application {
 		private static final double CAMERA_ID = -5000;
 	    private static final double CAMERA_NC = 0.1;
 	    private static final double CAMERA_FC = 10000.0;
-	    double currentX, currentY, oldX, oldY, deltaX, deltaY;
+	    private double currentX, currentY, oldX, oldY, deltaX, deltaY;
 	    private Map<Integer, Color> map = new HashMap<Integer, Color>();
+
+		public void showParcelGreedy(boolean random, int aValue, int bValue, int cValue, int width, int height, int depth) {
+			Stage stage = new Stage();
+			root.getChildren().add(rotGroup);
+	        setupCam();
+
+	        Item A = new Item("A", aValue, 2, 2, 4);
+					Item B = new Item("B", bValue, 2, 3, 4);
+					Item C = new Item("C", cValue, 3, 3, 3);
+
+	        Item[] items = new Item[] {A, B, C};
+	        Item[][][] shape = new Item[width][height][depth];
+	        Cargo cargo = new Cargo("cargo", shape);
+			greedyToRoot(items, cargo, rotGroup, random);
+
+			Scene scene = new Scene(root, SCENE_WIDTH, SCENE_HEIGHT, true);
+			scene.setFill(Color.ALICEBLUE);
+			setupMouse(scene);
+			stage.setTitle("Project 1.3 - Cargo");
+			stage.setScene(scene);
+			scene.setCamera(camera);
+			stage.showAndWait();
+		}
 
 		public void start(final Stage stage) {
 
@@ -47,8 +70,8 @@ public class View extends Application {
 			setupMouse(scene);
 			stage.setTitle("Project 1.3 - Cargo");
 			stage.setScene(scene);
-			stage.show();
 			scene.setCamera(camera);
+			stage.show();
 		}
 
 		public void dynamicToRoot(Item[] items, Cargo cargo, int limit, boolean optimized, Group rotGroup) {

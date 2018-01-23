@@ -218,6 +218,8 @@ public class Window extends Application {
     boolean random = ConfirmBox.display("Greedy Config", "Choose mode",
                                         "Random", "Discrete");
     clearFields();
+    View view = new View();
+    view.showParcelGreedy(random, this.value1, this.value2, this.value3, this.cargoWidth, this.cargoHeight, this.cargoDepth);
   }
 
   private void launchPentoGreedy() {
