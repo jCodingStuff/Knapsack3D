@@ -13,7 +13,7 @@ import javafx.geometry.Pos;
 public class Window extends Application {
 
   Stage mainWindow;
-  Button pentoButton, parcelButton, backButton;
+  Button pentoButton, parcelButton, backButton, clearButton;
   Scene mainScene;
   Label infoLabel1, infoLabel2, infoLabel3, infoLabel4, infoLabel5;
   Button greedyButton, backtrackingButton, dynamicButton;
@@ -32,6 +32,12 @@ public class Window extends Application {
     });
     mainWindow.setResizable(false);
     this.mainWindow.setTitle("Cargo Filling v0.01");
+
+    this.clearButton = new Button("Clear");
+    this.clearButton.setOnAction(e -> clearFields());
+
+    this.backButton = new Button("Back");
+    this.backButton.setOnAction(e -> this.mainWindow.setScene(this.mainScene));
 
     pentoButton = new Button("Pentominoes");
     pentoButton.setOnAction(e -> this.mainWindow.setScene(createPentoConfigScene()));
@@ -100,14 +106,16 @@ public class Window extends Application {
     this.dynamicButton = new Button("Dynamic");
     HBox bottomMenu = new HBox(60);
     bottomMenu.setAlignment(Pos.CENTER);
-    bottomMenu.getChildren().addAll(this.greedyButton, this.backtrackingButton, this.dynamicButton);
+    bottomMenu.getChildren().addAll(this.clearButton, this.greedyButton,
+                                    this.backtrackingButton, this.dynamicButton);
 
-    grid.getChildren().addAll(this.infoLabel1, this.infoLabel2, this.infoLabel3, this.infoLabel4, this.infoLabel5, this.valueField1, this.valueField2, this.valueField3, this.widthField, this.heightField, this.depthField);
+    grid.getChildren().addAll(this.infoLabel1, this.infoLabel2, this.infoLabel3,
+                              this.infoLabel4, this.infoLabel5, this.valueField1,
+                              this.valueField2, this.valueField3, this.widthField,
+                              this.heightField, this.depthField);
 
     // Set back Button
     HBox topMenu = new HBox();
-    this.backButton = new Button("Back");
-    this.backButton.setOnAction(e -> this.mainWindow.setScene(this.mainScene));
     topMenu.getChildren().add(this.backButton);
 
     majorLayout.setTop(topMenu);
@@ -169,14 +177,16 @@ public class Window extends Application {
     this.dynamicButton = new Button("Dynamic");
     HBox bottomMenu = new HBox(60);
     bottomMenu.setAlignment(Pos.CENTER);
-    bottomMenu.getChildren().addAll(this.greedyButton, this.backtrackingButton, this.dynamicButton);
+    bottomMenu.getChildren().addAll(this.clearButton, this.greedyButton,
+                                    this.backtrackingButton, this.dynamicButton);
 
-    grid.getChildren().addAll(this.infoLabel1, this.infoLabel2, this.infoLabel3, this.infoLabel4, this.infoLabel5, this.valueField1, this.valueField2, this.valueField3, this.widthField, this.heightField, this.depthField);
+    grid.getChildren().addAll(this.infoLabel1, this.infoLabel2, this.infoLabel3,
+                              this.infoLabel4, this.infoLabel5, this.valueField1,
+                              this.valueField2, this.valueField3, this.widthField,
+                              this.heightField, this.depthField);
 
     // Set back Button
     HBox topMenu = new HBox();
-    this.backButton = new Button("Back");
-    this.backButton.setOnAction(e -> this.mainWindow.setScene(this.mainScene));
     topMenu.getChildren().add(this.backButton);
 
     majorLayout.setTop(topMenu);
@@ -188,6 +198,15 @@ public class Window extends Application {
   private void closeProgram() {
     boolean answer = ConfirmBox.display("Warning", "Do you want to exit?");
     if (answer) this.mainWindow.close();
+  }
+
+  private void clearFields() {
+    this.valueField1.clear();
+    this.valueField2.clear();
+    this.valueField3.clear();
+    this.widthField.clear();
+    this.heightField.clear();
+    this.depthField.clear();
   }
 
 }
