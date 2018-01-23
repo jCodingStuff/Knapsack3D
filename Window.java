@@ -213,37 +213,49 @@ public class Window extends Application {
   }
 
   private void launchParcelGreedy() {
+    boolean cont = collectData();
+    if (!cont) return;
     boolean random = ConfirmBox.display("Greedy Config", "Choose mode",
                                         "Random", "Discrete");
-    collectData();
+    clearFields();
   }
 
   private void launchPentoGreedy() {
+    boolean cont = collectData();
+    if (!cont) return;
     boolean random = ConfirmBox.display("Greedy Config", "Choose mode",
                                         "Random", "Discrete");
-    collectData();
+    clearFields();
   }
 
   private void launchPentoBack() {
+    boolean cont = collectData();
+    if (!cont) return;
     boolean optimized = ConfirmBox.display("Backtracking Config", "Is optimization wanted?",
                                            "Yes", "No");
-    collectData();
+    clearFields();
   }
 
   private void launchParcelBack() {
+    boolean cont = collectData();
+    if (!cont) return;
     boolean optimized = ConfirmBox.display("Backtracking Config", "Is optimization wanted?",
                                            "Yes", "No");
-    collectData();
+    clearFields();
   }
 
   private void launchPentoDynamic() {
+    boolean cont = collectData();
+    if (!cont) return;
     promptDynamic();
-    collectData();
+    clearFields();
   }
 
   private void launchParcelDynamic() {
+    boolean cont = collectData();
+    if (!cont) return;
     promptDynamic();
-    collectData();
+    clearFields();
   }
 
   private void promptDynamic() {
@@ -263,9 +275,16 @@ public class Window extends Application {
     top.getChildren().addAll(label, limitField, optBox);
     Button button = new Button("Go");
     button.setOnAction(e -> {
-      this.limit = Integer.parseInt(limitField.getText());
-      this.dynOptimized = optBox.isSelected();
-      dynStage.close();
+      try {
+        this.limit = Integer.parseInt(limitField.getText());
+        this.dynOptimized = optBox.isSelected();
+        if (this.limit > 0) dynStage.close();
+      }
+      catch (NumberFormatException e2) {
+        WarningBox.display("Warning", "Invalid data: Integer needed", "I understand");
+        clearData();
+        return;
+      }
     });
     HBox bot = new HBox();
     bot.setPadding(new Insets(10, 0, 0, 0));
@@ -280,13 +299,36 @@ public class Window extends Application {
     dynStage.showAndWait();
   }
 
-  private void collectData() {
-    this.value1 = Integer.parseInt(this.valueField1.getText());
-    this.value2 = Integer.parseInt(this.valueField2.getText());
-    this.value3 = Integer.parseInt(this.valueField3.getText());
-    this.cargoWidth = Integer.parseInt(this.widthField.getText());
-    this.cargoHeight = Integer.parseInt(this.heightField.getText());
-    this.cargoDepth = Integer.parseInt(this.depthField.getText());
+  private boolean collectData() {
+    try {
+      this.value1 = Integer.parseInt(this.valueField1.getText());
+      if (this.value1 < 0) return false;
+      this.value2 = Integer.parseInt(this.valueField2.getText());
+      if (this.value2 < 0) return false;
+      this.value3 = Integer.parseInt(this.valueField3.getText());
+      if (this.value3 < 0) return false;
+      this.cargoWidth = Integer.parseInt(this.widthField.getText());
+      if (this.cargoWidth < 0) return false;
+      this.cargoHeight = Integer.parseInt(this.heightField.getText());
+      if (this.cargoHeight < 0) return false;
+      this.cargoDepth = Integer.parseInt(this.depthField.getText());
+      if (this.cargoDepth < 0) return false;
+      return true;
+    }
+    catch (NumberFormatException e) {
+      WarningBox.display("Warning", "Invalid data: Integer needed", "I understand");
+      clearData();
+      return false;
+    }
+  }
+
+  private void clearData() {
+    this.value1 = 0;
+    this.value2 = 0;
+    this.value3 = 0;
+    this.cargoWidth = 0;
+    this.cargoHeight = 0;
+    this.cargoDepth = 0;
   }
 
 }
