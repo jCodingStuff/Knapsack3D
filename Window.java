@@ -33,9 +33,20 @@ public class Window extends Application {
     mainWindow.setResizable(false);
     this.mainWindow.setTitle("Cargo Filling v0.01");
 
+    // Common components
+    this.infoLabel5 = new Label("Cargo");
     this.clearButton = new Button("Clear");
     this.clearButton.setOnAction(e -> clearFields());
     this.backButton = new Button("Back");
+    this.widthField = new TextField();
+    this.widthField.setPromptText("Width");
+    this.heightField = new TextField();
+    this.heightField.setPromptText("Height");
+    this.depthField = new TextField();
+    this.depthField.setPromptText("Depth");
+    this.greedyButton = new Button("Greedy");
+    this.backtrackingButton = new Button("Backtracking");
+    this.dynamicButton = new Button("Dynamic");
 
     pentoButton = new Button("Pentominoes");
     pentoButton.setOnAction(e -> this.mainWindow.setScene(createPentoConfigScene()));
@@ -65,7 +76,6 @@ public class Window extends Application {
     // Info column
     this.infoLabel4 = new Label("Pento");
     GridPane.setConstraints(this.infoLabel4, 0, 1);
-    this.infoLabel5 = new Label("Cargo");
     GridPane.setConstraints(this.infoLabel5, 0, 2);
 
     // Create the labels
@@ -88,20 +98,11 @@ public class Window extends Application {
     GridPane.setConstraints(this.valueField3, 3, 1);
 
     // Create cargo input fields
-    this.widthField = new TextField();
-    this.widthField.setPromptText("Width");
     GridPane.setConstraints(this.widthField, 1, 2);
-    this.heightField = new TextField();
-    this.heightField.setPromptText("Height");
     GridPane.setConstraints(this.heightField, 2, 2);
-    this.depthField = new TextField();
-    this.depthField.setPromptText("Depth");
     GridPane.setConstraints(this.depthField, 3, 2);
 
     // Create the buttons to start the algorithms
-    this.greedyButton = new Button("Greedy");
-    this.backtrackingButton = new Button("Backtracking");
-    this.dynamicButton = new Button("Dynamic");
     HBox bottomMenu = new HBox(60);
     bottomMenu.setAlignment(Pos.CENTER);
     bottomMenu.getChildren().addAll(this.clearButton, this.greedyButton,
@@ -160,20 +161,11 @@ public class Window extends Application {
     GridPane.setConstraints(this.valueField3, 3, 1);
 
     // Create cargo input fields
-    this.widthField = new TextField();
-    this.widthField.setPromptText("Width");
     GridPane.setConstraints(this.widthField, 1, 2);
-    this.heightField = new TextField();
-    this.heightField.setPromptText("Height");
     GridPane.setConstraints(this.heightField, 2, 2);
-    this.depthField = new TextField();
-    this.depthField.setPromptText("Depth");
     GridPane.setConstraints(this.depthField, 3, 2);
 
     // Create the buttons to start the algorithms
-    this.greedyButton = new Button("Greedy");
-    this.backtrackingButton = new Button("Backtracking");
-    this.dynamicButton = new Button("Dynamic");
     HBox bottomMenu = new HBox(60);
     bottomMenu.setAlignment(Pos.CENTER);
     bottomMenu.getChildren().addAll(this.clearButton, this.greedyButton,
