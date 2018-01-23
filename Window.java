@@ -54,9 +54,15 @@ public class Window extends Application {
     this.dynamicButton = new Button("Dynamic");
 
     pentoButton = new Button("Pentominoes");
-    pentoButton.setOnAction(e -> this.mainWindow.setScene(createPentoConfigScene()));
+    pentoButton.setOnAction(e -> {
+        this.mainWindow.setTitle("Pentominoes");
+        this.mainWindow.setScene(createPentoConfigScene());
+      });
     parcelButton = new Button("Parcels");
-    parcelButton.setOnAction(e -> this.mainWindow.setScene(createParcelConfigScene()));
+    parcelButton.setOnAction(e -> {
+      this.mainWindow.setTitle("Parcels");
+        this.mainWindow.setScene(createParcelConfigScene());
+      });
 
     HBox initialLayout = new HBox(20);
     initialLayout.setAlignment(Pos.CENTER);
@@ -74,7 +80,7 @@ public class Window extends Application {
 
     // Create the start layout
     GridPane grid = new GridPane();
-    grid.setPadding(new Insets(20, 20, 20, 20));
+    grid.setPadding(new Insets(0, 0, 20, 0));
     grid.setVgap(8);
     grid.setHgap(10);
 
@@ -107,13 +113,19 @@ public class Window extends Application {
     GridPane.setConstraints(this.heightField, 2, 2);
     GridPane.setConstraints(this.depthField, 3, 2);
 
+    // Back Button
+    this.backButton.setOnAction(e -> {
+        this.mainWindow.setTitle("Cargo Filling v0.01");
+        this.mainWindow.setScene(this.mainScene);
+      });
+
     // Create the buttons to start the algorithms
     HBox bottomMenu = new HBox(60);
     this.greedyButton.setOnAction(e -> launchPentoGreedy());
     this.backtrackingButton.setOnAction(e -> launchPentoBack());
     this.dynamicButton.setOnAction(e -> launchPentoDynamic());
     bottomMenu.setAlignment(Pos.CENTER);
-    bottomMenu.getChildren().addAll(this.clearButton, this.greedyButton,
+    bottomMenu.getChildren().addAll(this.backButton, this.clearButton, this.greedyButton,
                                     this.backtrackingButton, this.dynamicButton);
 
     grid.getChildren().addAll(this.infoLabel1, this.infoLabel2, this.infoLabel3,
@@ -121,12 +133,6 @@ public class Window extends Application {
                               this.valueField2, this.valueField3, this.widthField,
                               this.heightField, this.depthField);
 
-    // Set back Button
-    HBox topMenu = new HBox();
-    this.backButton.setOnAction(e -> this.mainWindow.setScene(this.mainScene));
-    topMenu.getChildren().add(this.backButton);
-
-    majorLayout.setTop(topMenu);
     majorLayout.setCenter(grid);
     majorLayout.setBottom(bottomMenu);
     return new Scene(majorLayout);
@@ -139,7 +145,7 @@ public class Window extends Application {
 
     // Create the start layout
     GridPane grid = new GridPane();
-    grid.setPadding(new Insets(20, 20, 20, 20));
+    grid.setPadding(new Insets(0, 0, 20, 0));
     grid.setVgap(8);
     grid.setHgap(10);
 
@@ -173,13 +179,19 @@ public class Window extends Application {
     GridPane.setConstraints(this.heightField, 2, 2);
     GridPane.setConstraints(this.depthField, 3, 2);
 
+    // Set back Button
+    this.backButton.setOnAction(e -> {
+        this.mainWindow.setTitle("Cargo Filling v0.01");
+        this.mainWindow.setScene(this.mainScene);
+      });
+
     // Create the buttons to start the algorithms
     HBox bottomMenu = new HBox(60);
     this.greedyButton.setOnAction(e -> launchParcelGreedy());
     this.backtrackingButton.setOnAction(e -> launchParcelBack());
     this.dynamicButton.setOnAction(e -> launchParcelDynamic());
     bottomMenu.setAlignment(Pos.CENTER);
-    bottomMenu.getChildren().addAll(this.clearButton, this.greedyButton,
+    bottomMenu.getChildren().addAll(this.backButton, this.clearButton, this.greedyButton,
                                     this.backtrackingButton, this.dynamicButton);
 
     grid.getChildren().addAll(this.infoLabel1, this.infoLabel2, this.infoLabel3,
@@ -187,12 +199,7 @@ public class Window extends Application {
                               this.valueField2, this.valueField3, this.widthField,
                               this.heightField, this.depthField);
 
-    // Set back Button
-    HBox topMenu = new HBox();
-    this.backButton.setOnAction(e -> this.mainWindow.setScene(this.mainScene));
-    topMenu.getChildren().add(this.backButton);
 
-    majorLayout.setTop(topMenu);
     majorLayout.setCenter(grid);
     majorLayout.setBottom(bottomMenu);
     return new Scene(majorLayout);
