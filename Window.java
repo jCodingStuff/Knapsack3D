@@ -5,19 +5,24 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.control.TextField;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import javafx.scene.control.Button;
 import javafx.geometry.Pos;
+import javafx.stage.Modality;
 
 public class Window extends Application {
 
-  Stage mainWindow;
+  Stage mainWindow, dynStage;
+  int limit;
+  boolean dynOptimized;
   Button pentoButton, parcelButton, backButton, clearButton;
   Scene mainScene;
   Label infoLabel1, infoLabel2, infoLabel3, infoLabel4, infoLabel5;
   Button greedyButton, backtrackingButton, dynamicButton;
-  TextField valueField1, valueField2, valueField3, widthField, heightField, depthField;
+  TextField valueField1, valueField2, valueField3, widthField, heightField,
+            depthField;
 
   public static void main(String[] args) {
     launch(args);
@@ -57,7 +62,7 @@ public class Window extends Application {
     initialLayout.setAlignment(Pos.CENTER);
     initialLayout.setPadding(new Insets(20, 20, 20, 20));
     initialLayout.getChildren().addAll(parcelButton, pentoButton);
-    this.mainScene = new Scene(initialLayout, 300, 250);
+    this.mainScene = new Scene(initialLayout, 300, 100);
     this.mainWindow.setScene(this.mainScene);
     this.mainWindow.show();
   }
@@ -104,6 +109,9 @@ public class Window extends Application {
 
     // Create the buttons to start the algorithms
     HBox bottomMenu = new HBox(60);
+    this.greedyButton.setOnAction(e -> launchPentoGreedy());
+    this.backtrackingButton.setOnAction(e -> launchPentoBack());
+    this.dynamicButton.setOnAction(e -> launchPentoDynamic());
     bottomMenu.setAlignment(Pos.CENTER);
     bottomMenu.getChildren().addAll(this.clearButton, this.greedyButton,
                                     this.backtrackingButton, this.dynamicButton);
@@ -167,6 +175,9 @@ public class Window extends Application {
 
     // Create the buttons to start the algorithms
     HBox bottomMenu = new HBox(60);
+    this.greedyButton.setOnAction(e -> launchParcelGreedy());
+    this.backtrackingButton.setOnAction(e -> launchParcelBack());
+    this.dynamicButton.setOnAction(e -> launchParcelDynamic());
     bottomMenu.setAlignment(Pos.CENTER);
     bottomMenu.getChildren().addAll(this.clearButton, this.greedyButton,
                                     this.backtrackingButton, this.dynamicButton);
@@ -188,7 +199,7 @@ public class Window extends Application {
   }
 
   private void closeProgram() {
-    boolean answer = ConfirmBox.display("Warning", "Do you want to exit?");
+    boolean answer = ConfirmBox.display("Warning", "Do you want to exit?", "Yes", "No");
     if (answer) this.mainWindow.close();
   }
 
@@ -199,6 +210,66 @@ public class Window extends Application {
     this.widthField.clear();
     this.heightField.clear();
     this.depthField.clear();
+  }
+
+  private void launchParcelGreedy() {
+    boolean random = ConfirmBox.display("Greedy Config", "Choose mode",
+                                        "Random", "Discrete");
+  }
+
+  private void launchPentoGreedy() {
+    boolean random = ConfirmBox.display("Greedy Config", "Choose mode",
+                                        "Random", "Discrete");
+  }
+
+  private void launchPentoBack() {
+    boolean optimized = ConfirmBox.display("Backtracking Config", "Is optimization wanted?",
+                                           "Yes", "No");
+  }
+
+  private void launchParcelBack() {
+    boolean optimized = ConfirmBox.display("Backtracking Config", "Is optimization wanted?",
+                                           "Yes", "No");
+  }
+
+  private void launchPentoDynamic() {
+    promptDynamic();
+  }
+
+  private void launchParcelDynamic() {
+    promptDynamic();
+  }
+
+  private void promptDynamic() {
+    BorderPane pane = new BorderPane();
+    pane.setPadding(new Insets(20, 20, 20, 20));
+    dynStage = new Stage();
+    dynStage.setResizable(false);
+    dynStage.setTitle("Dynamic Config");
+    dynStage.initModality(Modality.APPLICATION_MODAL);
+    Label label = new Label("Limit:");
+    TextField limitField = new TextField();
+    limitField.setPromptText("Limit");
+    CheckBox optBox = new CheckBox("Optimized");
+    optBox.setSelected(true);
+    HBox top = new HBox(20);
+    top.setAlignment(Pos.CENTER);
+    top.getChildren().addAll(label, limitField, optBox);
+    Button button = new Button("Go");
+    button.setOnAction(e -> {
+      dynStage.close();
+    });
+    HBox bot = new HBox();
+    bot.setPadding(new Insets(10, 0, 0, 0));
+    bot.setAlignment(Pos.CENTER);
+    bot.getChildren().add(button);
+
+    pane.setTop(top);
+    pane.setCenter(bot);
+
+    Scene scene = new Scene(pane);
+    dynStage.setScene(scene);
+    dynStage.showAndWait();
   }
 
 }
