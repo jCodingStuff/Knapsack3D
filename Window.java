@@ -333,11 +333,11 @@ public class Window extends Application {
       this.value3 = Integer.parseInt(this.valueField3.getText());
       if (this.value3 < 0) return false;
       this.cargoWidth = Integer.parseInt(this.widthField.getText());
-      if (this.cargoWidth < 0) return false;
+      if (this.cargoWidth < 1) return false;
       this.cargoHeight = Integer.parseInt(this.heightField.getText());
-      if (this.cargoHeight < 0) return false;
+      if (this.cargoHeight < 1) return false;
       this.cargoDepth = Integer.parseInt(this.depthField.getText());
-      if (this.cargoDepth < 0) return false;
+      if (this.cargoDepth < 1) return false;
       return true;
     }
     catch (NumberFormatException e) {
