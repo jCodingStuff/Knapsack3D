@@ -18,7 +18,6 @@
 */
 import java.util.ArrayList;
 import java.util.Arrays;
-import javafx.scene.paint.*;
 public class Item {
 
   private static int counter = 0;
@@ -58,24 +57,6 @@ public class Item {
     this.value = value;
     this.shape = new int[]{width, height, depth};
   }
-
-  /**
-   * Construct a new Item
-   * @param name the name of the item
-   * @param value the value of the item
-   * @param width the width of the item
-   * @param height the height of the item
-   * @param depth the depth of the item
-   * @param color the color of the item
-   */
-   public Item(String name, int value, int width, int height, int depth, Color color) {
-     counter++;
-     this.serialNumber = counter;
-     this.name = name;
-     this.value = value;
-     this.shape = new int[]{width, height, depth};
-     this.color = color;
-   }
 
   /**
   * Get access to the serial number of the item
@@ -182,14 +163,6 @@ public class Item {
   }
 
   /**
-   * Get the color of the item
-   * @return the color of the item
-   */
-   public Color getColor() {
-     return this.color;
-   }
-
-  /**
   * Get the volume of the item
   * @return the volume of the item
   */
@@ -226,8 +199,7 @@ public class Item {
     int width = this.shape[0];
     int height = this.shape[1];
     int depth = this.shape[2];
-    // int[] new_array = new int[]{width, height, depth};
-    return new Item(this.name, this.value, width, height, depth, this.color);
+    return new Item(this.name, this.value, width, height, depth);
   }
 
   /**
