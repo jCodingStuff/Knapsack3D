@@ -1,69 +1,66 @@
+import java.util.HashMap;
+import java.util.Map;
+
 import javafx.application.Application;
+import javafx.geometry.Point3D;
 import javafx.stage.*;
 import javafx.scene.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Box;
-import javafx.scene.transform.Rotate;
-import java.awt.*;
+import javafx.scene.shape.DrawMode;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.*;
+import javafx.scene.transform.*;
 
 public class View extends Application {
 
-		final int SIDE = 40;
+		private final int SIDE = 40;
+		private final double SCENE_WIDTH = 600.0;
+		private final double  SCENE_HEIGHT = 600.0;
+		private Group rotGroup = new Group();
+		private RotationCamera rotCam = new RotationCamera();
+		private Group root = new Group();
+		private PerspectiveCamera camera = new PerspectiveCamera(true);
+		private static final double CAMERA_ID = -5000;
+	    private static final double CAMERA_NC = 0.1;
+	    private static final double CAMERA_FC = 10000.0;
+	    double currentX, currentY, oldX, oldY, deltaX, deltaY;
+	    private Map<Integer, Color> map = new HashMap<Integer, Color>();
 
 		public void start(final Stage stage) {
-			System.out.println("Start");
-			stage.setTitle("Project 1.4 - Cargo");
-			stage.setTitle("Project 1.3 - Cargo");
-
-			Group rotationGroup = new Group();
-			Group root = new Group();
-			Scene scene = new Scene(root, 600, 600, true);
+			
+			root.getChildren().add(rotGroup);
+	        setupCam();
+	        
+	        Pentomino L = new Pentomino("L", 3);
+	        Pentomino P = new Pentomino("P", 4);
+	        Pentomino T = new Pentomino("T", 5);
+	        
+	        Pentomino[] items = new Pentomino[] {L,P,T};
+	        Item[][][] shape = new Item[33][5][8];
+	        Cargo cargo = new Cargo("cargo",shape);
+			dynamicToRoot(items,cargo,1,true,rotGroup);
+	        
+			Scene scene = new Scene(root, SCENE_WIDTH, SCENE_HEIGHT, true);
 			scene.setFill(Color.ALICEBLUE);
-			System.out.println("Initial setup done");
-
-			Item[][][] cargo = new Item[33][5][8];
-			// Item[][][] cargo = new Item[23][9][15];
-
-			Item A = new Item("A", 3, 2, 2, 4, Color.GREEN);
-			Item B = new Item("B", 4, 2, 3, 4, Color.RED);
-			Item C = new Item("C", 5, 3, 3, 3, Color.BLUE);
-			Item[] items = new Item[]{A, B, C};
-
-
-			Pentomino L = new Pentomino("L", 3);
-			Pentomino P = new Pentomino("P", 4);
-			Pentomino T = new Pentomino("T", 5);
-			Pentomino[] pentominoes = new Pentomino[]{L, P, T};
-
-			dynamicToRoot(pentominoes, cargo, 1, true, rotationGroup, root);
-			// greedyToRoot(pentominoes, cargo, rotationGroup, root);
-			// btToRoot(pentominoes, cargo, rotationGroup, root);
-			addSlider(rotationGroup, root);
-			System.out.println("Finalizing");
-
-			scene.setCamera(new PerspectiveCamera());
+			setupMouse(scene);
+			stage.setTitle("Project 1.3 - Cargo");
 			stage.setScene(scene);
 			stage.show();
+			scene.setCamera(camera);			
+		}
+		
+		public void dynamicToRoot(Item[] items, Cargo cargo, int limit, boolean optimized, Group rotGroup) {
+			Item[][][] result = DivideAndConquer.solve(items, cargo.getShape(), limit, optimized);
+			addBoxes(rotGroup, result);
+			setupRG(rotGroup, cargo);
 		}
 
-		public void dynamicToRoot(Item[] items, Item[][][] cargo, int limit, boolean optimized, Group rotationGroup, Group root) {
-			Item[][][] result = DivideAndConquer.solve(items, cargo, limit, optimized);
-			addBoxes(rotationGroup, result);
-			setupRG(rotationGroup);
-			root.getChildren().add(rotationGroup);
-
-			System.out.println("AddToRoot done");
-		}
-
-		public void dynamicToRoot(Pentomino[] pentos, Item[][][] cargo, int limit, boolean optimized, Group rotationGroup, Group root) {
-			Item[][][] result = DivideAndConquer.solve(pentos, cargo, limit, optimized);
-			addBoxes(rotationGroup, result);
-			setupRG(rotationGroup);
-			root.getChildren().add(rotationGroup);
-
-			System.out.println("AddToRoot done");
+		public void dynamicToRoot(Pentomino[] pentos, Cargo cargo, int limit, boolean optimized, Group rotGroup) {
+			Item[][][] result = DivideAndConquer.solve(pentos, cargo.getShape(), limit, optimized);
+			addBoxes(rotGroup, result);
+			setupRG(rotGroup, cargo);
 		}
 
 		/**
@@ -71,15 +68,11 @@ public class View extends Application {
 		*	@param items items given to solve
 		* 	@param cargo cargo that will be represented
 		*/
-		public void greedyToRoot(Item[] items, Item[][][] cargo, Group rotationGroup, Group root) {
-			Cargo tmp = new Cargo("tmp", cargo);
-			Solver mySolver = new Solver("mySolver", items, tmp);
-			mySolver.fillGreedyCargo(true, false);
-			addBoxes(rotationGroup, tmp.getShape());
-			setupRG(rotationGroup);
-			root.getChildren().add(rotationGroup);
-
-			System.out.println("AddToRoot done");
+		public void greedyToRoot(Item[] items, Cargo cargo, Group rotGroup, boolean random) {
+			Solver mySolver = new Solver("mySolver", items, cargo);
+			mySolver.fillGreedyCargo(random, false);
+			setupRG(rotGroup, cargo);
+			addBoxes(rotGroup, mySolver.getCargo().getShape());
 		}
 
 		/**
@@ -87,15 +80,12 @@ public class View extends Application {
 		*	@param pentos items given to solve
 		*	@param cargo cargo that will be represented
 		*/
-		public void greedyToRoot(Pentomino[] pentos, Item[][][] cargo, Group rotationGroup, Group root) {
-			Cargo tmp = new Cargo("tmp", cargo);
-			PSolver mySolver = new PSolver("mySolver", pentos, tmp);
-			mySolver.fillGreedyCargo(true, false);
-			addBoxes(rotationGroup, tmp.getShape());
-			setupRG(rotationGroup);
-			root.getChildren().add(rotationGroup);
-
-			System.out.println("AddToRoot done");
+		public void greedyToRoot(Pentomino[] pentos, Cargo cargo, Group rotGroup, boolean random) {
+			PSolver mySolver = new PSolver("mySolver", pentos, cargo);
+			mySolver.fillGreedyCargo(random, false);
+			
+			addBoxes(rotGroup, cargo.getShape());
+			setupRG(rotGroup, cargo);
 		}
 
 
@@ -104,71 +94,62 @@ public class View extends Application {
 		 * @param pentominoes pentominoes given to solve
 		 * @param cargo cargo that will be represented
 		 */
-		public void btToRoot(Pentomino[] pentominoes, Item[][][] cargo, Group rotationGroup, Group root) {
-
-			// <here goes the solver, with items as items to use and cargo as cargo settings>
-			PBacktracking.solveFor(pentominoes, cargo, true, 0);
-			Cargo tmp = new Cargo("TMP", PBacktracking.tmp.getShape());
-			// tmp.printSolution(pentominoes, false);
-
-			addBoxes(rotationGroup, tmp.getShape());
-			setupRG(rotationGroup);
-			root.getChildren().add(rotationGroup);
-
-			System.out.println("AddToRoot done");
+		public void btToRoot(Pentomino[] pentominoes, Cargo cargo, Group rotGroup, boolean optimized) {
+			PBacktracking.solveFor(pentominoes, cargo.getShape(), optimized, 0);
+			
+			if (Backtracking.tmp != null ) {
+				addBoxes(rotGroup, Backtracking.tmp.getShape());
+			} else {
+				System.out.println("BT couldn't solve this cargo");
+			}
+			setupRG(rotGroup, cargo);
 		}
 
 		/**
 		 * Create a box that corresponds to a specific item
-		 * @param item item from which the box will be created
 		 */
 		public Box makeBox(Item item) {
-			System.out.println("Making box");
 			Box box = new Box(SIDE,SIDE,SIDE);
-			PhongMaterial mat = new PhongMaterial();
-			mat.setSpecularColor(item.getColor());
-			mat.setDiffuseColor(item.getColor());
-			box.setMaterial(mat);
+			if (item == null) {		
+				PhongMaterial mat = new PhongMaterial();
+				mat.setSpecularColor(Color.BLACK);
+				mat.setDiffuseColor(Color.BLACK);
+				box.setMaterial(mat);
+				box.setDrawMode(DrawMode.LINE);
+			} else {
+				Color color = null;
+				if (this.map.get(item.serialNumber()) != null) {
+					color = map.get(item.serialNumber());
+				}
+				else {
+					double red = Math.random();
+					double blue = Math.random();
+					double green = Math.random();
+					color = new Color(red, green, blue, 1);
+					this.map.put(item.serialNumber(), color);
+				}
+				PhongMaterial mat = new PhongMaterial();
+				mat.setDiffuseColor(color);
+				mat.setSpecularColor(Color.WHITE);
+				box.setMaterial(mat);
+				//box.setDrawMode(DrawMode.LINE);
+			}			
 			return box;
 		}
 
 		/**
-		* Adds a slider to rotate the 3d representation in the x
-		*/
-		public void addSlider(Group rotationGroup, Group root) {
-			System.out.println("Adding slider");
-			Slider s = new Slider(0,360,0);
-			s.setBlockIncrement(1);
-			s.setTranslateX(225);
-			s.setTranslateY(575);
-			rotationGroup.rotateProperty().bind(s.valueProperty());
-			root.getChildren().add(s);
-		}
-
-		/**
 		 * Add the boxes to the rotation group
-		 * @param rotationGroup The group the items are added to
+		 * @param rotGroup The group the items are added to
 		 * @param items The solution matrix to retrieve the items from
 		 */
-		public void addBoxes(Group rotationGroup, Item[][][] items) {
-			System.out.println("Adding Boxes");
+		public void addBoxes(Group rotGroup, Item[][][] items) {
 
 			for (int i = 0; i < items.length; i++) {
-				System.out.println("Loop 1");
 				for (int j = 0; j < items[i].length; j++) {
-					System.out.println("Loop 2");
 					for (int k = 0; k < items[i][j].length; k++) {
-						System.out.println("Loop 3");
-						
 						Box box = makeBox(items[i][j][k]);
 						coordinates(box,i,j,k);
-						rotationGroup.getChildren().add(box);
-
-						if (items[i][j][k] != null) {
-							Box box = makeBox(items[i][j][k]);
-							coordinates(box,i,j,k);
-							rotationGroup.getChildren().add(box);
-						}
+						rotGroup.getChildren().add(box);
 					}
 				}
 			}
@@ -182,7 +163,6 @@ public class View extends Application {
 		 * @param z The z coordinate
 		 */
 		public void coordinates(Box box, double x, double y, double z) {
-			System.out.println("Setting Coordinates");
 			box.setTranslateX(x*SIDE);
 			box.setTranslateY(y*SIDE);
 			box.setTranslateZ(z*SIDE);
@@ -190,15 +170,73 @@ public class View extends Application {
 
 		/**
 		 * Set up the rotation group
-		 * @param rotationGroup The rotation group to set up
+		 * @param rotGroup The rotation group to set up
 		 */
-		public void setupRG(Group rotationGroup) {
-			System.out.println("SettingRG");
+		public void setupRG(Group rotGroup, Cargo cargo) {
+			double cW = (double) (cargo.getWidth())/2.0;
+			double cH = (double) (cargo.getHeight())/2.0;
+			double cD = (double) (cargo.getDepth())/2.0;
 			final Translate t = new Translate(0.0, 0.0, 0.0);
-		    final Rotate rx = new Rotate(0, 0, 0, 0, Rotate.X_AXIS);
-		    final Rotate ry = new Rotate(0, 0, 0, 0, Rotate.Y_AXIS);
+		    final Rotate rx = new Rotate(0,cW, cH, cD, Rotate.X_AXIS);
+		    final Rotate ry = new Rotate(0, cW, cH, cD, Rotate.Y_AXIS);
 		    final Rotate rz = new Rotate(0, 0, 0, 0, Rotate.Z_AXIS);
 
-		    rotationGroup.getTransforms().addAll(t, rx, ry, rz);
+		    rotGroup.getTransforms().addAll(t, rx, ry, rz);
 		}
+		
+		public void setupCam() {
+	        rotCam.getChildren().add(camera);
+			root.getChildren().add(rotCam);
+	        camera.setNearClip(CAMERA_NC);
+	        camera.setFarClip(CAMERA_FC);
+	        camera.setTranslateZ(CAMERA_ID);
+		}
+		
+		public void setupMouse(Scene scene) {
+		        scene.setOnMousePressed((MouseEvent event) -> {
+		            currentX = event.getSceneX();
+		            currentY = event.getSceneY();
+		            oldX = event.getSceneX();
+		            oldY = event.getSceneY();
+		        });
+		        scene.setOnMouseDragged((MouseEvent event) -> {
+		            oldX = currentX;
+		            oldY = currentY;
+		            currentX = event.getSceneX();
+		            currentY = event.getSceneY();
+		            deltaX = (currentX - oldX);
+		            deltaY = (currentY - oldY);
+		            if (event.isPrimaryButtonDown()) {
+		                rotCam.ry(deltaX * 180.0 / scene.getWidth());
+		                rotCam.rx(-deltaY * 180.0 / scene.getHeight());
+		            } else if (event.isSecondaryButtonDown()) {
+		                camera.setTranslateZ(camera.getTranslateZ() + deltaY*100);
+		            }
+		        });
+		}
+}
+
+class RotationCamera extends Group {
+    Point3D px = new Point3D(1.0, 0.0, 0.0);
+    Point3D py = new Point3D(0.0, 1.0, 0.0);
+    Transform t = new Rotate();
+    Rotate r;
+
+    public RotationCamera() {
+        super();
+    }
+
+    public void rx(double angle) {
+        r = new Rotate(angle, px);
+        this.t = t.createConcatenation(r);
+        this.getTransforms().clear();
+        this.getTransforms().addAll(t);
+    }
+
+    public void ry(double angle) {
+        r = new Rotate(angle, py);
+        this.t = t.createConcatenation(r);
+        this.getTransforms().clear();
+        this.getTransforms().addAll(t);
+    }
 }
