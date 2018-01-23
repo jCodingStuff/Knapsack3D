@@ -39,6 +39,8 @@ public class View {
 
 		private void openInfoWindow() {
 			infoStage = new Stage();
+			infoStage.setX(275);
+			infoStage.setY(350);
 			infoStage.setTitle("Information");
 			HBox layout = new HBox();
 			Label label = new Label(this.cargo.getResult());
@@ -169,8 +171,8 @@ public class View {
 			stage.setTitle("Project 1.3 - Cargo");
 			stage.setScene(scene);
 			scene.setCamera(camera);
-			// stage.initModality(Modality.APPLICATION_MODAL);
 			stage.setOnCloseRequest(e -> this.infoStage.close());
+			stage.initModality(Modality.APPLICATION_MODAL);
 			stage.show();
 		}
 
