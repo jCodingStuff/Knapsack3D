@@ -15,7 +15,7 @@ import javafx.stage.Modality;
 public class Window extends Application {
 
   Stage mainWindow, dynStage;
-  int limit;
+  int limit, value1, value2, value3, cargoWidth, cargoHeight, cargoDepth;
   boolean dynOptimized;
   Button pentoButton, parcelButton, backButton, clearButton;
   Scene mainScene;
@@ -215,29 +215,35 @@ public class Window extends Application {
   private void launchParcelGreedy() {
     boolean random = ConfirmBox.display("Greedy Config", "Choose mode",
                                         "Random", "Discrete");
+    collectData();
   }
 
   private void launchPentoGreedy() {
     boolean random = ConfirmBox.display("Greedy Config", "Choose mode",
                                         "Random", "Discrete");
+    collectData();
   }
 
   private void launchPentoBack() {
     boolean optimized = ConfirmBox.display("Backtracking Config", "Is optimization wanted?",
                                            "Yes", "No");
+    collectData();
   }
 
   private void launchParcelBack() {
     boolean optimized = ConfirmBox.display("Backtracking Config", "Is optimization wanted?",
                                            "Yes", "No");
+    collectData();
   }
 
   private void launchPentoDynamic() {
     promptDynamic();
+    collectData();
   }
 
   private void launchParcelDynamic() {
     promptDynamic();
+    collectData();
   }
 
   private void promptDynamic() {
@@ -257,6 +263,8 @@ public class Window extends Application {
     top.getChildren().addAll(label, limitField, optBox);
     Button button = new Button("Go");
     button.setOnAction(e -> {
+      this.limit = Integer.parseInt(limitField.getText());
+      this.dynOptimized = optBox.isSelected();
       dynStage.close();
     });
     HBox bot = new HBox();
@@ -270,6 +278,15 @@ public class Window extends Application {
     Scene scene = new Scene(pane);
     dynStage.setScene(scene);
     dynStage.showAndWait();
+  }
+
+  private void collectData() {
+    this.value1 = Integer.parseInt(this.valueField1.getText());
+    this.value2 = Integer.parseInt(this.valueField2.getText());
+    this.value3 = Integer.parseInt(this.valueField3.getText());
+    this.cargoWidth = Integer.parseInt(this.widthField.getText());
+    this.cargoHeight = Integer.parseInt(this.heightField.getText());
+    this.cargoDepth = Integer.parseInt(this.depthField.getText());
   }
 
 }
