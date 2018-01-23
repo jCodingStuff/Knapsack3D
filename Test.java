@@ -15,30 +15,33 @@ public class Test {
     //   System.exit(0);
     // }
 
-    Item A = new Item("A", 3, 2, 2, 4);
-    Item B = new Item("B", 4, 2, 3, 4);
-    Item C = new Item("C", 5, 3, 3, 3);
+    // Item A = new Item("A", 3, 2, 2, 4);
+    // Item B = new Item("B", 4, 2, 3, 4);
+    // Item C = new Item("C", 5, 3, 3, 3);
+    //
+    // Item[] items = new Item[]{A, B, C};
 
-    Item[] items = new Item[]{A, B, C};
-    Item[] sorted = Item.jSort(items);
     // for (Item item : sorted) System.out.println(item.getName());
     // Item[] items = new Item[]{A, B};
-    // Pentomino L = new Pentomino("L", 3);
-    // Pentomino P = new Pentomino("P", 4);
-    // Pentomino T = new Pentomino("T", 5);
-    //
-    // Pentomino[] items = new Pentomino[] {L, P, T};
+    Pentomino L = new Pentomino("L", 3);
+    Pentomino P = new Pentomino("P", 4);
+    Pentomino T = new Pentomino("T", 5);
+
+    Pentomino[] items = new Pentomino[] {L, P, T};
+    // Item[] sorted = Item.jSort(items);
 
     // Item[][][] cargo = new Item[33][5][8];
     int width = Integer.parseInt(args[0]);
     int height = Integer.parseInt(args[1]);
     int depth = Integer.parseInt(args[2]);
     Item[][][] cargo = new Item[width][height][depth];
+    PSolver mine = new PSolver("Greedy", items, new Cargo("Cargo", width, height, depth));
+    mine.fillGreedyCargo(false, true);
 
-    Item[][][] result = DivideAndConquer.solve(items, cargo, 4, false);
-    Cargo tmp = new Cargo("tmp", result);
-    Backtracking.print3DArray(result);
-    tmp.printSolution(items, false, true);
+    // Item[][][] result = DivideAndConquer.solve(items, cargo, 4, false);
+    // Cargo tmp = new Cargo("tmp", result);
+    // Backtracking.print3DArray(result);
+    // tmp.printSolution(items, false, true);
 
     // Backtracking.print3DArray(cargo);
     // long t1 = System.nanoTime();

@@ -29,28 +29,28 @@ public class View extends Application {
 	    private Map<Integer, Color> map = new HashMap<Integer, Color>();
 
 		public void start(final Stage stage) {
-			
+
 			root.getChildren().add(rotGroup);
 	        setupCam();
-	        
+
 	        Pentomino L = new Pentomino("L", 3);
 	        Pentomino P = new Pentomino("P", 4);
 	        Pentomino T = new Pentomino("T", 5);
-	        
+
 	        Pentomino[] items = new Pentomino[] {L,P,T};
 	        Item[][][] shape = new Item[33][5][8];
 	        Cargo cargo = new Cargo("cargo",shape);
 			dynamicToRoot(items,cargo,1,true,rotGroup);
-	        
+
 			Scene scene = new Scene(root, SCENE_WIDTH, SCENE_HEIGHT, true);
 			scene.setFill(Color.ALICEBLUE);
 			setupMouse(scene);
 			stage.setTitle("Project 1.3 - Cargo");
 			stage.setScene(scene);
 			stage.show();
-			scene.setCamera(camera);			
+			scene.setCamera(camera);
 		}
-		
+
 		public void dynamicToRoot(Item[] items, Cargo cargo, int limit, boolean optimized, Group rotGroup) {
 			Item[][][] result = DivideAndConquer.solve(items, cargo.getShape(), limit, optimized);
 			addBoxes(rotGroup, result);
@@ -83,7 +83,7 @@ public class View extends Application {
 		public void greedyToRoot(Pentomino[] pentos, Cargo cargo, Group rotGroup, boolean random) {
 			PSolver mySolver = new PSolver("mySolver", pentos, cargo);
 			mySolver.fillGreedyCargo(random, false);
-			
+
 			addBoxes(rotGroup, cargo.getShape());
 			setupRG(rotGroup, cargo);
 		}
@@ -96,7 +96,7 @@ public class View extends Application {
 		 */
 		public void btToRoot(Pentomino[] pentominoes, Cargo cargo, Group rotGroup, boolean optimized) {
 			PBacktracking.solveFor(pentominoes, cargo.getShape(), optimized, 0);
-			
+
 			if (Backtracking.tmp != null ) {
 				addBoxes(rotGroup, Backtracking.tmp.getShape());
 			} else {
@@ -110,7 +110,7 @@ public class View extends Application {
 		 */
 		public Box makeBox(Item item) {
 			Box box = new Box(SIDE,SIDE,SIDE);
-			if (item == null) {		
+			if (item == null) {
 				PhongMaterial mat = new PhongMaterial();
 				mat.setSpecularColor(Color.BLACK);
 				mat.setDiffuseColor(Color.BLACK);
@@ -133,7 +133,7 @@ public class View extends Application {
 				mat.setSpecularColor(Color.WHITE);
 				box.setMaterial(mat);
 				//box.setDrawMode(DrawMode.LINE);
-			}			
+			}
 			return box;
 		}
 
@@ -183,7 +183,7 @@ public class View extends Application {
 
 		    rotGroup.getTransforms().addAll(t, rx, ry, rz);
 		}
-		
+
 		public void setupCam() {
 	        rotCam.getChildren().add(camera);
 			root.getChildren().add(rotCam);
@@ -191,7 +191,7 @@ public class View extends Application {
 	        camera.setFarClip(CAMERA_FC);
 	        camera.setTranslateZ(CAMERA_ID);
 		}
-		
+
 		public void setupMouse(Scene scene) {
 		        scene.setOnMousePressed((MouseEvent event) -> {
 		            currentX = event.getSceneX();

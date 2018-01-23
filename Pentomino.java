@@ -44,7 +44,7 @@ public class Pentomino {
   * @param value the value for the pento
   */
   private void buildL(int value) {
-    this.item = new Item(this.name, value, 1, 1, 1, Color.GREEN);
+    this.item = new Item(this.name, value, 1, 1, 1);
     this.shape = new boolean[][][]{{{true, true, true, true}},
                                    {{true, false, false, false}}};
   }
@@ -54,7 +54,7 @@ public class Pentomino {
   * @param value the value for the pento
   */
   private void buildP(int value) {
-    this.item = new Item(this.name, value, 1, 1, 1, Color.ALICEBLUE);
+    this.item = new Item(this.name, value, 1, 1, 1);
     this.shape = new boolean[][][]{{{true, true, true}},
                                    {{true, true, false}}};
   }
@@ -64,7 +64,7 @@ public class Pentomino {
   * @param value the value for the pento
   */
   private void buildT(int value) {
-    this.item = new Item(this.name, value, 1, 1, 1, Color.RED);
+    this.item = new Item(this.name, value, 1, 1, 1);
     this.shape = new boolean[][][]{{{true, false, false}},
                                    {{true, true, true}},
                                    {{true, false, false}}};

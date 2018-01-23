@@ -21,6 +21,7 @@ public class Backtracking {
   * @param items the set of items that can be used
   * @param shape the cargo
   * @param optimized if optimization is wanted
+  * @param counter call counter
   */
   public static long iterations = 0;
   public static void solveFor(Item[] items, Item[][][] shape, boolean optimized, int counter) {
