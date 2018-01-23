@@ -261,8 +261,9 @@ public class Cargo {
   * Print the amount of each type of item in the cargo
   * @param items the set of items
   * @param pentos is the solution for pentos
+  * @param output want to print the solution?
   */
-  public void printSolution(Item[] items, boolean pentos) {
+  public void printSolution(Item[] items, boolean pentos, boolean output) {
     int[] amounts = new int[items.length];
     int volumeUsed = 0;
     int valueStored = 0;
@@ -288,7 +289,7 @@ public class Cargo {
     for (int t = 0; t < items.length; t++) {
       this.result += "\n - " + items[t].getName() + " -> " + amounts[t];
     }
-    System.out.println(this.result);
+    if (output) System.out.println(this.result);
   }
 
 }

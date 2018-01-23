@@ -14,6 +14,7 @@ public class View extends Application {
 
 		public void start(final Stage stage) {
 			System.out.println("Start");
+			stage.setTitle("Project 1.4 - Cargo");
 			stage.setTitle("Project 1.3 - Cargo");
 
 			Group rotationGroup = new Group();
@@ -23,6 +24,7 @@ public class View extends Application {
 			System.out.println("Initial setup done");
 
 			Item[][][] cargo = new Item[33][5][8];
+			// Item[][][] cargo = new Item[23][9][15];
 
 			Item A = new Item("A", 3, 2, 2, 4, Color.GREEN);
 			Item B = new Item("B", 4, 2, 3, 4, Color.RED);
@@ -35,8 +37,9 @@ public class View extends Application {
 			Pentomino T = new Pentomino("T", 5);
 			Pentomino[] pentominoes = new Pentomino[]{L, P, T};
 
-			greedyToRoot(pentominoes, cargo, rotationGroup, root);
-			// addToRoot(pentominoes, cargo, rotationGroup, root);
+			dynamicToRoot(pentominoes, cargo, 1, true, rotationGroup, root);
+			// greedyToRoot(pentominoes, cargo, rotationGroup, root);
+			// btToRoot(pentominoes, cargo, rotationGroup, root);
 			addSlider(rotationGroup, root);
 			System.out.println("Finalizing");
 
@@ -45,15 +48,33 @@ public class View extends Application {
 			stage.show();
 		}
 
+		public void dynamicToRoot(Item[] items, Item[][][] cargo, int limit, boolean optimized, Group rotationGroup, Group root) {
+			Item[][][] result = DivideAndConquer.solve(items, cargo, limit, optimized);
+			addBoxes(rotationGroup, result);
+			setupRG(rotationGroup);
+			root.getChildren().add(rotationGroup);
+
+			System.out.println("AddToRoot done");
+		}
+
+		public void dynamicToRoot(Pentomino[] pentos, Item[][][] cargo, int limit, boolean optimized, Group rotationGroup, Group root) {
+			Item[][][] result = DivideAndConquer.solve(pentos, cargo, limit, optimized);
+			addBoxes(rotationGroup, result);
+			setupRG(rotationGroup);
+			root.getChildren().add(rotationGroup);
+
+			System.out.println("AddToRoot done");
+		}
+
 		/**
 		*	Solve with greedy and add to rotation group
 		*	@param items items given to solve
-		* @param cargo cargo that will be represented
+		* 	@param cargo cargo that will be represented
 		*/
 		public void greedyToRoot(Item[] items, Item[][][] cargo, Group rotationGroup, Group root) {
 			Cargo tmp = new Cargo("tmp", cargo);
 			Solver mySolver = new Solver("mySolver", items, tmp);
-			mySolver.fillGreedyCargo();
+			mySolver.fillGreedyCargo(true, false);
 			addBoxes(rotationGroup, tmp.getShape());
 			setupRG(rotationGroup);
 			root.getChildren().add(rotationGroup);
@@ -64,12 +85,12 @@ public class View extends Application {
 		/**
 		*	Solve with greedy and add to rotation group
 		*	@param pentos items given to solve
-		* @param cargo cargo that will be represented
+		*	@param cargo cargo that will be represented
 		*/
 		public void greedyToRoot(Pentomino[] pentos, Item[][][] cargo, Group rotationGroup, Group root) {
 			Cargo tmp = new Cargo("tmp", cargo);
 			PSolver mySolver = new PSolver("mySolver", pentos, tmp);
-			mySolver.fillGreedyCargo();
+			mySolver.fillGreedyCargo(true, false);
 			addBoxes(rotationGroup, tmp.getShape());
 			setupRG(rotationGroup);
 			root.getChildren().add(rotationGroup);
@@ -77,34 +98,16 @@ public class View extends Application {
 			System.out.println("AddToRoot done");
 		}
 
-		/**
-		 * Adding Items to the rotation group
-		 * @param items items given to solve
-		 * @param cargo cargo that will be represented
-		 */
-		public void addToRoot(Item[] items, Item[][][] cargo, Group rotationGroup, Group root) {
-
-			// <here goes the solver, with items as items to use and cargo as cargo settings>
-			Backtracking.solveFor(items, cargo);
-			Cargo tmp = new Cargo("TMP", Backtracking.tmp.getShape());
-			tmp.printSolution(items, false);
-
-			addBoxes(rotationGroup, tmp.getShape());
-			setupRG(rotationGroup);
-			root.getChildren().add(rotationGroup);
-
-			System.out.println("AddToRoot done");
-		}
 
 		/**
 		 * Adding Pentominoes to the rotation group
 		 * @param pentominoes pentominoes given to solve
 		 * @param cargo cargo that will be represented
 		 */
-		public void addToRoot(Pentomino[] pentominoes, Item[][][] cargo, Group rotationGroup, Group root) {
+		public void btToRoot(Pentomino[] pentominoes, Item[][][] cargo, Group rotationGroup, Group root) {
 
 			// <here goes the solver, with items as items to use and cargo as cargo settings>
-			PBacktracking.solveFor(pentominoes, cargo);
+			PBacktracking.solveFor(pentominoes, cargo, true, 0);
 			Cargo tmp = new Cargo("TMP", PBacktracking.tmp.getShape());
 			// tmp.printSolution(pentominoes, false);
 
@@ -156,6 +159,11 @@ public class View extends Application {
 					System.out.println("Loop 2");
 					for (int k = 0; k < items[i][j].length; k++) {
 						System.out.println("Loop 3");
+						
+						Box box = makeBox(items[i][j][k]);
+						coordinates(box,i,j,k);
+						rotationGroup.getChildren().add(box);
+
 						if (items[i][j][k] != null) {
 							Box box = makeBox(items[i][j][k]);
 							coordinates(box,i,j,k);
@@ -186,8 +194,11 @@ public class View extends Application {
 		 */
 		public void setupRG(Group rotationGroup) {
 			System.out.println("SettingRG");
-			rotationGroup.setTranslateX(125);
-			rotationGroup.setTranslateY(125);
-			rotationGroup.setRotationAxis(Rotate.Y_AXIS);
+			final Translate t = new Translate(0.0, 0.0, 0.0);
+		    final Rotate rx = new Rotate(0, 0, 0, 0, Rotate.X_AXIS);
+		    final Rotate ry = new Rotate(0, 0, 0, 0, Rotate.Y_AXIS);
+		    final Rotate rz = new Rotate(0, 0, 0, 0, Rotate.Z_AXIS);
+
+		    rotationGroup.getTransforms().addAll(t, rx, ry, rz);
 		}
 }

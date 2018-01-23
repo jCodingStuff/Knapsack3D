@@ -20,13 +20,18 @@ public class Backtracking {
   * Try to fill the cargo with certain types of items
   * @param items the set of items that can be used
   * @param shape the cargo
+  * @param optimized if optimization is wanted
   */
   public static long iterations = 0;
-  public static void solveFor(Item[] items, Item[][][] shape) {
+  public static void solveFor(Item[] items, Item[][][] shape, boolean optimized, int counter) {
     // iterations++;
     // if(iterations == 500_000) {
     //   System.out.println(iterations + " iterations");
     // }
+    if (counter == 0) {
+      tmp = null;
+      solved = false;
+    }
     if (solved) return;
     if (isFull(shape)) {
       // System.out.println("The cargo is full");
@@ -47,8 +52,13 @@ public class Backtracking {
                 if (canBePut(item, shape, i, j, k)) {
                   Item[][][] newShape = insert(item, shape, i, j, k);
                   // System.out.println("Inserting " + item.getName());
-                  if (shouldContinue(newShape)) {
-                    solveFor(items, newShape);
+                  if (optimized) {
+                    if (shouldContinue(newShape)) {
+                      solveFor(items, newShape, optimized, counter + 1);
+                    }
+                  }
+                  else {
+                    solveFor(items, newShape, optimized, counter + 1);
                   }
                 }
               }

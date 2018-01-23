@@ -34,20 +34,26 @@ public class Test {
     int height = Integer.parseInt(args[1]);
     int depth = Integer.parseInt(args[2]);
     Item[][][] cargo = new Item[width][height][depth];
+
+    Item[][][] result = DivideAndConquer.solve(items, cargo, 4, false);
+    Cargo tmp = new Cargo("tmp", result);
+    Backtracking.print3DArray(result);
+    tmp.printSolution(items, false, true);
+
     // Backtracking.print3DArray(cargo);
-    long t1 = System.nanoTime();
-    Backtracking.solveFor(sorted, cargo);
-    long t2 = System.nanoTime();
-
-    System.out.println(t2-t1);
-
-    if (Backtracking.tmp != null) {
-      Cargo tmp = new Cargo("TMP", Backtracking.tmp.getShape());
-      tmp.printSolution(items, false);
-    }
-    else {
-      System.out.println("The cargo could not be filled :(");
-    }
+    // long t1 = System.nanoTime();
+    // Backtracking.solveFor(sorted, cargo, false, 0);
+    // long t2 = System.nanoTime();
+    //
+    // System.out.println(t2-t1);
+    //
+    // if (Backtracking.tmp != null) {
+    //   Cargo tmp = new Cargo("TMP", Backtracking.tmp.getShape());
+    //   tmp.printSolution(items, false, true);
+    // }
+    // else {
+    //   System.out.println("The cargo could not be filled :(");
+    // }
     // for (int i = 0; i < 20_000; i++) {
     //   PSolver mine = new PSolver("Greedy", items, new Cargo("Cargo", width, height, depth));
     //   mine.fillGreedyCargo();
