@@ -31,6 +31,11 @@ public class Arrays {
     return fut;
   }
 
+  /**
+  * Transforms an array of Pentominoes to an array of Items
+  * @param ori the array of Pentominoes
+  * @return the array of items
+  */
   public static Item[] toItemArray(Pentomino[] ori) {
     Item[] fut = new Item[ori.length];
     for (int i = 0; i < ori.length; i++) {
@@ -41,6 +46,11 @@ public class Arrays {
     return fut;
   }
 
+  /**
+  * Create a deep copy of an array of Items
+  * @param ori the array to copy
+  * @return the deep copy of the input array
+  */
   public static Item[] cloneArray(Item[] ori) {
     Item[] fut = new Item[ori.length];
     for (int i = 0; i < fut.length; i++) {
@@ -51,6 +61,11 @@ public class Arrays {
     return fut;
   }
 
+  /**
+  * Create a deep copy of a 3D-array of items
+  * @param ori the 3D-array to copy
+  * @return the deep copy of the input 3D-array
+  */
   public static Item[][][] clone3DMatrix(Item[][][] ori) {
     Item[][][] myInt = new Item [ori.length][ori[0].length][ori[0][0].length];
     for(int i = 0; i< ori.length; i++){
@@ -132,6 +147,11 @@ public class Arrays {
     return cont;
   }
 
+  /**
+  * Create a deep copy of a 3D boolean array
+  * @param ori the array to copy
+  * @return the deep copy of the input array
+  */
   public static boolean[][][] cloneBool3DArray(boolean[][][] ori) {
     boolean[][][] fut = new boolean[ori.length][ori[0].length][ori[0][0].length];
     for (int i = 0; i < ori.length; i++) {

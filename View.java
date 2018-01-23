@@ -27,9 +27,9 @@ public class View extends Application {
 			Item[][][] cargo = new Item[33][5][8];
 			// Item[][][] cargo = new Item[23][9][15];
 
-			Item A = new Item("A", 3, 2, 2, 4, Color.GREEN);
-			Item B = new Item("B", 4, 2, 3, 4, Color.RED);
-			Item C = new Item("C", 5, 3, 3, 3, Color.BLUE);
+			Item A = new Item("A", 3, 2, 2, 4);
+			Item B = new Item("B", 4, 2, 3, 4);
+			Item C = new Item("C", 5, 3, 3, 3);
 			Item[] items = new Item[]{A, B, C};
 
 

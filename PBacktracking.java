@@ -1,9 +1,19 @@
+/**
+* A backtracking algorithm for Pentominoes
+*/
 public class PBacktracking {
 
   public static Cargo tmp;
   public static boolean solved = false;
   public static long iterations = 0;
 
+  /**
+  * A recursive method to fill the cargo with pentominoes
+  * @param pentominoes the set of Pentominoes available
+  * @param cargo the cargo to fill
+  * @param optimized is optimization wanted?
+  * @param counter call counter
+  */
   public static void solveFor(Pentomino[] pentominoes, Item[][][] cargo, boolean optimized, int counter) {
     // iterations++;
     if (counter == 0) {
@@ -47,6 +57,15 @@ public class PBacktracking {
     }
   }
 
+  /**
+  * Create a copy of the cargo and insert the pentomino in it
+  * @param pent the Pentomino
+  * @param cargo the cargo
+  * @param i the position along the x-axis
+  * @param j the position along the y-axis
+  * @param k the position along the z-axis
+  * @return the new cargo
+  */
   public static Item[][][] insert(Pentomino pent, Item[][][] cargo, int i, int j, int k) {
     Pentomino newPent = pent.clone();
     Item item = newPent.getItem();
@@ -74,6 +93,15 @@ public class PBacktracking {
     return newCargo;
   }
 
+  /**
+  * See if a Pentomino fits in a certain position of the cargo
+  * @param pent the Pentomino
+  * @param cargo the cargo
+  * @param i the position along the x-axis
+  * @param j the position along the y-axis
+  * @param k the position along the z-axis
+  * @return true if it fits, false otherwise
+  */
   public static boolean canBePut(Pentomino pent, Item[][][] cargo, int i, int j, int k) {
     boolean permission = true;
     boolean[][][] shape = pent.getShape();
