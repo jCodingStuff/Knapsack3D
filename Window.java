@@ -13,9 +13,11 @@ import javafx.geometry.Pos;
 public class Window extends Application {
 
   Stage mainWindow;
-  Button pentoButton;
-  Button parcelButton;
+  Button pentoButton, parcelButton, backButton;
   Scene mainScene;
+  Label infoLabel1, infoLabel2, infoLabel3, infoLabel4, infoLabel5;
+  Button greedyButton, backtrackingButton, dynamicButton;
+  TextField valueField1, valueField2, valueField3, widthField, heightField, depthField;
 
   public static void main(String[] args) {
     launch(args);
@@ -24,6 +26,10 @@ public class Window extends Application {
   @Override
   public void start(Stage primaryStage) throws Exception {
     this.mainWindow = primaryStage;
+    this.mainWindow.setOnCloseRequest(e -> {
+      e.consume();
+      closeProgram();
+    });
     mainWindow.setResizable(false);
     this.mainWindow.setTitle("Cargo Filling v0.01");
 
@@ -53,56 +59,56 @@ public class Window extends Application {
     grid.setHgap(10);
 
     // Info column
-    Label pentoLabel = new Label("Pento");
-    GridPane.setConstraints(pentoLabel, 0, 1);
-    Label cargoLabel = new Label("Cargo");
-    GridPane.setConstraints(cargoLabel, 0, 2);
+    this.infoLabel4 = new Label("Pento");
+    GridPane.setConstraints(this.infoLabel4, 0, 1);
+    this.infoLabel5 = new Label("Cargo");
+    GridPane.setConstraints(this.infoLabel5, 0, 2);
 
     // Create the labels
-    Label lLabel = new Label("L");
-    GridPane.setConstraints(lLabel, 1, 0);
-    Label pLabel = new Label("P");
-    GridPane.setConstraints(pLabel, 2, 0);
-    Label tLabel = new Label("T");
-    GridPane.setConstraints(tLabel, 3, 0);
+    this.infoLabel1 = new Label("L");
+    GridPane.setConstraints(this.infoLabel1, 1, 0);
+    this.infoLabel2 = new Label("P");
+    GridPane.setConstraints(this.infoLabel2, 2, 0);
+    this.infoLabel3 = new Label("T");
+    GridPane.setConstraints(this.infoLabel3, 3, 0);
 
     // Create parcel input fields
-    TextField lField = new TextField();
-    lField.setPromptText("L Value");
-    GridPane.setConstraints(lField, 1, 1);
-    TextField pField = new TextField();
-    pField.setPromptText("P Value");
-    GridPane.setConstraints(pField, 2, 1);
-    TextField tField = new TextField();
-    tField.setPromptText("T Value");
-    GridPane.setConstraints(tField, 3, 1);
+    this.valueField1 = new TextField();
+    this.valueField1.setPromptText("L Value");
+    GridPane.setConstraints(this.valueField1, 1, 1);
+    this.valueField2 = new TextField();
+    this.valueField2.setPromptText("P Value");
+    GridPane.setConstraints(this.valueField2, 2, 1);
+    this.valueField3 = new TextField();
+    this.valueField3.setPromptText("T Value");
+    GridPane.setConstraints(this.valueField3, 3, 1);
 
     // Create cargo input fields
-    TextField widthField = new TextField();
-    widthField.setPromptText("Width");
-    GridPane.setConstraints(widthField, 1, 2);
-    TextField heightField = new TextField();
-    heightField.setPromptText("Height");
-    GridPane.setConstraints(heightField, 2, 2);
-    TextField depthField = new TextField();
-    depthField.setPromptText("Depth");
-    GridPane.setConstraints(depthField, 3, 2);
+    this.widthField = new TextField();
+    this.widthField.setPromptText("Width");
+    GridPane.setConstraints(this.widthField, 1, 2);
+    this.heightField = new TextField();
+    this.heightField.setPromptText("Height");
+    GridPane.setConstraints(this.heightField, 2, 2);
+    this.depthField = new TextField();
+    this.depthField.setPromptText("Depth");
+    GridPane.setConstraints(this.depthField, 3, 2);
 
     // Create the buttons to start the algorithms
-    Button greedyButton = new Button("Greedy");
-    Button backtrackingButton = new Button("Backtracking");
-    Button dynamicButton = new Button("Dynamic");
+    this.greedyButton = new Button("Greedy");
+    this.backtrackingButton = new Button("Backtracking");
+    this.dynamicButton = new Button("Dynamic");
     HBox bottomMenu = new HBox(60);
     bottomMenu.setAlignment(Pos.CENTER);
-    bottomMenu.getChildren().addAll(greedyButton, backtrackingButton, dynamicButton);
+    bottomMenu.getChildren().addAll(this.greedyButton, this.backtrackingButton, this.dynamicButton);
 
-    grid.getChildren().addAll(pentoLabel, cargoLabel, pLabel, tLabel, lField, pField, tField, widthField, heightField, depthField);
+    grid.getChildren().addAll(this.infoLabel1, this.infoLabel2, this.infoLabel3, this.infoLabel4, this.infoLabel5, this.valueField1, this.valueField2, this.valueField3, this.widthField, this.heightField, this.depthField);
 
     // Set back Button
     HBox topMenu = new HBox();
-    Button goBack = new Button("Back");
-    goBack.setOnAction(e -> this.mainWindow.setScene(this.mainScene));
-    topMenu.getChildren().add(goBack);
+    this.backButton = new Button("Back");
+    this.backButton.setOnAction(e -> this.mainWindow.setScene(this.mainScene));
+    topMenu.getChildren().add(this.backButton);
 
     majorLayout.setTop(topMenu);
     majorLayout.setCenter(grid);
@@ -122,61 +128,66 @@ public class Window extends Application {
     grid.setHgap(10);
 
     // Info column
-    Label parcelLabel = new Label("Parcel");
-    GridPane.setConstraints(parcelLabel, 0, 1);
-    Label cargoLabel = new Label("Cargo");
-    GridPane.setConstraints(cargoLabel, 0, 2);
+    this.infoLabel4 = new Label("Parcel");
+    GridPane.setConstraints(this.infoLabel4, 0, 1);
+    this.infoLabel5 = new Label("Cargo");
+    GridPane.setConstraints(this.infoLabel5, 0, 2);
 
     // Create the labels
-    Label aLabel = new Label("A");
-    GridPane.setConstraints(aLabel, 1, 0);
-    Label bLabel = new Label("B");
-    GridPane.setConstraints(bLabel, 2, 0);
-    Label cLabel = new Label("C");
-    GridPane.setConstraints(cLabel, 3, 0);
+    this.infoLabel1 = new Label("A");
+    GridPane.setConstraints(this.infoLabel1, 1, 0);
+    this.infoLabel2 = new Label("B");
+    GridPane.setConstraints(this.infoLabel2, 2, 0);
+    this.infoLabel3 = new Label("C");
+    GridPane.setConstraints(this.infoLabel3, 3, 0);
 
     // Create parcel input fields
-    TextField aField = new TextField();
-    aField.setPromptText("A Value");
-    GridPane.setConstraints(aField, 1, 1);
-    TextField bField = new TextField();
-    bField.setPromptText("B Value");
-    GridPane.setConstraints(bField, 2, 1);
-    TextField cField = new TextField();
-    cField.setPromptText("C Value");
-    GridPane.setConstraints(cField, 3, 1);
+    this.valueField1 = new TextField();
+    this.valueField1.setPromptText("A Value");
+    GridPane.setConstraints(this.valueField1, 1, 1);
+    this.valueField2 = new TextField();
+    this.valueField2.setPromptText("B Value");
+    GridPane.setConstraints(this.valueField2, 2, 1);
+    this.valueField3 = new TextField();
+    this.valueField3.setPromptText("C Value");
+    GridPane.setConstraints(this.valueField3, 3, 1);
 
     // Create cargo input fields
-    TextField widthField = new TextField();
-    widthField.setPromptText("Width");
-    GridPane.setConstraints(widthField, 1, 2);
-    TextField heightField = new TextField();
-    heightField.setPromptText("Height");
-    GridPane.setConstraints(heightField, 2, 2);
-    TextField depthField = new TextField();
-    depthField.setPromptText("Depth");
-    GridPane.setConstraints(depthField, 3, 2);
+    this.widthField = new TextField();
+    this.widthField.setPromptText("Width");
+    GridPane.setConstraints(this.widthField, 1, 2);
+    this.heightField = new TextField();
+    this.heightField.setPromptText("Height");
+    GridPane.setConstraints(this.heightField, 2, 2);
+    this.depthField = new TextField();
+    this.depthField.setPromptText("Depth");
+    GridPane.setConstraints(this.depthField, 3, 2);
 
     // Create the buttons to start the algorithms
-    Button greedyButton = new Button("Greedy");
-    Button backtrackingButton = new Button("Backtracking");
-    Button dynamicButton = new Button("Dynamic");
+    this.greedyButton = new Button("Greedy");
+    this.backtrackingButton = new Button("Backtracking");
+    this.dynamicButton = new Button("Dynamic");
     HBox bottomMenu = new HBox(60);
     bottomMenu.setAlignment(Pos.CENTER);
-    bottomMenu.getChildren().addAll(greedyButton, backtrackingButton, dynamicButton);
+    bottomMenu.getChildren().addAll(this.greedyButton, this.backtrackingButton, this.dynamicButton);
 
-    grid.getChildren().addAll(parcelLabel, cargoLabel, aLabel, bLabel, cLabel, aField, bField, cField, widthField, heightField, depthField);
+    grid.getChildren().addAll(this.infoLabel1, this.infoLabel2, this.infoLabel3, this.infoLabel4, this.infoLabel5, this.valueField1, this.valueField2, this.valueField3, this.widthField, this.heightField, this.depthField);
 
     // Set back Button
     HBox topMenu = new HBox();
-    Button goBack = new Button("Back");
-    goBack.setOnAction(e -> this.mainWindow.setScene(this.mainScene));
-    topMenu.getChildren().add(goBack);
+    this.backButton = new Button("Back");
+    this.backButton.setOnAction(e -> this.mainWindow.setScene(this.mainScene));
+    topMenu.getChildren().add(this.backButton);
 
     majorLayout.setTop(topMenu);
     majorLayout.setCenter(grid);
     majorLayout.setBottom(bottomMenu);
     return new Scene(majorLayout);
+  }
+
+  private void closeProgram() {
+    boolean answer = ConfirmBox.display("Warning", "Do you want to exit?");
+    if (answer) this.mainWindow.close();
   }
 
 }
