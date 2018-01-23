@@ -219,7 +219,8 @@ public class Window extends Application {
                                         "Random", "Discrete");
     clearFields();
     View view = new View();
-    view.showParcelGreedy(random, this.value1, this.value2, this.value3, this.cargoWidth, this.cargoHeight, this.cargoDepth);
+    view.showParcelGreedy(random, this.value1, this.value2, this.value3,
+                          this.cargoWidth, this.cargoHeight, this.cargoDepth);
   }
 
   private void launchPentoGreedy() {
@@ -229,7 +230,8 @@ public class Window extends Application {
                                         "Random", "Discrete");
     clearFields();
     View view = new View();
-    view.showPentoGreedy(random, this.value1, this.value2, this.value3, this.cargoWidth, this.cargoHeight, this.cargoDepth);
+    view.showPentoGreedy(random, this.value1, this.value2, this.value3,
+                         this.cargoWidth, this.cargoHeight, this.cargoDepth);
   }
 
   private void launchPentoBack() {
@@ -239,7 +241,8 @@ public class Window extends Application {
                                            "Yes", "No");
     clearFields();
     View view = new View();
-    view.showPentoBT(this.value1, this.value2, this.value3, this.cargoWidth, this.cargoHeight, this.cargoDepth, optimized);
+    view.showPentoBT(this.value1, this.value2, this.value3, this.cargoWidth,
+                     this.cargoHeight, this.cargoDepth, optimized);
   }
 
   private void launchParcelBack() {
@@ -249,7 +252,8 @@ public class Window extends Application {
                                            "Yes", "No");
     clearFields();
     View view = new View();
-    view.showParcelBT(this.value1, this.value2, this.value3, this.cargoWidth, this.cargoHeight, this.cargoDepth, optimized);
+    view.showParcelBT(this.value1, this.value2, this.value3, this.cargoWidth,
+                      this.cargoHeight, this.cargoDepth, optimized);
   }
 
   private void launchPentoDynamic() {
@@ -258,7 +262,8 @@ public class Window extends Application {
     promptDynamic();
     clearFields();
     View view = new View();
-    view.showPentoDynamic(this.value1, this.value2, this.value3, this.cargoWidth, this.cargoHeight, this.cargoDepth, this.limit, this.dynOptimized);
+    view.showPentoDynamic(this.value1, this.value2, this.value3, this.cargoWidth,
+                          this.cargoHeight, this.cargoDepth, this.limit, this.dynOptimized);
   }
 
   private void launchParcelDynamic() {
@@ -267,7 +272,8 @@ public class Window extends Application {
     promptDynamic();
     clearFields();
     View view = new View();
-    view.showParcelDynamic(this.value1, this.value2, this.value3, this.cargoWidth, this.cargoHeight, this.cargoDepth, this.limit, this.dynOptimized);
+    view.showParcelDynamic(this.value1, this.value2, this.value3, this.cargoWidth,
+                           this.cargoHeight, this.cargoDepth, this.limit, this.dynOptimized);
   }
 
   private void promptDynamic() {

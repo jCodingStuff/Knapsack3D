@@ -46,6 +46,7 @@ public class View {
 			layout.setAlignment(Pos.CENTER);
 			layout.getChildren().add(label);
 			Scene newScene = new Scene(layout, 300, 200);
+			infoStage.setResizable(false);
 			infoStage.setScene(newScene);
 			infoStage.show();
 		}
