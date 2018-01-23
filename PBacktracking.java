@@ -24,7 +24,7 @@ public class PBacktracking {
     if (solved) return;
     if (Backtracking.isFull(cargo)) {
       solved = true;
-      Backtracking.print3DArray(cargo);
+      // Backtracking.print3DArray(cargo);
       tmp = new Cargo("tmp", cargo);
       // tmp.printSolution(Arrays.toItemArray(pentominoes));
       return;
