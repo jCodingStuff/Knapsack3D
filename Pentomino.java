@@ -114,6 +114,7 @@ public class Pentomino {
 
   /**
   * Get access to the shape of the Pentomino
+  * @return the shape of the Pentomino
   */
   public boolean[][][] getShape() {
     return this.shape;
