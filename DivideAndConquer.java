@@ -3,7 +3,7 @@ import java.util.Map;
 import java.util.HashMap;
 
 /**
-* A class to hold the D&Q + Dynamic Programming algorithm
+* A class to hold the DandQ + Dynamic Programming algorithm
 *
 * @author Julián Marrades
 * @author Lucas Uberti-Bona
@@ -57,7 +57,7 @@ public class DivideAndConquer {
 
   /**
   * Fill the cargo
-  * @param pentos the set of Items available
+  * @param items the set of Items available
   * @param cargo the cargo to fill
   * @param limit the limit of dimension you want
   * @param optimized is optimization wanted?

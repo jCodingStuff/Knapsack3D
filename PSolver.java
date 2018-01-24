@@ -43,16 +43,16 @@ public class PSolver {
   }
 
   /**
-  * Get access to the items
-  * @return the items
+  * Get access to the pentominoes
+  * @return the pentominoes
   */
   public Pentomino[] getPentos()
   {
     return this.pentos;
   }
   /**
-  * Sets the items
-  * @param items the new array of items
+  * Sets the pentominoes
+  * @param pentos the new array of pentos
   */
   public void setPentos(Pentomino[] pentos)
   {
