@@ -34,7 +34,10 @@ public class View {
 	    private double currentX, currentY, oldX, oldY, deltaX, deltaY;
 	    private Map<Integer, Color> map = new HashMap<Integer, Color>();
 	    private Stage stage = new Stage();
-	    Cargo cargo; // fix this.cargo in each method
+	    private double iW;
+	    private double iH;
+	    private double iD;
+	    Cargo cargo;
 	    Item[][][] shape;
 	    Item[] items;
 	    Pentomino[] pentos;
@@ -389,8 +392,11 @@ public class View {
 			for (int i = 0; i < items.length; i++) {
 				for (int j = 0; j < items[i].length; j++) {
 					for (int k = 0; k < items[i][j].length; k++) {
+						iW = (double)(items[i][j][k].getWidth())/2.0;
+						iH = (double)(items[i][j][k].getHeight())/2.0;
+						iD = (double)(items[i][j][k].getDepth())/2.0;
 						Box box = makeBox(items[i][j][k]);
-						coordinates(box, i, j, k);
+						coordinates(box, i-iW, j-iH, k-iD);
 						rotGroup.getChildren().add(box);
 					}
 				}
