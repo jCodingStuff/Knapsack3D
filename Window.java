@@ -33,6 +33,7 @@ public class Window extends Application {
 
   @Override
   public void start(Stage primaryStage) throws Exception {
+    setupCommon();
     this.mainWindow = primaryStage;
     this.mainWindow.setOnCloseRequest(e -> {
       e.consume();
@@ -133,8 +134,6 @@ public class Window extends Application {
   }
 
   private void setupPentoConfigScene() {
-    setupCommon();
-
     // Info column
     this.infoLabel4.setText("Pento");
 
@@ -156,8 +155,6 @@ public class Window extends Application {
   }
 
   private void setupParcelConfigScene() {
-    setupCommon();
-
     // Info column
     this.infoLabel4.setText("Parcel");
 
