@@ -15,6 +15,9 @@ import javafx.stage.Modality;
 
 /**
 * A class for the main structure of the GUI
+*
+* @author Julian Marrades
+* @version 0.1, 23-01-2018
 */
 public class Window extends Application {
 

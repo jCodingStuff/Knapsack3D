@@ -1,3 +1,9 @@
+/**
+* A greedy solver for pentominoes
+*
+* @author Julian Marrades
+* @version 0.1, 13-01-2018
+*/
 public class PSolver {
 
   private Pentomino[] pentos;

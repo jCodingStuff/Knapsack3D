@@ -5,10 +5,18 @@ import javafx.scene.control.*;
 import javafx.geometry.*;
 import javafx.scene.image.Image;
 
+
+/**
+* A class that displays a Confirm Window
+*/
 public class ConfirmBox {
 
   public static boolean answer;
 
+  /**
+  * Display a confirmation Window
+  * @return true if user clicks yes, false otherwise
+  */
   public static boolean display(String title, String message, String yes, String no, Image icon) {
 
     BorderPane major = new BorderPane();

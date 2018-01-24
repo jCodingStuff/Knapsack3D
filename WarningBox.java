@@ -5,8 +5,14 @@ import javafx.scene.control.*;
 import javafx.geometry.*;
 import javafx.scene.image.Image;
 
+/**
+* A class that displays a warning Window
+*/
 public class WarningBox {
 
+  /**
+  * Display a warning Window
+  */
   public static void display(String title, String message, String buttText, Image icon) {
 
     Stage window = new Stage();
