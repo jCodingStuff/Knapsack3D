@@ -16,6 +16,9 @@ import javafx.scene.transform.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.image.Image;
 
+/**
+ * This is a class to view the 3D representation of the cargo
+ */
 public class View {
 
 		private final int SIDE = 40;
@@ -35,9 +38,11 @@ public class View {
 	    Item[][][] shape;
 	    Item[] items;
 	    Pentomino[] pentos;
-			Stage infoStage;
+		Stage infoStage;
 
-
+		/**
+		 * Open window with information about the current cargo content
+		 */
 		private void openInfoWindow() {
 			infoStage = new Stage();
 			infoStage.getIcons().add(Window.information);
@@ -55,6 +60,16 @@ public class View {
 			infoStage.show();
 		}
 
+		/**
+		 * Show the cargo solved by the greedy algorithm using parcels
+		 * @param random if true, sets the greedy to random
+		 * @param aValue value of the first kind of parcel
+		 * @param bValue value of the second kind of parcel
+		 * @param cValue value of the third kind of parcel
+		 * @param width width of the  cargo
+		 * @param height height of the cargo
+		 * @param depth depth of the cargo
+		 */
 		public void showParcelGreedy(boolean random, int aValue, int bValue, int cValue, int width, int height, int depth) {
 
 			buildItems(aValue, bValue, cValue);
@@ -64,7 +79,18 @@ public class View {
 			initialSetup();
 			openInfoWindow();
 		}
-
+		
+		 /**
+		 * Show the cargo solved by the dynamic algorithm using parcels
+		 * @param aValue value of the first kind of parcel
+		 * @param bValue value of the second kind of parcel
+		 * @param cValue value of the third kind of parcel
+		 * @param width width of the  cargo
+		 * @param height height of the cargo
+		 * @param depth depth of the cargo
+		 * @param limit highest value of the dimension to manipulate
+		 * @param optimized if true, the algorithm implements the optimizations
+		 */
 		public void showParcelDynamic(int aValue, int bValue, int cValue, int width, int height, int depth, int limit, boolean optimized) {
 
 			buildItems(aValue, bValue, cValue);
@@ -74,7 +100,17 @@ public class View {
 			initialSetup();
 			openInfoWindow();
 		}
-
+		
+		/**
+		 * Show the cargo solved by the backtracking algorithm using parcels
+		 * @param aValue value of the first kind of parcel
+		 * @param bValue value of the second kind of parcel
+		 * @param cValue value of the third kind of parcel
+		 * @param width width of the  cargo
+		 * @param height height of the cargo
+		 * @param depth depth of the cargo
+		 * @param optimized if true, the algorithm implements the optimizations
+		 */
 		public void showParcelBT(int aValue, int bValue, int cValue, int width, int height, int depth, boolean optimized) {
 
 			buildItems(aValue, bValue, cValue);
@@ -84,37 +120,75 @@ public class View {
 			initialSetup();
 			openInfoWindow();
 		}
-
+		
+		/**
+		 * Show the cargo solved by the greedy algorithm using pentominoes
+		 * @param random if true, sets the greedy to random
+		 * @param aValue value of the first kind of pentominoe
+		 * @param bValue value of the second kind of pentominoe
+		 * @param cValue value of the third kind of pentominoe
+		 * @param width width of the  cargo
+		 * @param height height of the cargo
+		 * @param depth depth of the cargo
+		 */
 		public void showPentoGreedy(boolean random, int aValue, int bValue, int cValue, int width, int height, int depth) {
 
 			buildPentos(aValue, bValue, cValue);
-			buildPCargo(width, height, depth);
+			buildCargo(width, height, depth);
 			greedyToRoot(pentos, cargo, rotGroup, random);
 
 			initialSetup();
 			openInfoWindow();
 		}
+		
+		 /**
+		 * Show the cargo solved by the dynamic algorithm using pentominoes
+		 * @param aValue value of the first kind of pentominoe
+		 * @param bValue value of the second kind of pentominoe
+		 * @param cValue value of the third kind of pentominoe
+		 * @param width width of the  cargo
+		 * @param height height of the cargo
+		 * @param depth depth of the cargo
+		 * @param limit highest value of the dimension to manipulate
+		 * @param optimized if true, the algorithm implements the optimizations
+		 */
 
 		public void showPentoDynamic(int aValue, int bValue, int cValue, int width, int height, int depth, int limit, boolean optimized) {
 
 			buildPentos(aValue, bValue, cValue);
-			buildPCargo(width, height, depth);
+			buildCargo(width, height, depth);
 			dynamicToRoot(pentos, cargo, limit, optimized, rotGroup);
 
 			initialSetup();
 			openInfoWindow();
 		}
-
+		
+		/**
+		 * Show the cargo solved by the backtracking algorithm using pentominoes
+		 * @param aValue value of the first kind of pentominoe
+		 * @param bValue value of the second kind of pentominoe
+		 * @param cValue value of the third kind of pentominoe
+		 * @param width width of the  cargo
+		 * @param height height of the cargo
+		 * @param depth depth of the cargo
+		 * @param optimized if true, the algorithm implements the optimizations
+		 */
 		public void showPentoBT(int aValue, int bValue, int cValue, int width, int height, int depth, boolean optimized) {
 
 			buildPentos(aValue, bValue, cValue);
-			buildPCargo(width, height, depth);
+			buildCargo(width, height, depth);
 			btToRoot(pentos, cargo, rotGroup, optimized);
 
 			initialSetup();
 			openInfoWindow();
 		}
-
+		
+		/**
+		 * Assign a value to each kind of parcel and build it
+		 * @param aValue value of the first kind of parcel
+		 * @param bValue value of the second kind of parcel
+		 * @param cValue value of the third kind of parcel
+		 */
 		public void buildItems(int aValue, int bValue, int cValue) {
 			Item A = new Item("A", aValue, 2, 2, 4);
 			Item B = new Item("B", bValue, 2, 3, 4);
@@ -122,7 +196,13 @@ public class View {
 
 	        this.items = new Item[] {A, B, C};
 		}
-
+		
+		/**
+		 * Assign a value to each kind of pentominoe and build it
+		 * @param aValue value of the first kind of pentominoe
+		 * @param bValue value of the second kind of pentominoe
+		 * @param cValue value of the third kind of pentominoe
+		 */
 		public void buildPentos(int aValue, int bValue, int cValue) {
 			Pentomino L = new Pentomino("L", aValue);
 	        Pentomino P = new Pentomino("P", bValue);
@@ -130,17 +210,17 @@ public class View {
 
 	        this.pentos = new Pentomino[] {L,P,T};
 		}
-
+		
+		/**
+		 * Build cargo with given width, height and depth
+		 * @param width width of the  cargo
+		 * @param height height of the cargo
+		 * @param depth depth of the cargo
+		 */
 		public void buildCargo(int width, int height, int depth) {
 			this.shape = new Item[width][height][depth];
 	        this.cargo = new Cargo("cargo", shape);
 		}
-
-		public void buildPCargo(int width, int height, int depth) {
-		    this.shape = new Item[width][height][depth];
-		    this.cargo = new Cargo("cargo", shape);
-		}
-
 
 //		public void start(final Stage stage) {
 //
@@ -163,7 +243,9 @@ public class View {
 //		}
 
 
-
+		/**
+		 * Create the basic elements to build the scene, finalize and show
+		 */
 		public void initialSetup() {
 			root.getChildren().add(rotGroup);
 	        setupCam();
@@ -179,15 +261,29 @@ public class View {
 			stage.show();
 		}
 
-		public void dynamicToRoot(Item[] items, Cargo cargo, int limit, boolean optimized, Group rotGroup) {
+		/**
+		 * Solve by using the dynamic algorithm, add shapes to the scene
+		 * @param items set of parcels to use
+		 * @param limit highest value of the dimension to manipulate
+		 * @param optimized if true, the algorithm implements the optimizations
+		 * @param rotGroup rotational group to which the scene objects are added
+		 */
+		public void dynamicToRoot(Item[] items, int limit, boolean optimized, Group rotGroup) {
 			Item[][][] result = DivideAndConquer.solve(items, cargo.getShape(), limit, optimized);
 			this.cargo = new Cargo("whatever", result);
 			this.cargo.printSolution(items, false, false);
 			addBoxes(rotGroup, result);
 
 		}
-
-		public void dynamicToRoot(Pentomino[] pentos, Cargo cargo, int limit, boolean optimized, Group rotGroup) {
+		
+		/**
+		 * Solve by using dynamic programming, add shapes to the scene
+		 * @param pentos set of pentominoes to use
+		 * @param limit highest value of the dimension to manipulate
+		 * @param optimized if true, the algorithm implements the optimizations
+		 * @param rotGroup rotational group to which the scene objects are added
+		 */
+		public void dynamicToRoot(Pentomino[] pentos, int limit, boolean optimized, Group rotGroup) {
 			Item[][][] result = DivideAndConquer.solve(pentos, cargo.getShape(), limit, optimized);
 			this.cargo = new Cargo("whatever", result);
 			this.cargo.printSolution(Arrays.toItemArray(pentos), true, false);
@@ -199,7 +295,7 @@ public class View {
 		*	@param items items given to solve
 		* 	@param cargo cargo that will be represented
 		*/
-		public void greedyToRoot(Item[] items, Cargo cargo, Group rotGroup, boolean random) {
+		public void greedyToRoot(Item[] items, Group rotGroup, boolean random) {
 			Solver mySolver = new Solver("mySolver", items, cargo);
 			mySolver.fillGreedyCargo(random, false);
 			addBoxes(rotGroup, mySolver.getCargo().getShape());
@@ -210,7 +306,7 @@ public class View {
 		*	@param pentos items given to solve
 		*	@param cargo cargo that will be represented
 		*/
-		public void greedyToRoot(Pentomino[] pentos, Cargo cargo, Group rotGroup, boolean random) {
+		public void greedyToRoot(Pentomino[] pentos, Group rotGroup, boolean random) {
 			PSolver mySolver = new PSolver("mySolver", pentos, cargo);
 			mySolver.fillGreedyCargo(random, false);
 
@@ -223,7 +319,7 @@ public class View {
 		 * @param pentominoes pentominoes given to solve
 		 * @param cargo cargo that will be represented
 		 */
-		public void btToRoot(Pentomino[] pentominoes, Cargo cargo, Group rotGroup, boolean optimized) {
+		public void btToRoot(Pentomino[] pentominoes, Group rotGroup, boolean optimized) {
 			PBacktracking.solveFor(pentominoes, cargo.getShape(), optimized, 0);
 
 			if (PBacktracking.tmp != null ) {
@@ -240,7 +336,7 @@ public class View {
 		 * @param items items given to solve
 		 * @param cargo cargo that will be represented
 		 */
-		public void btToRoot(Item[] items, Cargo cargo, Group rotGroup, boolean optimized) {
+		public void btToRoot(Item[] items, Group rotGroup, boolean optimized) {
 			Backtracking.solveFor(items, cargo.getShape(), optimized, 0);
 
 			if (Backtracking.tmp != null ) {
@@ -346,6 +442,9 @@ public class View {
 		}
 }
 
+/**
+ * A class to set up the basics of the camera
+ */
 class RotationCamera extends Group {
     Point3D px = new Point3D(1.0, 0.0, 0.0);
     Point3D py = new Point3D(0.0, 1.0, 0.0);
