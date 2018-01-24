@@ -3,7 +3,7 @@ import java.util.ArrayList;
 /**
 * A method that clones from Cargo
 * @author Sarah Waseem
-* @author Pierre Bongrad
+* @author Pierre Bongrand
 * @version 0.1, 08-01-2018
 *
 * @author Julián Marrades

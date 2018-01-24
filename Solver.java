@@ -1,6 +1,7 @@
 /**
 * A class to solve using items and cargo
 * @author Sarah Waseem
+* @author Pierre Bongrand
 * @version 0.1, 09-01-2018
 *
 * @author Julián Marrades
@@ -172,5 +173,4 @@ public class Solver
       index++;
     }
   }
-
 }

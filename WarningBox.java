@@ -3,14 +3,22 @@ import javafx.scene.*;
 import javafx.scene.layout.*;
 import javafx.scene.control.*;
 import javafx.geometry.*;
+import javafx.scene.image.Image;
 
+/**
+* A class that displays a warning Window
+*/
 public class WarningBox {
 
-
-  public static void display(String title, String message, String buttText) {
+  /**
+  * Display a warning Window
+  */
+  public static void display(String title, String message, String buttText, Image icon) {
 
     Stage window = new Stage();
+    window.getIcons().add(icon);
     window.setResizable(false);
+    window.setOnCloseRequest(e -> e.consume());
     window.initModality(Modality.APPLICATION_MODAL);
     window.setTitle(title);
     window.setResizable(false);
