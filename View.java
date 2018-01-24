@@ -18,6 +18,9 @@ import javafx.scene.image.Image;
 
 /**
  * This is a class to view the 3D representation of the cargo
+ *
+ * @author Silvia Fallone
+ * @version 0.3, 24-01-2018
  */
 public class View {
 
