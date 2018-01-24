@@ -12,6 +12,9 @@ import javafx.scene.control.Button;
 import javafx.geometry.Pos;
 import javafx.stage.Modality;
 
+/**
+* A class for the main structure of the GUI
+*/
 public class Window extends Application {
 
   Stage mainWindow, dynStage;
@@ -31,6 +34,9 @@ public class Window extends Application {
     launch(args);
   }
 
+  /**
+  * Setup the main scene and the common attributes of the choice scene
+  */
   @Override
   public void start(Stage primaryStage) throws Exception {
     setupCommon();
@@ -64,6 +70,9 @@ public class Window extends Application {
     this.mainWindow.show();
   }
 
+  /**
+  * Setup common parts of the choice scene
+  */
   private void setupCommon() {
     // Common labels and Buttons
     this.infoLabel5 = new Label("Cargo");
@@ -133,6 +142,9 @@ public class Window extends Application {
     this.choiceScene = new Scene(majorLayout);
   }
 
+  /**
+  * Setup for Pento config
+  */
   private void setupPentoConfigScene() {
     // Info column
     this.infoLabel4.setText("Pento");
@@ -154,6 +166,9 @@ public class Window extends Application {
     this.dynamicButton.setOnAction(e -> launchPentoDynamic());
   }
 
+  /**
+  * Setup for Parcel config
+  */
   private void setupParcelConfigScene() {
     // Info column
     this.infoLabel4.setText("Parcel");
@@ -174,11 +189,17 @@ public class Window extends Application {
     this.dynamicButton.setOnAction(e -> launchParcelDynamic());
   }
 
+  /**
+  * Close in a safe way
+  */
   private void closeProgram() {
     boolean answer = ConfirmBox.display("Warning", "Do you want to exit?", "Yes", "No");
     if (answer) this.mainWindow.close();
   }
 
+  /**
+  * Clear all input fields
+  */
   private void clearFields() {
     this.valueField1.clear();
     this.valueField2.clear();
@@ -188,6 +209,9 @@ public class Window extends Application {
     this.depthField.clear();
   }
 
+  /**
+  * Collect data and run greedy for parcels
+  */
   private void launchParcelGreedy() {
     boolean cont = collectData();
     if (!cont) return;
@@ -199,6 +223,9 @@ public class Window extends Application {
                           this.cargoWidth, this.cargoHeight, this.cargoDepth);
   }
 
+  /**
+  * Collect data and run greedy for pentominoes
+  */
   private void launchPentoGreedy() {
     boolean cont = collectData();
     if (!cont) return;
@@ -210,6 +237,9 @@ public class Window extends Application {
                          this.cargoWidth, this.cargoHeight, this.cargoDepth);
   }
 
+  /**
+  * Collect data and run backtracking for pentominoes
+  */
   private void launchPentoBack() {
     boolean cont = collectData();
     if (!cont) return;
@@ -221,6 +251,9 @@ public class Window extends Application {
                      this.cargoHeight, this.cargoDepth, optimized);
   }
 
+  /**
+  * Collect data and run backtracking for parcels
+  */
   private void launchParcelBack() {
     boolean cont = collectData();
     if (!cont) return;
@@ -232,6 +265,9 @@ public class Window extends Application {
                       this.cargoHeight, this.cargoDepth, optimized);
   }
 
+  /**
+  * Collect data and run dynamic for pentominoes
+  */
   private void launchPentoDynamic() {
     boolean cont = collectData();
     if (!cont) return;
@@ -242,6 +278,9 @@ public class Window extends Application {
                           this.cargoHeight, this.cargoDepth, this.limit, this.dynOptimized);
   }
 
+  /**
+  * Collect data and run dynamic for parcels
+  */
   private void launchParcelDynamic() {
     boolean cont = collectData();
     if (!cont) return;
@@ -252,6 +291,9 @@ public class Window extends Application {
                            this.cargoHeight, this.cargoDepth, this.limit, this.dynOptimized);
   }
 
+  /**
+  * Open the config Stage for Dynamic algorithm
+  */
   private void promptDynamic() {
     BorderPane pane = new BorderPane();
     pane.setPadding(new Insets(20, 20, 20, 20));
@@ -293,6 +335,10 @@ public class Window extends Application {
     dynStage.showAndWait();
   }
 
+  /**
+  * Collect data from input fields
+  * @return true if all correct, false if errors
+  */
   private boolean collectData() {
     try {
       this.value1 = Integer.parseInt(this.valueField1.getText());
@@ -316,6 +362,9 @@ public class Window extends Application {
     }
   }
 
+  /**
+  * Clear instance fields
+  */
   private void clearData() {
     this.value1 = 0;
     this.value2 = 0;
