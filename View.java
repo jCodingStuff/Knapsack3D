@@ -74,7 +74,7 @@ public class View {
 
 			buildItems(aValue, bValue, cValue);
 			buildCargo(width, height, depth);
-			greedyToRoot(items, cargo, rotGroup, random);
+			greedyToRoot(items, rotGroup, random);
 
 			initialSetup();
 			openInfoWindow();
@@ -95,7 +95,7 @@ public class View {
 
 			buildItems(aValue, bValue, cValue);
 			buildCargo(width, height, depth);
-			dynamicToRoot(items, cargo, limit, optimized, rotGroup);
+			dynamicToRoot(items, limit, optimized, rotGroup);
 
 			initialSetup();
 			openInfoWindow();
@@ -115,7 +115,7 @@ public class View {
 
 			buildItems(aValue, bValue, cValue);
 			buildCargo(width, height, depth);
-			btToRoot(items, cargo, rotGroup, optimized);
+			btToRoot(items, rotGroup, optimized);
 
 			initialSetup();
 			openInfoWindow();
@@ -135,7 +135,7 @@ public class View {
 
 			buildPentos(aValue, bValue, cValue);
 			buildCargo(width, height, depth);
-			greedyToRoot(pentos, cargo, rotGroup, random);
+			greedyToRoot(pentos, rotGroup, random);
 
 			initialSetup();
 			openInfoWindow();
@@ -157,7 +157,7 @@ public class View {
 
 			buildPentos(aValue, bValue, cValue);
 			buildCargo(width, height, depth);
-			dynamicToRoot(pentos, cargo, limit, optimized, rotGroup);
+			dynamicToRoot(pentos, limit, optimized, rotGroup);
 
 			initialSetup();
 			openInfoWindow();
@@ -177,7 +177,7 @@ public class View {
 
 			buildPentos(aValue, bValue, cValue);
 			buildCargo(width, height, depth);
-			btToRoot(pentos, cargo, rotGroup, optimized);
+			btToRoot(pentos, rotGroup, optimized);
 
 			initialSetup();
 			openInfoWindow();
@@ -410,6 +410,7 @@ public class View {
 			box.setTranslateZ(z*SIDE);
 		}
 
+		
 		public void setupCam() {
 	        rotCam.getChildren().add(camera);
 			root.getChildren().add(rotCam);
