@@ -18,7 +18,7 @@ import javafx.scene.image.Image;
 
 /**
  * This is a class to view the 3D representation of the cargo
- * 
+ *
  * @author Silvia Fallone
  * @version 0.3, 24-01-2018
  */
@@ -52,6 +52,7 @@ public class View {
 		private void openInfoWindow() {
 			infoStage = new Stage();
 			infoStage.getIcons().add(Window.information);
+			infoStage.setAlwaysOnTop(true);
 			infoStage.setX(275);
 			infoStage.setY(350);
 			infoStage.setTitle("Information");
@@ -85,7 +86,7 @@ public class View {
 			initialSetup();
 			openInfoWindow();
 		}
-		
+
 		 /**
 		 * Show the cargo solved by the dynamic algorithm using parcels
 		 * @param aValue value of the first kind of parcel
@@ -106,7 +107,7 @@ public class View {
 			initialSetup();
 			openInfoWindow();
 		}
-		
+
 		/**
 		 * Show the cargo solved by the backtracking algorithm using parcels
 		 * @param aValue value of the first kind of parcel
@@ -126,7 +127,7 @@ public class View {
 			initialSetup();
 			openInfoWindow();
 		}
-		
+
 		/**
 		 * Show the cargo solved by the greedy algorithm using pentominoes
 		 * @param random if true, sets the greedy to random
@@ -146,7 +147,7 @@ public class View {
 			initialSetup();
 			openInfoWindow();
 		}
-		
+
 		 /**
 		 * Show the cargo solved by the dynamic algorithm using pentominoes
 		 * @param aValue value of the first kind of pentominoe
@@ -168,7 +169,7 @@ public class View {
 			initialSetup();
 			openInfoWindow();
 		}
-		
+
 		/**
 		 * Show the cargo solved by the backtracking algorithm using pentominoes
 		 * @param aValue value of the first kind of pentominoe
@@ -188,7 +189,7 @@ public class View {
 			initialSetup();
 			openInfoWindow();
 		}
-		
+
 		/**
 		 * Assign a value to each kind of parcel and build it
 		 * @param aValue value of the first kind of parcel
@@ -202,7 +203,7 @@ public class View {
 
 	        this.items = new Item[] {A, B, C};
 		}
-		
+
 		/**
 		 * Assign a value to each kind of pentominoe and build it
 		 * @param aValue value of the first kind of pentominoe
@@ -216,7 +217,7 @@ public class View {
 
 	        this.pentos = new Pentomino[] {L,P,T};
 		}
-		
+
 		/**
 		 * Build cargo with given width, height and depth
 		 * @param width width of the  cargo
@@ -281,7 +282,7 @@ public class View {
 			addBoxes(rotGroup, result);
 
 		}
-		
+
 		/**
 		 * Solve by using dynamic programming, add shapes to the scene
 		 * @param pentos set of pentominoes to use
@@ -429,7 +430,7 @@ public class View {
 	        camera.setFarClip(CAMERA_FC);
 	        camera.setTranslateZ(CAMERA_ID);
 		}
-		
+
 		/**
 		 * Set up mouse controll settings
 		 * @param scene scene to which all objects are added
@@ -466,14 +467,14 @@ class RotationCamera extends Group {
     Point3D py = new Point3D(0.0, 1.0, 0.0);
     Transform t = new Rotate();
     Rotate r;
-    
+
 	/**
 	 * Create a new instance of the class
 	 */
     public RotationCamera() {
         super();
     }
-    
+
 	/**
 	 * Set up rotation around x pivot
 	 * @param angle angle of rotation
@@ -484,7 +485,7 @@ class RotationCamera extends Group {
         this.getTransforms().clear();
         this.getTransforms().addAll(t);
     }
-    
+
     /**
      * Set up rotation around y pivot
      * @param angle angle of rotation
