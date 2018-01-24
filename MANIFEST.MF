@@ -1,0 +1,2 @@
+Manifest-Version: 1.8
+Main-Class: Window
