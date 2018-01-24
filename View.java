@@ -131,9 +131,9 @@ public class View {
 		/**
 		 * Show the cargo solved by the greedy algorithm using pentominoes
 		 * @param random if true, sets the greedy to random
-		 * @param aValue value of the first kind of pentominoe
-		 * @param bValue value of the second kind of pentominoe
-		 * @param cValue value of the third kind of pentominoe
+		 * @param aValue value of the first kind of pentomino
+		 * @param bValue value of the second kind of pentomino
+		 * @param cValue value of the third kind of pentomino
 		 * @param width width of the  cargo
 		 * @param height height of the cargo
 		 * @param depth depth of the cargo
@@ -150,9 +150,9 @@ public class View {
 
 		 /**
 		 * Show the cargo solved by the dynamic algorithm using pentominoes
-		 * @param aValue value of the first kind of pentominoe
-		 * @param bValue value of the second kind of pentominoe
-		 * @param cValue value of the third kind of pentominoe
+		 * @param aValue value of the first kind of pentomino
+		 * @param bValue value of the second kind of pentomino
+		 * @param cValue value of the third kind of pentomino
 		 * @param width width of the  cargo
 		 * @param height height of the cargo
 		 * @param depth depth of the cargo
@@ -172,9 +172,9 @@ public class View {
 
 		/**
 		 * Show the cargo solved by the backtracking algorithm using pentominoes
-		 * @param aValue value of the first kind of pentominoe
-		 * @param bValue value of the second kind of pentominoe
-		 * @param cValue value of the third kind of pentominoe
+		 * @param aValue value of the first kind of pentomino
+		 * @param bValue value of the second kind of pentomino
+		 * @param cValue value of the third kind of pentomino
 		 * @param width width of the  cargo
 		 * @param height height of the cargo
 		 * @param depth depth of the cargo
@@ -206,9 +206,9 @@ public class View {
 
 		/**
 		 * Assign a value to each kind of pentominoe and build it
-		 * @param aValue value of the first kind of pentominoe
-		 * @param bValue value of the second kind of pentominoe
-		 * @param cValue value of the third kind of pentominoe
+		 * @param aValue value of the first kind of pentomino
+		 * @param bValue value of the second kind of pentomino
+		 * @param cValue value of the third kind of pentomino
 		 */
 		public void buildPentos(int aValue, int bValue, int cValue) {
 			Pentomino L = new Pentomino("L", aValue);
@@ -300,7 +300,8 @@ public class View {
 		/**
 		*	Solve with greedy and add to rotation group
 		*	@param items items given to solve
-		* 	@param cargo cargo that will be represented
+		* 	@param rotGroup rotational Group to which the boxes are added
+		*   @param random if true, sets the algorithm to random
 		*/
 		public void greedyToRoot(Item[] items, Group rotGroup, boolean random) {
 			Solver mySolver = new Solver("mySolver", items, cargo);
@@ -311,7 +312,8 @@ public class View {
 		/**
 		*	Solve with greedy and add to rotation group
 		*	@param pentos items given to solve
-		*	@param cargo cargo that will be represented
+		* 	@param rotGroup rotational Group to which the boxes are added
+		*   @param random if true, sets the algorithm to random
 		*/
 		public void greedyToRoot(Pentomino[] pentos, Group rotGroup, boolean random) {
 			PSolver mySolver = new PSolver("mySolver", pentos, cargo);
