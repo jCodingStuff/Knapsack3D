@@ -410,7 +410,9 @@ public class View {
 			box.setTranslateZ(z*SIDE);
 		}
 
-		
+		/**
+		 * Add the camera to the rotation group
+		 */
 		public void setupCam() {
 	        rotCam.getChildren().add(camera);
 			root.getChildren().add(rotCam);
@@ -418,7 +420,10 @@ public class View {
 	        camera.setFarClip(CAMERA_FC);
 	        camera.setTranslateZ(CAMERA_ID);
 		}
-
+		
+		/**
+		 * Set up mouse controll settings
+		 */
 		public void setupMouse(Scene scene) {
 		        scene.setOnMousePressed((MouseEvent event) -> {
 		            currentX = event.getSceneX();
@@ -451,18 +456,29 @@ class RotationCamera extends Group {
     Point3D py = new Point3D(0.0, 1.0, 0.0);
     Transform t = new Rotate();
     Rotate r;
-
+    
+	/**
+	 * Create a new instance of the class
+	 */
     public RotationCamera() {
         super();
     }
-
+    
+	/**
+	 * Set up rotation around x pivot
+	 * @param angle angle of rotation
+	 */
     public void rx(double angle) {
         r = new Rotate(angle, px);
         this.t = t.createConcatenation(r);
         this.getTransforms().clear();
         this.getTransforms().addAll(t);
     }
-
+    
+    /**
+     * Set up rotation around y pivot
+     * @param angle angle of rotation
+     */
     public void ry(double angle) {
         r = new Rotate(angle, py);
         this.t = t.createConcatenation(r);
