@@ -423,6 +423,7 @@ public class View {
 		
 		/**
 		 * Set up mouse controll settings
+		 * @param scene scene to which all objects are added
 		 */
 		public void setupMouse(Scene scene) {
 		        scene.setOnMousePressed((MouseEvent event) -> {
