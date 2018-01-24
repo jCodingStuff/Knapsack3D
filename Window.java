@@ -8,6 +8,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
+import javafx.scene.image.Image;
 import javafx.scene.control.Button;
 import javafx.geometry.Pos;
 import javafx.stage.Modality;
@@ -16,6 +17,15 @@ import javafx.stage.Modality;
 * A class for the main structure of the GUI
 */
 public class Window extends Application {
+
+  // Designed by Freepik from www.flaticon.com
+  public static Image icon = new Image("trucking.png");
+  // Designed by Freepik from www.flaticon.com
+  public static Image question = new Image("question.png");
+  // Designed by Roundicons from www.flaticon.com
+  public static Image warning = new Image("warning.png");
+  // Designed by Maxim Basinski from www.flaticon.com
+  public static Image information = new Image("information.png");
 
   Stage mainWindow, dynStage;
   int limit, value1, value2, value3, cargoWidth, cargoHeight, cargoDepth;
@@ -41,6 +51,7 @@ public class Window extends Application {
   public void start(Stage primaryStage) throws Exception {
     setupCommon();
     this.mainWindow = primaryStage;
+    this.mainWindow.getIcons().add(icon);
     this.mainWindow.setOnCloseRequest(e -> {
       e.consume();
       closeProgram();
@@ -193,7 +204,7 @@ public class Window extends Application {
   * Close in a safe way
   */
   private void closeProgram() {
-    boolean answer = ConfirmBox.display("Warning", "Do you want to exit?", "Yes", "No");
+    boolean answer = ConfirmBox.display("Exit", "Do you want to exit?", "Yes", "No", warning);
     if (answer) this.mainWindow.close();
   }
 
@@ -215,8 +226,8 @@ public class Window extends Application {
   private void launchParcelGreedy() {
     boolean cont = collectData();
     if (!cont) return;
-    boolean random = ConfirmBox.display("Greedy Config", "Choose mode",
-                                        "Random", "Discrete");
+    boolean random = ConfirmBox.display("Greedy Settings", "Choose mode",
+                                        "Random", "Discrete", question);
     clearFields();
     View view = new View();
     view.showParcelGreedy(random, this.value1, this.value2, this.value3,
@@ -229,8 +240,8 @@ public class Window extends Application {
   private void launchPentoGreedy() {
     boolean cont = collectData();
     if (!cont) return;
-    boolean random = ConfirmBox.display("Greedy Config", "Choose mode",
-                                        "Random", "Discrete");
+    boolean random = ConfirmBox.display("Greedy Settings", "Choose mode",
+                                        "Random", "Discrete", question);
     clearFields();
     View view = new View();
     view.showPentoGreedy(random, this.value1, this.value2, this.value3,
@@ -243,8 +254,8 @@ public class Window extends Application {
   private void launchPentoBack() {
     boolean cont = collectData();
     if (!cont) return;
-    boolean optimized = ConfirmBox.display("Backtracking Config", "Is optimization wanted?",
-                                           "Yes", "No");
+    boolean optimized = ConfirmBox.display("Backtracking Settings", "Is optimization wanted?",
+                                           "Yes", "No", question);
     clearFields();
     View view = new View();
     view.showPentoBT(this.value1, this.value2, this.value3, this.cargoWidth,
@@ -257,8 +268,8 @@ public class Window extends Application {
   private void launchParcelBack() {
     boolean cont = collectData();
     if (!cont) return;
-    boolean optimized = ConfirmBox.display("Backtracking Config", "Is optimization wanted?",
-                                           "Yes", "No");
+    boolean optimized = ConfirmBox.display("Backtracking Settings", "Is optimization wanted?",
+                                           "Yes", "No", question);
     clearFields();
     View view = new View();
     view.showParcelBT(this.value1, this.value2, this.value3, this.cargoWidth,
@@ -298,8 +309,9 @@ public class Window extends Application {
     BorderPane pane = new BorderPane();
     pane.setPadding(new Insets(20, 20, 20, 20));
     dynStage = new Stage();
+    dynStage.getIcons().add(question);
     dynStage.setResizable(false);
-    dynStage.setTitle("Dynamic Config");
+    dynStage.setTitle("Dynamic Settings");
     dynStage.initModality(Modality.APPLICATION_MODAL);
     Label label = new Label("Limit:");
     TextField limitField = new TextField();
@@ -317,7 +329,7 @@ public class Window extends Application {
         if (this.limit > 0) dynStage.close();
       }
       catch (NumberFormatException e2) {
-        WarningBox.display("Warning", "Invalid data: Integer needed", "I understand");
+        WarningBox.display("Warning", "Invalid data: Integer needed", "I understand", warning);
         clearData();
         return;
       }
@@ -356,7 +368,7 @@ public class Window extends Application {
       return true;
     }
     catch (NumberFormatException e) {
-      WarningBox.display("Warning", "Invalid data: Integer needed", "I understand");
+      WarningBox.display("Warning", "Invalid data: Integer needed", "I understand", warning);
       clearData();
       return false;
     }

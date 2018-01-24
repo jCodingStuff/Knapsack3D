@@ -14,6 +14,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.*;
 import javafx.scene.transform.*;
 import javafx.scene.layout.HBox;
+import javafx.scene.image.Image;
 
 public class View {
 
@@ -39,6 +40,7 @@ public class View {
 
 		private void openInfoWindow() {
 			infoStage = new Stage();
+			infoStage.getIcons().add(Window.information);
 			infoStage.setX(275);
 			infoStage.setY(350);
 			infoStage.setTitle("Information");
@@ -173,6 +175,7 @@ public class View {
 			scene.setCamera(camera);
 			stage.setOnCloseRequest(e -> this.infoStage.close());
 			stage.initModality(Modality.APPLICATION_MODAL);
+			stage.getIcons().add(Window.icon);
 			stage.show();
 		}
 

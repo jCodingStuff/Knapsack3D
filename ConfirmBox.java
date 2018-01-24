@@ -3,17 +3,19 @@ import javafx.scene.*;
 import javafx.scene.layout.*;
 import javafx.scene.control.*;
 import javafx.geometry.*;
+import javafx.scene.image.Image;
 
 public class ConfirmBox {
 
   public static boolean answer;
 
-  public static boolean display(String title, String message, String yes, String no) {
+  public static boolean display(String title, String message, String yes, String no, Image icon) {
 
     BorderPane major = new BorderPane();
     major.setPadding(new Insets(20, 20, 20, 20));
 
     Stage window = new Stage();
+    window.getIcons().add(icon);
     window.initModality(Modality.APPLICATION_MODAL);
     window.setTitle(title);
     window.setResizable(false);

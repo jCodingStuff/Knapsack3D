@@ -3,13 +3,14 @@ import javafx.scene.*;
 import javafx.scene.layout.*;
 import javafx.scene.control.*;
 import javafx.geometry.*;
+import javafx.scene.image.Image;
 
 public class WarningBox {
 
-
-  public static void display(String title, String message, String buttText) {
+  public static void display(String title, String message, String buttText, Image icon) {
 
     Stage window = new Stage();
+    window.getIcons().add(icon);
     window.setResizable(false);
     window.initModality(Modality.APPLICATION_MODAL);
     window.setTitle(title);
