@@ -326,7 +326,8 @@ public class View {
 		/**
 		 * Adding Pentominoes to the rotation group
 		 * @param pentominoes pentominoes given to solve
-		 * @param cargo cargo that will be represented
+		 * @param rotGroup rotational Group to which the boxes are added
+		 * @param optimized if true, the algorithm implements the optimizations
 		 */
 		public void btToRoot(Pentomino[] pentominoes, Group rotGroup, boolean optimized) {
 			PBacktracking.solveFor(pentominoes, cargo.getShape(), optimized, 0);
@@ -343,7 +344,8 @@ public class View {
 		/**
 		 * Adding Items to the rotation group
 		 * @param items items given to solve
-		 * @param cargo cargo that will be represented
+		 * @param rotGroup rotational Group to which the boxes are added
+		 * @param optimized if true, the algorithm implements the optimizations
 		 */
 		public void btToRoot(Item[] items, Group rotGroup, boolean optimized) {
 			Backtracking.solveFor(items, cargo.getShape(), optimized, 0);
@@ -359,6 +361,7 @@ public class View {
 
 		/**
 		 * Create a box that corresponds to a specific item
+		 * @param item item correspinding to the box
 		 */
 		public Box makeBox(Item item) {
 			Box box = new Box(SIDE,SIDE,SIDE);
@@ -411,7 +414,7 @@ public class View {
 
 		/**
 		 * Set the coordinates of a box
-		 * @param Box of which to set the coordinates
+		 * @param box of which to set the coordinates
 		 * @param x The x coordinate
 		 * @param y The y coordinate
 		 * @param z The z coordinate
