@@ -9,6 +9,9 @@ import java.util.ArrayList;
 *
 * @author Julián Marrades
 * @version 0.2, 12-01-2018
+*
+* @author Silvia Fallone
+* @version 0.3, 14-01-2018
 */
 
 public class Backtracking {

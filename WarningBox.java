@@ -7,6 +7,8 @@ import javafx.scene.image.Image;
 
 /**
 * A class that displays a warning Window
+* @author Silvia Fallone
+* @version 23-01-2018
 */
 public class WarningBox {
 

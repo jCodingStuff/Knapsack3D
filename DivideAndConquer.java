@@ -4,6 +4,10 @@ import java.util.HashMap;
 
 /**
 * A class to hold the D&Q + Dynamic Programming algorithm
+*
+* @author Julián Marrades
+* @author Lucas Uberti-Bona
+* @version 0.1, 22-01-2018
 */
 
 public class DivideAndConquer {

@@ -2,6 +2,9 @@
 * A backtracking algorithm for Pentominoes
 * @author Julian Marrades
 * @version 0.1, 15-01-2018
+*
+* @author Silvia Fallone
+* @version 0.3, 17-01-2018
 */
 public class PBacktracking {
 

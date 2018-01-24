@@ -3,6 +3,9 @@
 *
 * @author Julian Marrades
 * @version 0.1, 13-01-2018
+*
+* @author Pierre Bongrand
+* @version 0.2, 15-01-2018
 */
 public class PSolver {
 

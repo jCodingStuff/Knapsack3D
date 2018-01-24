@@ -18,6 +18,9 @@ import javafx.stage.Modality;
 *
 * @author Julian Marrades
 * @version 0.1, 23-01-2018
+*
+* @author Julian Marrades
+* @version 0.2, 24-01-2018
 */
 public class Window extends Application {
 

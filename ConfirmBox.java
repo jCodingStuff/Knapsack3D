@@ -8,6 +8,8 @@ import javafx.scene.image.Image;
 
 /**
 * A class that displays a Confirm Window
+* @author Silvia Fallone
+* @version 0.1, 23-1-2018
 */
 public class ConfirmBox {
 

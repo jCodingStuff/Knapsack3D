@@ -1,5 +1,6 @@
 /**
 * A class to solve using items and cargo
+*
 * @author Sarah Waseem
 * @author Pierre Bongrand
 * @version 0.1, 09-01-2018
@@ -12,6 +13,9 @@
 *
 * @author Julián Marrades
 * @version 0.4, 12-01-2018
+*
+* @author Pierre Bongrand
+* @version 0.5, 13-01-2018
 */
 public class Solver
 {

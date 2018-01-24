@@ -4,6 +4,9 @@ import java.util.ArrayList;
 * A class to represent a Cargo for the Knapsack problem
 * @author Julián Marrades
 * @version 0.1, 09-01-2018
+*
+* @author Sarah Waseem
+* @version 0.2, 12-01-2018
 */
 
 public class Cargo {
