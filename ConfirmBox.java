@@ -17,6 +17,11 @@ public class ConfirmBox {
 
   /**
   * Display a confirmation Window
+  * @param title the title of the frame
+  * @param message the message in the frame
+  * @param yes the text for the yes button
+  * @param no the text for the no button
+  * @param icon the icon for the frame
   * @return true if user clicks yes, false otherwise
   */
   public static boolean display(String title, String message, String yes, String no, Image icon) {

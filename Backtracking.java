@@ -18,6 +18,7 @@ public class Backtracking {
 
   public static Cargo tmp;
   public static boolean solved = false;
+  public static long iterations = 0;
 
   /**
   * Try to fill the cargo with certain types of items
@@ -26,7 +27,6 @@ public class Backtracking {
   * @param optimized if optimization is wanted
   * @param counter call counter
   */
-  public static long iterations = 0;
   public static void solveFor(Item[] items, Item[][][] shape, boolean optimized, int counter) {
     // iterations++;
     // if(iterations == 500_000) {

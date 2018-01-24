@@ -52,6 +52,7 @@ public class Window extends Application {
 
   /**
   * Setup the main scene and the common attributes of the choice scene
+  * @param primaryStage the main Stage
   */
   @Override
   public void start(Stage primaryStage) throws Exception {

@@ -348,7 +348,7 @@ public class Item {
 
   /**
    * Checks if the serial number matches any number in a list
-   * @param list the list of numbers to compare
+   * @param number the list of numbers to compare
    * @return true if there is a match
    */
 

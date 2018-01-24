@@ -21,6 +21,11 @@ import java.util.ArrayList;
 
 public class Arrays {
 
+  /**
+  * Create a deep copy of a Pentomino array
+  * @param ori the array to clone
+  * @return the cloned array
+  */
   public static Pentomino[] clonePArray(Pentomino[] ori) {
     Pentomino[] fut = new Pentomino[ori.length];
     for (int i = 0; i < fut.length; i++) {

@@ -145,7 +145,7 @@ public class DivideAndConquer {
 
   /**
   * Fill the dynamic programming matrix
-  * @param I the matrix
+  * @param T the matrix
   * @param keys the dimensions
   * @param profits the values of the dimensions
   */
@@ -288,6 +288,7 @@ public class DivideAndConquer {
 
   /**
   * Merge a set of Item[][][] to a bigger one
+  * @param cargo the complete cargo
   * @param set the set of items to merge
   * @param axis the axis that follows the merge
   * @return the merged result

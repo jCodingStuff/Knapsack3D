@@ -14,6 +14,10 @@ public class WarningBox {
 
   /**
   * Display a warning Window
+  * @param title the title of the frame
+  * @param message the message on the frame
+  * @param buttText the text for the button
+  * @param icon the icon for the frame
   */
   public static void display(String title, String message, String buttText, Image icon) {
 

@@ -143,7 +143,7 @@ public class Solver
   /**
   * Shuffle an array of elements
   * @param ori original arrey
-  * @return  shuffled array
+  * @return shuffled array
   */
   public static Item[] shuffle(Item[] ori) {
     Item[] result = new Item[ori.length];

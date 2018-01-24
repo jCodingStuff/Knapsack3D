@@ -223,6 +223,7 @@ public class Pentomino {
 
   /**
   * Sort an array of pentominoes
+  * @param input the array to sort
   * @return an array of sorted pentominoes
   */
   public static Pentomino[] sort(Pentomino[] input) {
