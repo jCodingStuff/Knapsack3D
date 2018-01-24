@@ -12,6 +12,7 @@ public class WarningBox {
     Stage window = new Stage();
     window.getIcons().add(icon);
     window.setResizable(false);
+    window.setOnCloseRequest(e -> e.consume());
     window.initModality(Modality.APPLICATION_MODAL);
     window.setTitle(title);
     window.setResizable(false);

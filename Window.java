@@ -133,6 +133,7 @@ public class Window extends Application {
 
     // Back Button
     this.backButton.setOnAction(e -> {
+        clearFields();
         this.mainWindow.setTitle("Cargo Filling v0.01");
         this.mainWindow.setScene(this.mainScene);
       });
@@ -310,6 +311,7 @@ public class Window extends Application {
     pane.setPadding(new Insets(20, 20, 20, 20));
     dynStage = new Stage();
     dynStage.getIcons().add(question);
+    dynStage.setOnCloseRequest(e -> e.consume());
     dynStage.setResizable(false);
     dynStage.setTitle("Dynamic Settings");
     dynStage.initModality(Modality.APPLICATION_MODAL);
