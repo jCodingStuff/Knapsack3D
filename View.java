@@ -287,12 +287,14 @@ public class View {
 		 * @param items The solution matrix to retrieve the items from
 		 */
 		public void addBoxes(Group rotGroup, Item[][][] items) {
-
+			double moveX = items.length / 2.0;
+			double moveY = items[0].length / 2.0;
+			double moveZ = items[0][0].length / 2.0;
 			for (int i = 0; i < items.length; i++) {
 				for (int j = 0; j < items[i].length; j++) {
 					for (int k = 0; k < items[i][j].length; k++) {
 						Box box = makeBox(items[i][j][k]);
-						coordinates(box,i,j,k);
+						coordinates(box,i - moveX,j - moveY, k - moveZ);
 						rotGroup.getChildren().add(box);
 					}
 				}
