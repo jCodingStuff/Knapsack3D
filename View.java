@@ -361,7 +361,8 @@ public class View {
 
 		/**
 		 * Create a box that corresponds to a specific item
-		 * @param item item correspinding to the box
+		 * @param item item corresponding to the box
+		 * @return box corresponding to the item
 		 */
 		public Box makeBox(Item item) {
 			Box box = new Box(SIDE,SIDE,SIDE);
