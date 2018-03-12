@@ -235,7 +235,7 @@ public class Window extends Application {
     boolean cont = collectData();
     if (!cont) return;
     boolean random = ConfirmBox.display("Greedy Settings", "Choose mode",
-                                        "Random", "Discrete", question);
+                                        "Random", "Deterministic", question);
     clearFields();
     View view = new View();
     view.showParcelGreedy(random, this.value1, this.value2, this.value3,
@@ -249,7 +249,7 @@ public class Window extends Application {
     boolean cont = collectData();
     if (!cont) return;
     boolean random = ConfirmBox.display("Greedy Settings", "Choose mode",
-                                        "Random", "Discrete", question);
+                                        "Random", "Deterministic", question);
     clearFields();
     View view = new View();
     view.showPentoGreedy(random, this.value1, this.value2, this.value3,
