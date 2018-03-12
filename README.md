@@ -2,8 +2,8 @@
 This is the Project 1 - Part 3 of the Data Science and Knowledge Engineering Bachelor at Maastricht University.  
 The code was written in collaboration with Lucas Giovanni Uberti-Bona Marin, Silvia Fallone, Antonio Rodriguez, Sarah Waseem and Pierre Bongrand.
 
-The problem consisted in the following: we were given a set of 3D objects (each with its dimensions and value) and asked to pack them in a certain cargo, in order to maximize profit. In other words, a 3-Dimensional Knapsack Problem.  
-The sets of objects can be split in two categories:  
+We were given a set of 3D objects (each with its dimensions and value) and asked to pack them in a certain cargo, in order to maximize profit. In other words, a 3-Dimensional Knapsack Problem.  
+The sets of objects can be split in two categories:
  - Parcels: boxes of types A (1.0x1.0x2.0), B (1.0x1.5x2.0) and C (1.5x1.5x1.5).
  - Pentominoes: of types L, P, and T (each one made of 1.0x1.0x1.0 boxes). 
 Since half a unit cannot be represented using half a matrix cell, the dimensions are duplicated.
