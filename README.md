@@ -40,5 +40,4 @@ Controls:
  - Drag using the left click to rotate the 3D model.
  - Drag up and down using the right click to use the zoom feature.
 
-Project presentation: https://docs.google.com/presentation/d/1U4Vh8hvta7GG8O-A-Xe1GhkD8qWGQZ6rAC0MlslYCHk/edit?usp=sharing   
-Project report: https://docs.google.com/document/d/1B1Tnce2YDTQmLGugcAWCyg0NxO6ezdKuLvTs-reAbTg/edit?usp=sharing
+Here are links to the [presentation](https://docs.google.com/presentation/d/1U4Vh8hvta7GG8O-A-Xe1GhkD8qWGQZ6rAC0MlslYCHk/edit?usp=sharing) and [report](https://docs.google.com/document/d/1B1Tnce2YDTQmLGugcAWCyg0NxO6ezdKuLvTs-reAbTg/edit?usp=sharing).
