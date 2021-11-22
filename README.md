@@ -1,6 +1,6 @@
 # Knapsack3D
 
-## Java JDK 8 is required since JavaFX is used. Otherwise, you need to bring JavaFX into your project in another way. ##
+### Java JDK 8 is required since JavaFX is used. Otherwise, you need to bring JavaFX into your project in another way. ###
 
 <img src="/imgs/cargo.png" alt="Thumbnail" width="65%"/>
 
