@@ -25,3 +25,6 @@ hs_err_pid*
 Test.java
 results.txt
 PTest.java
+
+# Mac
+.DS_Store

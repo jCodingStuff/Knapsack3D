@@ -25,13 +25,13 @@ import javafx.stage.Modality;
 public class Window extends Application {
 
   // Designed by Freepik from www.flaticon.com
-  public static Image icon = new Image("trucking.png");
+  public static Image icon = new Image("assets/trucking.png");
   // Designed by Freepik from www.flaticon.com
-  public static Image question = new Image("question.png");
+  public static Image question = new Image("assets/question.png");
   // Designed by Roundicons from www.flaticon.com
-  public static Image warning = new Image("warning.png");
+  public static Image warning = new Image("assets/warning.png");
   // Designed by Maxim Basinski from www.flaticon.com
-  public static Image information = new Image("information.png");
+  public static Image information = new Image("assets/information.png");
 
   Stage mainWindow, dynStage;
   int limit, value1, value2, value3, cargoWidth, cargoHeight, cargoDepth;
