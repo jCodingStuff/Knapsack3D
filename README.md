@@ -1,4 +1,7 @@
 # Knapsack3D
+
+<img src="/imgs/cargo.png" alt="Thumbnail" width="65%"/>
+
 This is the Project 1 - Part 3 of the Data Science and Knowledge Engineering Bachelor at Maastricht University.  
 The code was written in collaboration with Lucas Giovanni Uberti-Bona Marin, Silvia Fallone, Antonio Rodriguez, Sarah Waseem and Pierre Bongrand.
 
