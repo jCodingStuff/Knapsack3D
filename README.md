@@ -11,7 +11,7 @@ We were given a set of 3D objects (each with its dimensions and value) and asked
 The sets of objects can be split in two categories:
  - Parcels: boxes of types A (1.0x1.0x2.0), B (1.0x1.5x2.0) and C (1.5x1.5x1.5).
  - Pentominoes: of types L, P, and T (each one made of 1.0x1.0x1.0 boxes).
-Since half a unit cannot be represented using half a matrix cell, the dimensions are duplicated.
+Since half a unit cannot be represented using half a matrix cell, the dimensions are doubled.
 
 In order to solve this problems, three algorithms were implemented:  
  - Greedy: selecting the local maximum each iteration hoping that this will lead to the global maximum. It has two variants: deterministic (selecting pieces by their value/volume ratio) and random (selecting pieces randomly).
